@@ -7,8 +7,20 @@ export default function Home() {
         <div className="absolute -top-24 left-1/3 h-64 w-64 rounded-full bg-primary-fixed/40 blur-3xl pointer-events-none" />
         <div className="absolute bottom-10 left-10 h-40 w-40 rounded-full bg-secondary-fixed-dim/20 blur-3xl pointer-events-none" />
 
-        <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 px-6 py-16 md:grid-cols-12 md:gap-8 md:px-20 md:py-24 lg:py-28">
-          <div className="md:col-span-6 lg:col-span-5">
+        <div className="pointer-events-none absolute inset-0 z-0">
+          <Image
+            src="/hero2.png"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-right"
+          />
+          <div className="absolute inset-0" />
+        </div>
+
+        <div className="relative z-10 mx-auto max-w-7xl px-6 py-16 md:px-20 md:py-24 lg:py-28">
+          <div className="max-w-xl">
             <div className="mb-6 inline-flex w-fit items-center gap-2 rounded-full border border-primary/10 bg-primary-fixed/50 px-4 py-2 backdrop-blur-sm">
               <span className="h-1.5 w-1.5 rounded-full bg-primary" />
               <span className="text-xs font-semibold tracking-wide text-on-primary-fixed-variant">
@@ -73,19 +85,6 @@ export default function Home() {
                 </span>
                 안전한 데이터 보호
               </div>
-            </div>
-          </div>
-
-          <div className="md:col-span-6 lg:col-span-7">
-            <div className="relative mx-auto aspect-1491/1055 w-full max-w-xl md:max-w-none">
-              <Image
-                src="/hero.png"
-                alt="구름 위에서 책을 들고 미소짓는 별 캐릭터"
-                fill
-                priority
-                sizes="(min-width: 1024px) 640px, (min-width: 768px) 50vw, 100vw"
-                className="object-contain"
-              />
             </div>
           </div>
         </div>
