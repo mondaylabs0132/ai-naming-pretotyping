@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
 import { Sparkles, BookOpen, SlidersHorizontal } from 'lucide-react';
 
@@ -23,10 +23,30 @@ const planned = [
 ];
 
 const SIGNUP_TARGET = 247;
+const EMAIL_DOMAINS = [
+  'gmail.com',
+  'naver.com',
+  'kakao.com',
+  'daum.net',
+  'hanmail.net',
+  'nate.com',
+  'icloud.com',
+  'outlook.com',
+];
 
 export default function Home() {
   const [count, setCount] = useState(0);
   const [bumping, setBumping] = useState(false);
+  const [email, setEmail] = useState('');
+  const [showSuggestions, setShowSuggestions] = useState(false);
+
+  const suggestions = useMemo(() => {
+    if (!email.includes('@')) return [];
+    const typed = email.split('@')[1] ?? '';
+    return typed === ''
+      ? EMAIL_DOMAINS
+      : EMAIL_DOMAINS.filter((d) => d.startsWith(typed) && d !== typed);
+  }, [email]);
 
   useEffect(() => {
     const duration = 1500;
@@ -40,12 +60,15 @@ export default function Home() {
 
     let liveTimeout: ReturnType<typeof setTimeout>;
     const scheduleLive = () => {
-      liveTimeout = setTimeout(() => {
-        setCount((prev) => prev + 1);
-        setBumping(true);
-        setTimeout(() => setBumping(false), 450);
-        scheduleLive();
-      }, 5000 + Math.random() * 8000);
+      liveTimeout = setTimeout(
+        () => {
+          setCount((prev) => prev + 1);
+          setBumping(true);
+          setTimeout(() => setBumping(false), 450);
+          scheduleLive();
+        },
+        5000 + Math.random() * 8000,
+      );
     };
     const liveStart = setTimeout(scheduleLive, 1700);
 
@@ -77,9 +100,11 @@ export default function Home() {
   return (
     <main className="grow overflow-hidden">
       {/* ── Hero ─────────────────────────────────────────────── */}
-      <section className="relative w-full overflow-hidden">
-        <div className="pointer-events-none absolute -top-32 left-1/3 h-150 w-150 rounded-full bg-primary-fixed/60 blur-3xl" />
-        <div className="pointer-events-none absolute bottom-0 right-0 h-80 w-80 rounded-full bg-secondary-fixed/50 blur-3xl" />
+      <section className="relative w-full">
+        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+          <div className="absolute -top-32 left-1/3 h-150 w-150 rounded-full bg-primary-fixed/60 blur-3xl" />
+          <div className="absolute bottom-0 right-0 h-80 w-80 rounded-full bg-secondary-fixed/50 blur-3xl" />
+        </div>
 
         <div className="pointer-events-none absolute inset-0 z-0">
           <Image
@@ -97,9 +122,12 @@ export default function Home() {
           <div className="max-w-lg">
             {/* Badge */}
             <div className="animate-fade-in-up delay-0 mb-8 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary-fixed/60 px-4 py-2 backdrop-blur-sm">
-              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-red-400" />
               <span className="text-xs font-semibold tracking-wide text-on-primary-fixed-variant">
-                작명 서비스 — 사전 신청 중
+                <span className={bumping ? 'count-bump' : ''}>
+                  {count.toLocaleString()}
+                </span>
+                명이 신청했어요
               </span>
             </div>
 
@@ -130,34 +158,62 @@ export default function Home() {
             {/* Sub */}
             <p className="animate-fade-in-up delay-200 mt-6 text-lg leading-relaxed text-on-surface-variant">
               며칠째 고민 중이신가요?
-              <br className="hidden md:block" />
+            </p>
+            <p className="animate-fade-in-up delay-200 text-lg leading-relaxed text-on-surface-variant">
               복잡한 거 없이, 좋은 이름 후보를 바로 받아가실 수 있어요.
             </p>
 
-            {/* Email form */}
-            <div className="animate-fade-in-up delay-300 mt-8">
-              <button
-                type="button"
-                className="whitespace-nowrap rounded-full bg-primary px-8 py-4 text-sm font-semibold text-on-primary shadow-[0_8px_24px_-6px_rgba(97,85,152,0.45)] transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_28px_-6px_rgba(97,85,152,0.55)]"
-              >
-                신청할게요 →
-              </button>
-            </div>
+            {/* Email form + social proof */}
+            <div className="animate-fade-in-up delay-300 mt-8 flex flex-wrap items-center gap-4">
+              <div className="relative min-w-64 max-w-md flex-1">
+                <form
+                  onSubmit={(e) => e.preventDefault()}
+                  className="flex items-center rounded-full border border-outline-variant bg-surface shadow-sm transition-all focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20"
+                >
+                  <input
+                    id="email-input"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    onFocus={() => setShowSuggestions(true)}
+                    onBlur={() =>
+                      setTimeout(() => setShowSuggestions(false), 150)
+                    }
+                    placeholder="이메일을 입력해 주세요"
+                    className="min-w-0 flex-1 bg-transparent px-5 py-3.5 text-sm text-on-surface placeholder:text-on-surface-variant/50 outline-none"
+                  />
+                  <button
+                    type="submit"
+                    className="m-1 shrink-0 whitespace-nowrap rounded-full bg-primary px-6 py-3 text-sm font-semibold text-on-primary shadow-[0_8px_24px_-6px_rgba(97,85,152,0.45)] transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_28px_-6px_rgba(97,85,152,0.55)]"
+                  >
+                    신청할게요 →
+                  </button>
+                </form>
 
-            {/* Social proof */}
-            <div className="animate-fade-in-up delay-400 mt-4 flex items-center gap-3">
-              <div className="flex items-center gap-1.5 rounded-full bg-surface-container px-3 py-1.5">
-                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-red-400" />
-                <span className="text-xs text-on-surface-variant">
-                  <span className={`font-semibold text-on-surface ${bumping ? 'count-bump' : ''}`}>
-                    {count.toLocaleString()}명
-                  </span>
-                  이 신청했어요
-                </span>
+                {showSuggestions && suggestions.length > 0 && (
+                  <ul className="absolute left-0 top-full z-10 mt-2 w-full overflow-hidden rounded-2xl border border-outline-variant bg-surface shadow-lg">
+                    {suggestions.map((domain) => (
+                      <li key={domain}>
+                        <button
+                          type="button"
+                          onMouseDown={() => {
+                            setEmail(`${email.split('@')[0]}@${domain}`);
+                            setShowSuggestions(false);
+                          }}
+                          className="w-full px-5 py-3 text-left text-sm transition-colors hover:bg-surface-container"
+                        >
+                          <span className="text-on-surface-variant">
+                            {email.split('@')[0]}@
+                          </span>
+                          <span className="font-medium text-on-surface">
+                            {domain}
+                          </span>
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
-              <span className="text-xs text-on-surface-variant/50">
-                스팸 없이 오픈 알림 한 번만 드려요
-              </span>
             </div>
           </div>
         </div>

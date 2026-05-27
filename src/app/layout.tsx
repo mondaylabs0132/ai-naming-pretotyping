@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
+import FocusEmailButton from './components/FocusEmailButton';
 
 const plusJakarta = Plus_Jakarta_Sans({
   variable: '--font-plus-jakarta',
@@ -30,12 +31,7 @@ export default function RootLayout({
                 Starlit Names
               </span>
             </div>
-            <a
-              href="#form"
-              className="rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-on-primary transition-all hover:-translate-y-0.5 hover:shadow-md"
-            >
-              오픈 알림 받기
-            </a>
+            <FocusEmailButton />
           </div>
         </header>
 
