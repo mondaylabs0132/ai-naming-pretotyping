@@ -1,8 +1,9 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, useActionState } from 'react';
 import Image from 'next/image';
 import { Sparkles, BookOpen, SlidersHorizontal } from 'lucide-react';
+import { signupEmail } from './actions';
 
 const planned = [
   {
@@ -39,6 +40,7 @@ export default function Home() {
   const [bumping, setBumping] = useState(false);
   const [email, setEmail] = useState('');
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const [state, formAction, pending] = useActionState(signupEmail, {});
 
   const suggestions = useMemo(() => {
     if (!email.includes('@')) return [];
@@ -113,9 +115,8 @@ export default function Home() {
             fill
             priority
             sizes="100vw"
-            className="object-cover object-right opacity-50"
+            className="object-cover object-right"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/20" />
         </div>
 
         <div className="relative z-10 mx-auto max-w-7xl px-6 py-28 md:px-20 md:py-44">
@@ -165,55 +166,67 @@ export default function Home() {
 
             {/* Email form + social proof */}
             <div className="animate-fade-in-up delay-300 mt-8 flex flex-wrap items-center gap-4">
-              <div className="relative min-w-64 max-w-md flex-1">
-                <form
-                  onSubmit={(e) => e.preventDefault()}
-                  className="flex items-center rounded-full border border-outline-variant bg-surface shadow-sm transition-all focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20"
-                >
-                  <input
-                    id="email-input"
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    onFocus={() => setShowSuggestions(true)}
-                    onBlur={() =>
-                      setTimeout(() => setShowSuggestions(false), 150)
-                    }
-                    placeholder="이메일을 입력해 주세요"
-                    className="min-w-0 flex-1 bg-transparent px-5 py-3.5 text-sm text-on-surface placeholder:text-on-surface-variant/50 outline-none"
-                  />
-                  <button
-                    type="submit"
-                    className="m-1 shrink-0 whitespace-nowrap rounded-full bg-primary px-6 py-3 text-sm font-semibold text-on-primary shadow-[0_8px_24px_-6px_rgba(97,85,152,0.45)] transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_28px_-6px_rgba(97,85,152,0.55)]"
+              {state.success ? (
+                <div className="flex items-center gap-3 rounded-full border border-primary/30 bg-primary-fixed/40 px-6 py-4 text-sm font-medium text-on-primary-fixed-variant">
+                  서비스 오픈 때 이메일로 알려드릴게요!
+                </div>
+              ) : (
+                <div className="relative min-w-64 max-w-md flex-1">
+                  <form
+                    action={formAction}
+                    className="flex items-center rounded-full border border-outline-variant bg-surface shadow-sm transition-all focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20"
                   >
-                    신청할게요 →
-                  </button>
-                </form>
+                    <input
+                      id="email-input"
+                      type="email"
+                      name="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      onFocus={() => setShowSuggestions(true)}
+                      onBlur={() =>
+                        setTimeout(() => setShowSuggestions(false), 150)
+                      }
+                      placeholder="이메일을 입력해 주세요"
+                      className="min-w-0 flex-1 bg-transparent px-5 py-3.5 text-sm text-on-surface placeholder:text-on-surface-variant/50 outline-none"
+                    />
+                    <button
+                      type="submit"
+                      disabled={pending}
+                      className="m-1 shrink-0 whitespace-nowrap rounded-full bg-primary px-6 py-3 text-sm font-semibold text-on-primary shadow-[0_8px_24px_-6px_rgba(97,85,152,0.45)] transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_28px_-6px_rgba(97,85,152,0.55)] disabled:cursor-not-allowed disabled:opacity-60 disabled:translate-y-0"
+                    >
+                      {pending ? '신청 중...' : '신청할게요 →'}
+                    </button>
+                  </form>
 
-                {showSuggestions && suggestions.length > 0 && (
-                  <ul className="absolute left-0 top-full z-10 mt-2 w-full overflow-hidden rounded-2xl border border-outline-variant bg-surface shadow-lg">
-                    {suggestions.map((domain) => (
-                      <li key={domain}>
-                        <button
-                          type="button"
-                          onMouseDown={() => {
-                            setEmail(`${email.split('@')[0]}@${domain}`);
-                            setShowSuggestions(false);
-                          }}
-                          className="w-full px-5 py-3 text-left text-sm transition-colors hover:bg-surface-container"
-                        >
-                          <span className="text-on-surface-variant">
-                            {email.split('@')[0]}@
-                          </span>
-                          <span className="font-medium text-on-surface">
-                            {domain}
-                          </span>
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
+                  {state.error && (
+                    <p className="mt-2 px-4 text-xs text-red-500">{state.error}</p>
+                  )}
+
+                  {showSuggestions && suggestions.length > 0 && (
+                    <ul className="absolute left-0 top-full z-10 mt-2 w-full overflow-hidden rounded-2xl border border-outline-variant bg-surface shadow-lg">
+                      {suggestions.map((domain) => (
+                        <li key={domain}>
+                          <button
+                            type="button"
+                            onMouseDown={() => {
+                              setEmail(`${email.split('@')[0]}@${domain}`);
+                              setShowSuggestions(false);
+                            }}
+                            className="w-full px-5 py-3 text-left text-sm transition-colors hover:bg-surface-container"
+                          >
+                            <span className="text-on-surface-variant">
+                              {email.split('@')[0]}@
+                            </span>
+                            <span className="font-medium text-on-surface">
+                              {domain}
+                            </span>
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </div>
