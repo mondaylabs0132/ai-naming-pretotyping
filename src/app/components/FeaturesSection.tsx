@@ -67,8 +67,8 @@ export default function FeaturesSection() {
 
         <h2 className="text-3xl mobile-xs:text-2xl font-bold text-on-surface xl:text-5xl">
           이름 고민,
-          <br />
-          <span className="text-primary">이렇게 해결해드려요</span>
+          <br className="xl:hidden" />
+          <span className="text-primary"> 이렇게 해결해드려요</span>
         </h2>
       </div>
 
@@ -104,10 +104,15 @@ export default function FeaturesSection() {
                 </h3>
 
                 <p className="mt-2 text-xs mobile-xs:text-[11px] leading-relaxed text-on-surface-variant">
-                  {f.desc.split('\n').map((line, i) => (
+                  {f.desc.split('\n').map((line, i, arr) => (
                     <span key={i}>
                       {line}
-                      <br />
+                      {i < arr.length - 1 && (
+                        <>
+                          <br className="xl:hidden" />
+                          <span className="hidden xl:inline"> </span>
+                        </>
+                      )}
                     </span>
                   ))}
                 </p>
