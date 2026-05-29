@@ -77,3 +77,22 @@ body {
 .delay-400 { animation-delay: 400ms; }
 .delay-500 { animation-delay: 500ms; }
 .delay-600 { animation-delay: 600ms; }
+
+@keyframes float-y {
+  0% {
+    transform: translate3d(0, 0px, 0);
+  }
+
+  50% {
+    transform: translate3d(0, -14px, 0);
+  }
+
+  100% {
+    transform: translate3d(0, 0px, 0);
+  }
+}
+
+.animate-float-y {
+  animation: float-y 8s ease-in-out infinite;
+  will-change: transform;
+}
