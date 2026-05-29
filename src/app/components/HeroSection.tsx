@@ -106,7 +106,7 @@ export default function HeroSection() {
   }, [state.success]);
 
   return (
-    <section className="relative z-30 flex min-h-svh w-full items-end md:min-h-screen md:items-center">
+    <section className="relative z-30 flex min-h-svh w-full items-end xl:min-h-screen xl:items-center">
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute -top-32 left-1/3 h-150 w-150 rounded-full bg-primary-fixed/60 blur-3xl" />
 
@@ -121,13 +121,13 @@ export default function HeroSection() {
             fill
             priority
             unoptimized
-            className="object-cover object-[68%_52%] scale-[1.02] mobile-xs:scale-[1.0] sm:scale-[1.05] md:scale-100 md:object-right"
+            className="object-cover object-[68%_52%] scale-[1.02] mobile-xs:scale-[1.0] xl:scale-100 xl:object-right"
           />
         </div>
       </div>
 
-      <div className="relative z-20 mx-auto w-full max-w-7xl px-5 pb-40 mobile-xs:pb-32 md:px-10 md:py-44 md:max-w-screen-md xl:px-20 xl:max-w-7xl">
-        <div className="max-w-[320px] md:max-w-lg">
+      <div className="relative z-20 mx-auto w-full max-w-7xl px-5 pb-40 mobile-xs:pb-32 xl:px-20 xl:py-44 xl:max-w-7xl">
+        <div className="max-w-[320px] xl:max-w-lg">
           <div className="animate-fade-in-up delay-0 mb-8 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary-fixed/60 px-4 py-2 backdrop-blur-sm">
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-red-400" />
 
@@ -139,7 +139,7 @@ export default function HeroSection() {
             </span>
           </div>
 
-          <h1 className="animate-fade-in-up delay-100 max-w-[12ch] text-[2.4rem] mobile-xs:text-[2.1rem] font-bold leading-[1.05] tracking-tight text-on-surface sm:text-5xl md:max-w-none md:text-6xl">
+          <h1 className="animate-fade-in-up delay-100 max-w-[12ch] text-[2.4rem] mobile-xs:text-[2.1rem] font-bold leading-[1.05] tracking-tight text-on-surface xl:max-w-none xl:text-6xl">
             <span className="block text-balance whitespace-nowrap">
               {heroMessage.title[0]}
             </span>
@@ -164,13 +164,13 @@ export default function HeroSection() {
             </span>
           </h1>
 
-          <p className="animate-fade-in-up delay-200 mt-5 text-base mobile-xs:text-sm leading-relaxed text-on-surface-variant md:text-lg">
+          <p className="animate-fade-in-up delay-200 mt-5 text-base mobile-xs:text-sm leading-relaxed text-on-surface-variant xl:text-lg">
             며칠째 고민 중이신가요?
           </p>
 
-          <p className="animate-fade-in-up delay-200 text-base mobile-xs:text-sm leading-7 text-on-surface-variant md:text-lg md:leading-relaxed">
+          <p className="animate-fade-in-up delay-200 text-base mobile-xs:text-sm leading-7 text-on-surface-variant xl:text-lg xl:leading-relaxed">
             AI가 바로 분석해서
-            <br className="md:hidden" />
+            <br className="xl:hidden" />
             좋은 이름만 추천해드려요.
           </p>
 

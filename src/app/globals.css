@@ -2,7 +2,7 @@
 
 @theme inline {
   --font-sans: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
-
+  --breakpoint-xl: 1440px;
   --color-background: #faf8fd;
   --color-surface: #faf8fd;
   --color-surface-container-low: #f5f3f8;
