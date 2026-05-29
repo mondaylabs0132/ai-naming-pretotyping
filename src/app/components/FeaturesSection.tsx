@@ -59,15 +59,16 @@ export default function FeaturesSection() {
   }, []);
 
   return (
-    <section className="mx-auto max-w-7xl px-6 py-28 md:px-20">
+    <section className="mx-auto max-w-7xl px-6 py-28 xl:px-20 xl:max-w-7xl">
       <div className="scroll-animate mb-16">
-        <p className="mb-3 text-xs font-bold uppercase tracking-[0.25em] text-primary/50">
+        <p className="mb-3 text-xs mobile-xs:text-[10px] font-bold uppercase tracking-[0.25em] text-primary/50">
           준비 중인 기능
         </p>
-        <h2 className="text-3xl font-bold text-on-surface md:text-5xl">
+
+        <h2 className="text-3xl mobile-xs:text-2xl font-bold text-on-surface xl:text-5xl">
           이름 고민,
-          <br />
-          <span className="text-primary">이렇게 해결해드려요</span>
+          <br className="xl:hidden" />
+          <span className="text-primary"> 이렇게 해결해드려요</span>
         </h2>
       </div>
 
@@ -75,7 +76,7 @@ export default function FeaturesSection() {
         {planned.map((f, i) => (
           <div
             key={f.title}
-            className="scroll-animate group relative overflow-hidden rounded-[1.75rem] border border-white/60 bg-white/70 p-5 shadow-[0_10px_40px_-18px_rgba(15,23,42,0.15)] backdrop-blur-xl transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_50px_-20px_rgba(15,23,42,0.22)] md:p-6"
+            className="scroll-animate group relative overflow-hidden rounded-[1.75rem] border border-white/60 bg-white/70 p-5 shadow-[0_10px_40px_-18px_rgba(15,23,42,0.15)] backdrop-blur-xl transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_50px_-20px_rgba(15,23,42,0.22)]"
             style={{ animationDelay: `${i * 120}ms` }}
           >
             <div className="absolute inset-0 bg-linear-to-br from-white/40 via-transparent to-white/10 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
@@ -94,19 +95,24 @@ export default function FeaturesSection() {
               </div>
 
               <div className="flex-1">
-                <div className="mb-2 inline-flex items-center rounded-full bg-white/70 px-3 py-1 text-[11px] font-semibold text-on-surface-variant shadow-sm backdrop-blur-sm">
+                <div className="mb-2 inline-flex items-center rounded-full bg-white/70 px-3 py-1 text-[11px] mobile-xs:text-[10px] font-semibold text-on-surface-variant shadow-sm backdrop-blur-sm">
                   {f.chip}
                 </div>
 
-                <h3 className="whitespace-nowrap text-[15px] font-bold leading-snug text-on-surface md:text-lg">
+                <h3 className="whitespace-nowrap text-[15px] mobile-xs:text-[14px] font-bold leading-snug text-on-surface xl:text-lg">
                   {f.title}
                 </h3>
 
-                <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
-                  {f.desc.split('\n').map((line, i) => (
+                <p className="mt-2 text-xs mobile-xs:text-[11px] leading-relaxed text-on-surface-variant">
+                  {f.desc.split('\n').map((line, i, arr) => (
                     <span key={i}>
                       {line}
-                      <br />
+                      {i < arr.length - 1 && (
+                        <>
+                          <br className="xl:hidden" />
+                          <span className="hidden xl:inline"> </span>
+                        </>
+                      )}
                     </span>
                   ))}
                 </p>

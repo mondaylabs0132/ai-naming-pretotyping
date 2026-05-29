@@ -22,38 +22,40 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" className={`${plusJakarta.variable} h-full antialiased`}>
-      <body className="flex min-h-full flex-col">
-        <header className="sticky top-0 z-50 border-b border-outline-variant/20 bg-background/80 backdrop-blur-md">
-          <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 md:px-20">
-            <div className="flex items-center gap-2">
-              <span className="text-xl text-primary">✦</span>
-              <span className="text-base font-bold tracking-tight text-on-surface">
-                Starlit Names
-              </span>
-            </div>
-            <FocusEmailButton />
-          </div>
-        </header>
-
-        {children}
-
-        <footer className="border-t border-outline-variant/20 py-8">
-          <div className="mx-auto max-w-7xl px-6 md:px-20">
-            <div className="flex flex-col items-start justify-between gap-4 text-sm text-on-surface-variant sm:flex-row sm:items-center">
+      <body className="flex min-h-full flex-col bg-background text-on-surface">
+        <div className="mx-auto flex min-h-full w-full min-w-[360px] max-w-[520px] flex-col xl:max-w-none">
+          <header className="sticky top-0 z-50 border-b border-outline-variant/20 bg-background/80 backdrop-blur-md">
+            <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 xl:px-20 xl:max-w-7xl">
               <div className="flex items-center gap-2">
-                <span className="text-primary">✦</span>
-                <span className="font-semibold text-on-surface">
+                <span className="text-xl text-primary">✦</span>
+                <span className="text-base font-bold tracking-tight text-on-surface">
                   Starlit Names
                 </span>
-                <span className="text-on-surface-variant/60">— 사전 예약</span>
               </div>
-              <p className="text-xs text-on-surface-variant/60">
-                © 2024 Starlit Names. 수집된 개인 정보는 오픈 알림 외에 사용되지
-                않습니다.
-              </p>
+              <FocusEmailButton />
             </div>
-          </div>
-        </footer>
+          </header>
+
+          <main className="flex-1">{children}</main>
+
+          <footer className="border-t border-outline-variant/20 py-8">
+            <div className="mx-auto max-w-7xl px-6 xl:px-20 xl:max-w-7xl">
+              <div className="flex flex-col items-start justify-between gap-4 text-sm text-on-surface-variant xl:flex-row xl:items-center">
+                <div className="flex items-center gap-2">
+                  <span className="text-primary">✦</span>
+                  <span className="font-semibold text-on-surface">
+                    Starlit Names
+                  </span>
+                  <span className="text-on-surface-variant/60">— 사전 예약</span>
+                </div>
+                <p className="text-xs text-on-surface-variant/60">
+                  © 2024 Starlit Names. 수집된 개인 정보는 오픈 알림 외에 사용되지
+                  않습니다.
+                </p>
+              </div>
+            </div>
+          </footer>
+        </div>
       </body>
     </html>
   );
