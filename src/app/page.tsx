@@ -20,18 +20,36 @@ const HERO_MESSAGES = [
 const planned = [
   {
     Icon: Sparkles,
-    title: '클릭 몇 번으로 이름 후보 완성',
-    desc: '복잡한 과정 없어요. 조건만 입력하면 잘 지어진 이름 후보를 바로 받아볼 수 있어요.',
+    title: 'AI가 이름의 어감과 인상을 분석해드려요',
+    desc: '발음의 부드러움, 또래 인식, 이름의 분위기까지 여러 기준으로 정밀하게 분석해드려요.',
+    chip: '이름 분위기 분석',
+    cardClass:
+      'bg-gradient-to-br from-[#ede9fe] via-[#f5f3ff] to-surface border border-[#ddd6fe]',
+    iconBg: 'bg-[#ede9fe]',
+    iconColor: 'text-[#7c3aed]',
+    glowClass: 'bg-[#8b5cf6]/25',
   },
   {
     Icon: BookOpen,
-    title: '이름마다 뜻과 소리를 풀어드려요',
-    desc: '추천된 이름마다 한자 뜻, 획수, 소리 느낌을 한눈에 볼 수 있어요.',
+    title: '한자 뜻·획수·음양 조화를 함께 확인',
+    desc: '단순 추천이 아니라 이름마다 의미, 획수, 조화까지 한눈에 비교할 수 있어요.',
+    chip: '한자 의미 풀이',
+    cardClass:
+      'bg-gradient-to-br from-[#fef3c7] via-[#fffbeb] to-surface border border-[#fde68a]',
+    iconBg: 'bg-[#fef3c7]',
+    iconColor: 'text-[#d97706]',
+    glowClass: 'bg-[#f59e0b]/25',
   },
   {
     Icon: SlidersHorizontal,
-    title: '원하는 조건만 골라요',
-    desc: '느낌, 돌림자, 성씨 조합 중 하나만 정해도 맞는 이름만 바로 보여드려요.',
+    title: '성씨와 조합해 자연스러운 이름만 추천',
+    desc: 'AI가 성과 이름의 연결감, 발음 흐름, 부르기 쉬운 조합을 분석해 추천해드려요.',
+    chip: '발음 조화 추천',
+    cardClass:
+      'bg-gradient-to-br from-[#fce7f3] via-[#fdf2f8] to-surface border border-[#fbcfe8]',
+    iconBg: 'bg-[#fce7f3]',
+    iconColor: 'text-[#db2777]',
+    glowClass: 'bg-[#ec4899]/25',
   },
 ];
 
@@ -134,8 +152,8 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="grow overflow-hidden">
-      <section className="relative min-h-[760px] w-full overflow-hidden md:min-h-screen">
+    <main className="grow overflow-hidden space-y-16">
+      <section className="relative min-h-190 w-full overflow-hidden md:min-h-screen">
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
           <div className="absolute -top-32 left-1/3 h-150 w-150 rounded-full bg-primary-fixed/60 blur-3xl" />
 
@@ -271,36 +289,57 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-48 bg-gradient-to-b from-transparent via-background/60 to-background backdrop-blur-[2px]" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-48 bg-linear-to-b from-transparent via-background/60 to-background backdrop-blur-[2px]" />
       </section>
 
-      <section className="mx-auto max-w-7xl px-6 py-24 md:px-20 ">
-        <div className="scroll-animate mb-14">
-          <p className="text-xs font-semibold uppercase tracking-widest text-primary/70">
-            곧 쓸 수 있어요
+      <section className="mx-auto max-w-7xl px-6 py-28 md:px-20">
+        <div className="scroll-animate mb-16">
+          <p className="mb-3 text-xs font-bold uppercase tracking-[0.25em] text-primary/50">
+            준비 중인 기능
           </p>
-
-          <h2 className="mt-3 text-2xl font-bold text-on-surface md:text-3xl">
-            3가지 기능을 준비했어요
+          <h2 className="text-3xl font-bold text-on-surface md:text-5xl">
+            이름 고민,
+            <br />
+            <span className="text-primary">이렇게 해결해드려요</span>
           </h2>
         </div>
 
-        <div className="grid gap-5 md:grid-cols-3">
+        <div className="flex flex-col gap-4">
           {planned.map((f, i) => (
             <div
               key={f.title}
-              className="scroll-animate group rounded-2xl border border-outline-variant/30 bg-surface-container-low p-7 transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-xl"
-              style={{ animationDelay: `${i * 100}ms` }}
+              className="scroll-animate group relative overflow-hidden rounded-[1.75rem] border border-white/60 bg-white/70 p-5 shadow-[0_10px_40px_-18px_rgba(15,23,42,0.15)] backdrop-blur-xl transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_50px_-20px_rgba(15,23,42,0.22)] md:p-6"
+              style={{ animationDelay: `${i * 120}ms` }}
             >
-              <div className="mb-5 inline-flex rounded-xl bg-primary-fixed/50 p-3 text-primary transition-colors group-hover:bg-primary-fixed">
-                <f.Icon size={22} />
+              <div className="absolute inset-0 bg-linear-to-br from-white/40 via-transparent to-white/10 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+
+              <div className="relative flex items-start gap-4">
+                <div className="relative shrink-0">
+                  <div
+                    className={`absolute inset-0 rounded-2xl blur-xl opacity-0 transition-opacity duration-500 group-hover:opacity-100 ${f.glowClass}`}
+                  />
+
+                  <div
+                    className={`relative flex h-12 w-12 items-center justify-center rounded-2xl border border-white/60 shadow-sm ${f.iconBg}`}
+                  >
+                    <f.Icon size={20} className={f.iconColor} />
+                  </div>
+                </div>
+
+                <div className="flex-1">
+                  <div className="mb-2 inline-flex items-center rounded-full bg-white/70 px-3 py-1 text-[11px] font-semibold text-on-surface-variant shadow-sm backdrop-blur-sm">
+                    {f.chip}
+                  </div>
+
+                  <h3 className="text-base font-bold leading-snug text-on-surface md:text-lg">
+                    {f.title}
+                  </h3>
+
+                  <p className="mt-2 text-sm leading-relaxed text-on-surface-variant">
+                    {f.desc}
+                  </p>
+                </div>
               </div>
-
-              <h3 className="mb-2 font-bold text-on-surface">{f.title}</h3>
-
-              <p className="text-sm leading-relaxed text-on-surface-variant">
-                {f.desc}
-              </p>
             </div>
           ))}
         </div>
