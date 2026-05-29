@@ -59,12 +59,13 @@ export default function FeaturesSection() {
   }, []);
 
   return (
-    <section className="mx-auto max-w-7xl px-6 py-28 md:px-20">
+    <section className="mx-auto max-w-7xl px-6 py-28 md:px-10 md:max-w-screen-md xl:px-20 xl:max-w-7xl">
       <div className="scroll-animate mb-16">
-        <p className="mb-3 text-xs font-bold uppercase tracking-[0.25em] text-primary/50">
+        <p className="mb-3 text-xs mobile-xs:text-[10px] font-bold uppercase tracking-[0.25em] text-primary/50">
           준비 중인 기능
         </p>
-        <h2 className="text-3xl font-bold text-on-surface md:text-5xl">
+
+        <h2 className="text-3xl mobile-xs:text-2xl font-bold text-on-surface md:text-5xl">
           이름 고민,
           <br />
           <span className="text-primary">이렇게 해결해드려요</span>
@@ -94,15 +95,15 @@ export default function FeaturesSection() {
               </div>
 
               <div className="flex-1">
-                <div className="mb-2 inline-flex items-center rounded-full bg-white/70 px-3 py-1 text-[11px] font-semibold text-on-surface-variant shadow-sm backdrop-blur-sm">
+                <div className="mb-2 inline-flex items-center rounded-full bg-white/70 px-3 py-1 text-[11px] mobile-xs:text-[10px] font-semibold text-on-surface-variant shadow-sm backdrop-blur-sm">
                   {f.chip}
                 </div>
 
-                <h3 className="whitespace-nowrap text-[15px] font-bold leading-snug text-on-surface md:text-lg">
+                <h3 className="whitespace-nowrap text-[15px] mobile-xs:text-[14px] font-bold leading-snug text-on-surface md:text-lg">
                   {f.title}
                 </h3>
 
-                <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
+                <p className="mt-2 text-xs mobile-xs:text-[11px] leading-relaxed text-on-surface-variant">
                   {f.desc.split('\n').map((line, i) => (
                     <span key={i}>
                       {line}

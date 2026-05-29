@@ -24,7 +24,7 @@ export default function RootLayout({
     <html lang="ko" className={`${plusJakarta.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col">
         <header className="sticky top-0 z-50 border-b border-outline-variant/20 bg-background/80 backdrop-blur-md">
-          <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 md:px-20">
+          <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 md:px-10 md:max-w-screen-md xl:px-20 xl:max-w-7xl">
             <div className="flex items-center gap-2">
               <span className="text-xl text-primary">✦</span>
               <span className="text-base font-bold tracking-tight text-on-surface">
@@ -38,7 +38,7 @@ export default function RootLayout({
         {children}
 
         <footer className="border-t border-outline-variant/20 py-8">
-          <div className="mx-auto max-w-7xl px-6 md:px-20">
+          <div className="mx-auto max-w-7xl px-6 md:px-10 md:max-w-screen-md xl:px-20 xl:max-w-7xl">
             <div className="flex flex-col items-start justify-between gap-4 text-sm text-on-surface-variant sm:flex-row sm:items-center">
               <div className="flex items-center gap-2">
                 <span className="text-primary">✦</span>

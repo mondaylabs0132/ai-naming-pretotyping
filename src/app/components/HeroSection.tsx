@@ -106,7 +106,7 @@ export default function HeroSection() {
   }, [state.success]);
 
   return (
-    <section className="relative z-30 flex min-h-190 w-full items-end md:min-h-screen md:items-center">
+    <section className="relative z-30 flex min-h-svh w-full items-end md:min-h-screen md:items-center">
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute -top-32 left-1/3 h-150 w-150 rounded-full bg-primary-fixed/60 blur-3xl" />
 
@@ -121,17 +121,17 @@ export default function HeroSection() {
             fill
             priority
             unoptimized
-            className="object-cover object-[68%_52%] scale-[1.02] sm:scale-[1.05] md:scale-100 md:object-right"
+            className="object-cover object-[68%_52%] scale-[1.02] mobile-xs:scale-[1.0] sm:scale-[1.05] md:scale-100 md:object-right"
           />
         </div>
       </div>
 
-      <div className="relative z-20 mx-auto w-full max-w-7xl px-5 pb-24 md:px-20 md:py-44">
+      <div className="relative z-20 mx-auto w-full max-w-7xl px-5 pb-40 mobile-xs:pb-32 md:px-10 md:py-44 md:max-w-screen-md xl:px-20 xl:max-w-7xl">
         <div className="max-w-[320px] md:max-w-lg">
           <div className="animate-fade-in-up delay-0 mb-8 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary-fixed/60 px-4 py-2 backdrop-blur-sm">
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-red-400" />
 
-            <span className="text-xs font-semibold tracking-wide text-on-primary-fixed-variant">
+            <span className="text-xs mobile-xs:text-[10px] font-semibold tracking-wide text-on-primary-fixed-variant">
               <span className={bumping ? 'count-bump' : ''}>
                 {count.toLocaleString()}
               </span>
@@ -139,7 +139,7 @@ export default function HeroSection() {
             </span>
           </div>
 
-          <h1 className="animate-fade-in-up delay-100 max-w-[12ch] text-[2.4rem] font-bold leading-[1.05] tracking-tight text-on-surface sm:text-5xl md:max-w-none md:text-6xl">
+          <h1 className="animate-fade-in-up delay-100 max-w-[12ch] text-[2.4rem] mobile-xs:text-[2.1rem] font-bold leading-[1.05] tracking-tight text-on-surface sm:text-5xl md:max-w-none md:text-6xl">
             <span className="block text-balance whitespace-nowrap">
               {heroMessage.title[0]}
             </span>
@@ -164,11 +164,11 @@ export default function HeroSection() {
             </span>
           </h1>
 
-          <p className="animate-fade-in-up delay-200 mt-5 text-base leading-relaxed text-on-surface-variant md:text-lg">
+          <p className="animate-fade-in-up delay-200 mt-5 text-base mobile-xs:text-sm leading-relaxed text-on-surface-variant md:text-lg">
             며칠째 고민 중이신가요?
           </p>
 
-          <p className="animate-fade-in-up delay-200 text-base leading-7 text-on-surface-variant md:text-lg md:leading-relaxed">
+          <p className="animate-fade-in-up delay-200 text-base mobile-xs:text-sm leading-7 text-on-surface-variant md:text-lg md:leading-relaxed">
             AI가 바로 분석해서
             <br className="md:hidden" />
             좋은 이름만 추천해드려요.
@@ -179,7 +179,7 @@ export default function HeroSection() {
             className="animate-fade-in-up delay-300 mt-8 flex flex-wrap items-center gap-4"
           >
             {state.success ? (
-              <div className="flex items-center gap-3 rounded-full border border-primary/30 bg-primary-fixed/40 px-6 py-4 text-sm font-medium text-on-primary-fixed-variant">
+              <div className="flex items-center gap-3 rounded-full border border-primary/30 bg-primary-fixed/40 px-6 py-4 text-sm mobile-xs:text-xs font-medium text-on-primary-fixed-variant">
                 서비스 오픈 때 이메일로 알려드릴게요!
               </div>
             ) : (
@@ -206,20 +206,20 @@ export default function HeroSection() {
                       setTimeout(() => setShowSuggestions(false), 150)
                     }
                     placeholder="이메일을 입력해 주세요"
-                    className="min-w-0 flex-1 bg-transparent px-5 py-3.5 text-sm text-on-surface placeholder:text-on-surface-variant/50 outline-none"
+                    className="min-w-0 flex-1 bg-transparent px-5 py-3.5 text-sm mobile-xs:text-xs text-on-surface placeholder:text-on-surface-variant/50 outline-none"
                   />
 
                   <button
                     type="submit"
                     disabled={pending}
-                    className="m-1 shrink-0 whitespace-nowrap rounded-full bg-primary px-5 py-3 text-sm font-semibold text-on-primary shadow-[0_8px_24px_-6px_rgba(97,85,152,0.45)] transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_28px_-6px_rgba(97,85,152,0.55)] disabled:cursor-not-allowed disabled:opacity-60 disabled:translate-y-0"
+                    className="m-1 shrink-0 whitespace-nowrap rounded-full bg-primary px-5 py-3 text-sm mobile-xs:text-xs font-semibold text-on-primary shadow-[0_8px_24px_-6px_rgba(97,85,152,0.45)] transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_28px_-6px_rgba(97,85,152,0.55)] disabled:cursor-not-allowed disabled:opacity-60 disabled:translate-y-0"
                   >
                     {pending ? '신청 중...' : '신청할게요 →'}
                   </button>
                 </form>
 
                 {state.error && (
-                  <p className="mt-2 px-4 text-xs text-red-500">
+                  <p className="mt-2 px-4 text-xs mobile-xs:text-[10px] text-red-500">
                     {state.error}
                   </p>
                 )}
@@ -234,7 +234,7 @@ export default function HeroSection() {
                             setEmail(`${email.split('@')[0]}@${domain}`);
                             setShowSuggestions(false);
                           }}
-                          className="w-full px-5 py-3 text-left text-sm transition-colors hover:bg-surface-container"
+                          className="w-full px-5 py-3 text-left text-sm mobile-xs:text-xs transition-colors hover:bg-surface-container"
                         >
                           <span className="text-on-surface-variant">
                             {email.split('@')[0]}@
