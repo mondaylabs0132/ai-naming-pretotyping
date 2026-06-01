@@ -116,10 +116,8 @@ export default function HeroSection() {
             <div className="hero-fade-4 flex flex-col sm:flex-row items-center gap-6 w-full md:w-auto">
               <button
                 onClick={scrollToEmail}
-                className="hero-btn relative overflow-hidden flex items-center justify-center gap-2.5 px-8 py-4 rounded-full text-md font-bold text-white transition-all duration-300 hover:scale-[1.03] hover:-translate-y-0.5 active:scale-[0.97] w-full sm:w-auto"
+                className="hero-cta relative overflow-hidden flex items-center justify-center gap-2.5 px-8 py-4 rounded-full text-md font-bold text-white transition-all duration-300 hover:scale-[1.03] hover:-translate-y-0.5 active:scale-[0.97] w-full sm:w-auto"
                 style={{
-                  background:
-                    'linear-gradient(135deg, #5441d8 0%, #7c6ef0 100%)',
                   boxShadow:
                     '0 8px 32px rgba(84,65,219,0.35), 0 2px 8px rgba(84,65,219,0.2), inset 0 1px 0 rgba(255,255,255,0.15)',
                 }}

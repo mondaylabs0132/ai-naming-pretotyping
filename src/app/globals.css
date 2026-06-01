@@ -103,6 +103,28 @@
           transition: filter 0.3s ease;
         }
 
+        /* HeroSection */
+@keyframes gradient-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+.hero-cta {
+  background: linear-gradient(
+    90deg,
+    #5441d8,
+    #7c6ef0,
+    #9f8fff,
+    #5441d8
+  );
+  background-size: 300% 100%;
+  animation: gradient-flow 6s linear infinite;
+}
+
                 /* EmpathySection */
         .empathy-card {
           position: relative;
