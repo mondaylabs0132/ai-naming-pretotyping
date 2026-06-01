@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, type FormEvent } from 'react';
+import { useState, useRef, type FormEvent } from 'react';
 
 const perks = [
   { icon: '🎟️', text: '우선 체험권' },
@@ -8,12 +8,73 @@ const perks = [
   { icon: '📊', text: '분석 리포트' },
 ];
 
+const EMAIL_DOMAINS = [
+  'gmail.com',
+  'naver.com',
+  'kakao.com',
+  'daum.net',
+  'hanmail.net',
+  'nate.com',
+  'icloud.com',
+  'outlook.com',
+];
+
 export default function CTASection() {
   const [email, setEmail] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [activeIndex, setActiveIndex] = useState(-1);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const handleEmailChange = (value: string) => {
+    setEmail(value);
+    setActiveIndex(-1);
+
+    const atIndex = value.indexOf('@');
+    if (atIndex !== -1) {
+      const domainPart = value.slice(atIndex + 1).toLowerCase();
+      const filtered =
+        domainPart === ''
+          ? EMAIL_DOMAINS
+          : EMAIL_DOMAINS.filter((d) => d.startsWith(domainPart));
+      setSuggestions(filtered);
+    } else {
+      setSuggestions([]);
+    }
+  };
+
+  const selectDomain = (domain: string) => {
+    const atIndex = email.indexOf('@');
+    const newEmail =
+      atIndex !== -1
+        ? email.slice(0, atIndex + 1) + domain
+        : email + '@' + domain;
+    setEmail(newEmail);
+    setSuggestions([]);
+    setActiveIndex(-1);
+    inputRef.current?.focus();
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (!suggestions.length) return;
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      setActiveIndex((prev) => (prev + 1) % suggestions.length);
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      setActiveIndex((prev) => (prev <= 0 ? suggestions.length - 1 : prev - 1));
+    } else if (e.key === 'Enter' && activeIndex >= 0) {
+      e.preventDefault();
+      selectDomain(suggestions[activeIndex]);
+    } else if (e.key === 'Escape') {
+      setSuggestions([]);
+      setActiveIndex(-1);
+    }
+  };
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+    setSuggestions([]);
     console.log('Submitted email:', email);
     setIsSubmitted(true);
     setEmail('');
@@ -27,10 +88,16 @@ export default function CTASection() {
           background: linear-gradient(145deg, #3d2fc4 0%, #5441d8 45%, #7c5fe6 100%);
           border-radius: 32px;
           position: relative;
-          overflow: hidden;
         }
         @media (min-width: 768px) {
           .cta-wrap { border-radius: 40px; }
+        }
+        .cta-bg-layer {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+          border-radius: inherit;
+          pointer-events: none;
         }
         .cta-grid {
           position: absolute; inset: 0;
@@ -39,14 +106,12 @@ export default function CTASection() {
             linear-gradient(rgba(255,255,255,1) 1px, transparent 1px),
             linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px);
           background-size: 48px 48px;
-          pointer-events: none;
         }
         .cta-orb-tr {
           position: absolute;
           width: 300px; height: 300px; border-radius: 50%;
           background: radial-gradient(circle, rgba(198,192,255,0.22) 0%, transparent 65%);
           top: -100px; right: -80px;
-          pointer-events: none;
         }
         @media (min-width: 768px) {
           .cta-orb-tr { width: 420px; height: 420px; top: -140px; right: -100px; }
@@ -56,7 +121,6 @@ export default function CTASection() {
           width: 200px; height: 200px; border-radius: 50%;
           background: radial-gradient(circle, rgba(252,211,68,0.14) 0%, transparent 65%);
           bottom: -60px; left: -40px;
-          pointer-events: none;
         }
         @media (min-width: 768px) {
           .cta-orb-bl { width: 320px; height: 320px; bottom: -100px; left: -60px; }
@@ -73,6 +137,10 @@ export default function CTASection() {
         @media (min-width: 768px) {
           .perk-chip { font-size: 12px; gap: 6px; padding: 7px 14px; }
         }
+        .email-form-wrapper {
+          position: relative;
+          z-index: 50;
+        }
         .email-wrap {
           display: flex; flex-direction: column; gap: 8px;
           padding: 6px;
@@ -80,16 +148,20 @@ export default function CTASection() {
           border: 1px solid rgba(255,255,255,0.2);
           border-radius: 24px;
           backdrop-filter: blur(8px);
+          position: relative;
+          z-index: 2;
         }
         @media (min-width: 640px) {
           .email-wrap { flex-direction: row; border-radius: 999px; gap: 10px; }
         }
         .email-inner {
           position: relative; flex: 1;
+          overflow: visible; 
         }
         .email-icon {
           position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
           color: rgba(100,100,120,0.5); pointer-events: none;
+          z-index: 1;
         }
         .email-input {
           width: 100%; padding: 12px 16px 12px 42px;
@@ -97,9 +169,42 @@ export default function CTASection() {
           background: #fff; color: #191a2e;
           border: none; outline: none;
           font-size: 14px; font-weight: 500;
+          box-sizing: border-box;
         }
         @media (min-width: 768px) {
           .email-input { font-size: 15px; padding: 14px 20px 14px 48px; }
+        }
+        .email-dropdown {
+          position: absolute;
+          top: calc(100% + 4px);
+          left: 0; right: 0;
+          background: #fff;
+          border-radius: 16px;
+          padding: 8px 0;
+          overflow: hidden;
+          box-shadow: 0 12px 32px rgba(0,0,0,0.2);
+          z-index: 100;
+          border: 1px solid rgba(0,0,0,0.08);
+        }
+        .email-dropdown-item {
+          display: flex; align-items: center;
+          padding: 10px 16px;
+          font-size: 14px; color: #191a2e;
+          cursor: pointer;
+          gap: 4px;
+          transition: background 0.1s;
+          border: none; background: transparent; width: 100%; text-align: left;
+        }
+        .email-dropdown-item:hover,
+        .email-dropdown-item.active {
+          background: #f0edff;
+        }
+        .domain-highlight {
+          font-weight: 700;
+          color: #3d2fc4;
+        }
+        .email-at-prefix {
+          color: #888; font-size: 13px; flex-shrink: 0;
         }
         .cta-submit {
           display: flex; align-items: center; justify-content: center; gap: 6px;
@@ -108,6 +213,8 @@ export default function CTASection() {
           font-size: 13px; font-weight: 800;
           border: none; cursor: pointer; white-space: nowrap;
           transition: transform 0.2s, box-shadow 0.2s;
+          position: relative;
+          z-index: 1;
         }
         @media (min-width: 768px) {
           .cta-submit { font-size: 14px; padding: 14px 28px; gap: 8px; }
@@ -130,15 +237,17 @@ export default function CTASection() {
         }
       `}</style>
 
-      <section className="px-6 mx-auto w-full h-svh flex flex-col items-center justify-center py-6 md:py-0">
+      <section className="px-6 mx-auto w-full h-svh flex flex-col items-center justify-center py-6 md:py-0 relative">
         <div
-          className="max-w-275 mx-auto w-full cta-wrap"
+          className="max-w-[1100px] mx-auto w-full cta-wrap"
           style={{ boxShadow: '0 40px 80px -20px rgba(62,37,195,0.35)' }}
         >
-          {/* 배경 레이어 */}
-          <div className="cta-grid" />
-          <div className="cta-orb-tr" />
-          <div className="cta-orb-bl" />
+          {/* 배경 레이어 (별도 컨테이너로 분리하여 overflow: hidden 적용) */}
+          <div className="cta-bg-layer">
+            <div className="cta-grid" />
+            <div className="cta-orb-tr" />
+            <div className="cta-orb-bl" />
+          </div>
 
           <div className="relative z-10 px-6 py-12 md:px-20 md:py-20 text-center">
             {/* 출시 뱃지 */}
@@ -163,8 +272,7 @@ export default function CTASection() {
 
             {/* 헤드라인 */}
             <h2 className="text-2xl md:text-5xl font-black text-white leading-[1.2] tracking-tight mb-4 md:mb-6">
-              우리 아이 평생 불릴 이름,
-              <br />
+              우리 아이 평생 불릴 이름,<br />
               <span style={{ color: '#fcd344' }}>한 번 더</span> 확인해보세요.
             </h2>
 
@@ -172,10 +280,8 @@ export default function CTASection() {
               className="text-sm md:text-lg mb-6 md:mb-8 leading-relaxed max-w-xl mx-auto"
               style={{ color: 'rgba(255,255,255,0.65)' }}
             >
-              지금 사전 등록하고{' '}
-              <strong className="text-white">우선 체험권</strong>과{' '}
-              <strong style={{ color: '#fcd344' }}>50% 할인권</strong>을
-              받으세요.
+              지금 사전 등록하고 <strong className="text-white">우선 체험권</strong>과{' '}
+              <strong style={{ color: '#fcd344' }}>50% 할인권</strong>을 받으세요.
             </p>
 
             {/* 혜택 칩 */}
@@ -214,52 +320,92 @@ export default function CTASection() {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit}>
-                  <div className="email-wrap">
-                    <div className="email-inner">
-                      <div className="email-icon">
+                  <div className="email-form-wrapper">
+                    <div className="email-wrap">
+                      <div className="email-inner">
+                        <div className="email-icon">
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                            <polyline points="22,6 12,13 2,6" />
+                          </svg>
+                        </div>
+                        <input
+                          ref={inputRef}
+                          id="email-input"
+                          type="text"
+                          inputMode="email"
+                          value={email}
+                          onChange={(e) => handleEmailChange(e.target.value)}
+                          onKeyDown={handleKeyDown}
+                          onBlur={() =>
+                            setTimeout(() => setSuggestions([]), 150)
+                          }
+                          className="email-input"
+                          placeholder="이메일 주소를 입력해주세요"
+                          required
+                          autoComplete="off"
+                        />
+
+                        {/* 이메일 추천 드롭다운 */}
+                        {suggestions.length > 0 && (
+                          <div className="email-dropdown" role="listbox">
+                            {suggestions.map((domain, idx) => {
+                              const atIndex = email.indexOf('@');
+                              const localPart =
+                                atIndex !== -1 ? email.slice(0, atIndex) : email;
+                              const typedDomain =
+                                atIndex !== -1 ? email.slice(atIndex + 1) : '';
+
+                              return (
+                                <button
+                                  key={domain}
+                                  type="button"
+                                  role="option"
+                                  aria-selected={idx === activeIndex}
+                                  className={`email-dropdown-item${idx === activeIndex ? ' active' : ''}`}
+                                  onMouseDown={() => selectDomain(domain)}
+                                >
+                                  <span
+                                    style={{ color: '#191a2e', fontWeight: 500 }}
+                                  >
+                                    {localPart}
+                                  </span>
+                                  <span className="email-at-prefix">@</span>
+                                  <span>
+                                    <span style={{ color: '#555' }}>
+                                      {typedDomain}
+                                    </span>
+                                    <span className="domain-highlight">
+                                      {domain.slice(typedDomain.length)}
+                                    </span>
+                                  </span>
+                                </button>
+                              );
+                            })}
+                          </div>
+                        )}
+                      </div>
+
+                      <button
+                        type="submit"
+                        className="cta-submit hover:bg-[#ffe066] active:scale-95 transition-all"
+                      >
+                        무료 사전 예약
                         <svg
-                          width="18"
-                          height="18"
+                          width="16"
+                          height="16"
                           viewBox="0 0 24 24"
                           fill="none"
                           stroke="currentColor"
-                          strokeWidth="2"
+                          strokeWidth="2.5"
                           strokeLinecap="round"
                           strokeLinejoin="round"
                         >
-                          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                          <polyline points="22,6 12,13 2,6" />
+                          <line x1="5" y1="12" x2="19" y2="12" />
+                          <polyline points="12 5 19 12 12 19" />
                         </svg>
-                      </div>
-                      <input
-                        id="email-input"
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        className="email-input"
-                        placeholder="이메일 주소를 입력해주세요"
-                        required
-                      />
+                      </button>
                     </div>
-                    <button
-                      type="submit"
-                      className="cta-submit hover:bg-[#ffe066] active:scale-95 transition-all"
-                    >
-                      무료 사전 예약
-                      <svg
-                        width="16"
-                        height="16"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <line x1="5" y1="12" x2="19" y2="12" />
-                        <polyline points="12 5 19 12 12 19" />
-                      </svg>
-                    </button>
                   </div>
                 </form>
               )}
@@ -270,20 +416,12 @@ export default function CTASection() {
               <div className="flex">
                 {[16, 17, 18, 19, 20].map((i) => (
                   <div key={i} className="avatar-ring">
-                    <img
-                      src={`https://i.pravatar.cc/100?img=${i}`}
-                      alt="user"
-                      className="w-full h-full object-cover"
-                    />
+                    <img src={`https://i.pravatar.cc/100?img=${i}`} alt="user" className="w-full h-full object-cover" />
                   </div>
                 ))}
               </div>
               <p className="text-[11px] md:text-sm font-medium text-white/50">
-                이미{' '}
-                <strong style={{ color: '#fcd344', fontWeight: 800 }}>
-                  1,248명
-                </strong>
-                의 부모님이 대기 중
+                이미 <strong style={{ color: '#fcd344', fontWeight: 800 }}>1,248명</strong>의 부모님이 대기 중
               </p>
             </div>
           </div>
