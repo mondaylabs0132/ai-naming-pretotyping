@@ -1,6 +1,6 @@
 const cards = [
   {
-    emoji: '🗣️',
+    icon: 'record_voice_over',
     number: '01',
     accent: '#fcd344',
     accentLight: 'rgba(252,211,68,0.12)',
@@ -9,7 +9,7 @@ const cards = [
     tag: '발음 리스크',
   },
   {
-    emoji: '😅',
+    icon: 'translate',
     number: '02',
     accent: '#5441d8',
     accentLight: 'rgba(84,65,219,0.08)',
@@ -18,7 +18,7 @@ const cards = [
     tag: '의미 왜곡',
   },
   {
-    emoji: '📌',
+    icon: 'history',
     number: '03',
     accent: '#ff6b6b',
     accentLight: 'rgba(255,107,107,0.08)',
@@ -37,10 +37,19 @@ export default function EmpathySection() {
           background: #ffffff;
           border: 1px solid rgba(84,65,219,0.08);
           border-radius: 24px;
-          padding: 36px 32px;
+          padding: 32px 24px;
           overflow: hidden;
           transition: transform 0.3s ease, box-shadow 0.3s ease;
           cursor: default;
+          flex-shrink: 0;
+          width: 280px;
+        }
+        @media (min-width: 768px) {
+          .empathy-card {
+            padding: 36px 32px;
+            width: auto;
+            flex-shrink: 1;
+          }
         }
         .empathy-card::before {
           content: '';
@@ -62,37 +71,52 @@ export default function EmpathySection() {
         .card-2::before { background: linear-gradient(90deg, #ff6b6b, #ff9a9a); }
 
         .empathy-number {
-          font-size: 72px;
+          font-size: 64px;
           font-weight: 900;
           line-height: 1;
           position: absolute;
-          top: 20px;
-          right: 24px;
+          top: 16px;
+          right: 20px;
           opacity: 0.06;
           font-family: 'Plus Jakarta Sans', sans-serif;
-          letter-spacing: -4px;
+          letter-spacing: -3px;
           user-select: none;
+        }
+        @media (min-width: 768px) {
+          .empathy-number {
+            font-size: 72px;
+            top: 20px;
+            right: 24px;
+          }
+        }
+        
+        .scroll-container {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+        .scroll-container::-webkit-scrollbar {
+          display: none;
         }
       `}</style>
 
       <section
-        className="overflow-hidden px-6 mx-auto w-full h-screen flex flex-col items-center justify-center"
+        className="overflow-hidden px-6 mx-auto w-full min-h-svh flex flex-col items-center justify-center py-16 md:py-0"
         style={{
           background: 'linear-gradient(180deg, #f5f2ff 0%, #fbf8ff 100%)',
         }}
       >
-        <div className="max-w-[1200px] mx-auto">
-          {/* 헤더 */}
-          <div className="mb-14">
+        <div className="max-w-[1200px] mx-auto w-full">
+          {/* 헤드라인 섹션 */}
+          <div className="mb-10 md:mb-14">
             <p
-              className="text-xs font-bold tracking-[0.2em] uppercase mb-3"
+              className="text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase mb-2 md:mb-3 text-center md:text-left"
               style={{ color: '#5441d8' }}
             >
               WHY IT MATTERS
             </p>
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 text-center md:text-left">
               <h2
-                className="text-3xl md:text-4xl font-bold leading-tight"
+                className="text-2xl md:text-4xl font-bold leading-tight"
                 style={{ color: '#191a2e' }}
               >
                 왜 <span style={{ color: '#5441d8' }}>아이리음</span>이
@@ -100,7 +124,7 @@ export default function EmpathySection() {
               </h2>
             </div>
             <div
-              className="mt-6 h-px"
+              className="mt-6 h-px hidden md:block"
               style={{
                 background:
                   'linear-gradient(90deg, rgba(84,65,219,0.3) 0%, transparent 60%)',
@@ -108,25 +132,29 @@ export default function EmpathySection() {
             />
           </div>
 
-          {/* 카드 그리드 */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* 카드 컨테이너 (모바일 스와이프 대응) */}
+          <div className="scroll-container flex md:grid md:grid-cols-3 gap-5 md:gap-6 overflow-x-auto md:overflow-x-visible snap-x snap-mandatory pb-8 md:pb-0 px-4 -mx-4 md:px-0 md:mx-0">
             {cards.map((card, i) => (
-              <div key={card.title} className={`empathy-card card-${i}`}>
+              <div key={card.title} className={`empathy-card card-${i} snap-center`}>
                 {/* 배경 숫자 */}
                 <span className="empathy-number">{card.number}</span>
 
-                {/* 상단 영역 */}
+                {/* 상단 아이콘 영역 */}
                 <div className="flex items-start justify-between mb-6">
-                  {/* 이모지 아이콘 */}
                   <div
-                    className="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl"
+                    className="w-12 h-12 rounded-2xl flex items-center justify-center"
                     style={{ background: card.accentLight }}
                   >
-                    {card.emoji}
+                    <span 
+                      className="material-symbols-outlined text-2xl"
+                      style={{ color: card.accent }}
+                    >
+                      {card.icon}
+                    </span>
                   </div>
                   {/* 태그 */}
                   <span
-                    className="text-[11px] font-bold px-3 py-1 rounded-full"
+                    className="text-[10px] md:text-[11px] font-bold px-3 py-1 rounded-full"
                     style={{
                       background: card.accentLight,
                       color: card.accent,
@@ -137,16 +165,16 @@ export default function EmpathySection() {
                   </span>
                 </div>
 
-                {/* 텍스트 */}
+                {/* 텍스트 콘텐츠 */}
                 <h3
-                  className="text-[19px] font-bold mb-3 leading-snug"
+                  className="text-[18px] md:text-[19px] font-bold mb-3 leading-snug"
                   style={{ color: '#191a2e', whiteSpace: 'pre-line' }}
                 >
                   {card.title}
                 </h3>
                 <p
                   className="text-sm leading-relaxed"
-                  style={{ color: '#787586' }}
+                  style={{ color: '#474555' }}
                 >
                   {card.desc}
                 </p>
@@ -163,6 +191,17 @@ export default function EmpathySection() {
                   />
                 </div>
               </div>
+            ))}
+          </div>
+
+          {/* 모바일 스와이프 인디케이터 (모바일에서만 표시) */}
+          <div className="flex md:hidden justify-center items-center gap-1.5 mt-2">
+            {[0, 1, 2].map((dot) => (
+              <div 
+                key={dot}
+                className={`w-1.5 h-1.5 rounded-full ${dot === 0 ? 'bg-primary w-4' : 'bg-outline-variant'}`}
+                style={{ transition: 'all 0.3s ease' }}
+              />
             ))}
           </div>
         </div>
