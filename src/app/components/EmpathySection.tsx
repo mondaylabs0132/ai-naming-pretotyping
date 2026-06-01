@@ -105,7 +105,7 @@ export default function EmpathySection() {
           background: 'linear-gradient(180deg, #f5f2ff 0%, #fbf8ff 100%)',
         }}
       >
-        <div className="max-w-[1200px] mx-auto w-full">
+        <div className="max-w-300 mx-auto w-full">
           {/* 헤드라인 섹션 */}
           <div className="mb-10 md:mb-14">
             <p
@@ -135,7 +135,10 @@ export default function EmpathySection() {
           {/* 카드 컨테이너 (모바일 스와이프 대응) */}
           <div className="scroll-container flex md:grid md:grid-cols-3 gap-5 md:gap-6 overflow-x-auto md:overflow-x-visible snap-x snap-mandatory pb-8 md:pb-0 px-4 -mx-4 md:px-0 md:mx-0">
             {cards.map((card, i) => (
-              <div key={card.title} className={`empathy-card card-${i} snap-center`}>
+              <div
+                key={card.title}
+                className={`empathy-card card-${i} snap-center`}
+              >
                 {/* 배경 숫자 */}
                 <span className="empathy-number">{card.number}</span>
 
@@ -145,7 +148,7 @@ export default function EmpathySection() {
                     className="w-12 h-12 rounded-2xl flex items-center justify-center"
                     style={{ background: card.accentLight }}
                   >
-                    <span 
+                    <span
                       className="material-symbols-outlined text-2xl"
                       style={{ color: card.accent }}
                     >
@@ -197,7 +200,7 @@ export default function EmpathySection() {
           {/* 모바일 스와이프 인디케이터 (모바일에서만 표시) */}
           <div className="flex md:hidden justify-center items-center gap-1.5 mt-2">
             {[0, 1, 2].map((dot) => (
-              <div 
+              <div
                 key={dot}
                 className={`w-1.5 h-1.5 rounded-full ${dot === 0 ? 'bg-primary w-4' : 'bg-outline-variant'}`}
                 style={{ transition: 'all 0.3s ease' }}

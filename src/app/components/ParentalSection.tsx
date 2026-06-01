@@ -93,7 +93,7 @@ export default function ParentalSection() {
                   src="/image02.png"
                   alt="Emotional shot of a young child"
                   fill
-                  className="object-cover"
+                  className="object-cover w-full h-full"
                 />
                 {/* 부드러운 보라 오버레이 */}
                 <div

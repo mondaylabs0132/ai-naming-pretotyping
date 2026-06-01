@@ -3,9 +3,9 @@
 import { useState, type FormEvent } from 'react';
 
 const perks = [
-  { icon: '🎟️', text: '우선 체험권 지급' },
-  { icon: '💸', text: '50% 할인 바우처' },
-  { icon: '📊', text: '무료 샘플 리포트' },
+  { icon: '🎟️', text: '우선 체험권' },
+  { icon: '💸', text: '50% 할인' },
+  { icon: '📊', text: '분석 리포트' },
 ];
 
 export default function CTASection() {
@@ -25,9 +25,12 @@ export default function CTASection() {
       <style>{`
         .cta-wrap {
           background: linear-gradient(145deg, #3d2fc4 0%, #5441d8 45%, #7c5fe6 100%);
-          border-radius: 40px;
+          border-radius: 32px;
           position: relative;
           overflow: hidden;
+        }
+        @media (min-width: 768px) {
+          .cta-wrap { border-radius: 40px; }
         }
         .cta-grid {
           position: absolute; inset: 0;
@@ -40,97 +43,96 @@ export default function CTASection() {
         }
         .cta-orb-tr {
           position: absolute;
-          width: 420px; height: 420px; border-radius: 50%;
+          width: 300px; height: 300px; border-radius: 50%;
           background: radial-gradient(circle, rgba(198,192,255,0.22) 0%, transparent 65%);
-          top: -140px; right: -100px;
+          top: -100px; right: -80px;
           pointer-events: none;
+        }
+        @media (min-width: 768px) {
+          .cta-orb-tr { width: 420px; height: 420px; top: -140px; right: -100px; }
         }
         .cta-orb-bl {
           position: absolute;
-          width: 320px; height: 320px; border-radius: 50%;
+          width: 200px; height: 200px; border-radius: 50%;
           background: radial-gradient(circle, rgba(252,211,68,0.14) 0%, transparent 65%);
-          bottom: -100px; left: -60px;
+          bottom: -60px; left: -40px;
           pointer-events: none;
         }
+        @media (min-width: 768px) {
+          .cta-orb-bl { width: 320px; height: 320px; bottom: -100px; left: -60px; }
+        }
         .perk-chip {
-          display: inline-flex; align-items: center; gap: 6px;
-          padding: 7px 14px; border-radius: 999px;
+          display: inline-flex; align-items: center; gap: 4px;
+          padding: 6px 12px; border-radius: 999px;
           background: rgba(255,255,255,0.1);
           border: 1px solid rgba(255,255,255,0.18);
-          font-size: 12px; font-weight: 600;
+          font-size: 11px; font-weight: 600;
           color: rgba(255,255,255,0.88);
           backdrop-filter: blur(4px);
         }
+        @media (min-width: 768px) {
+          .perk-chip { font-size: 12px; gap: 6px; padding: 7px 14px; }
+        }
         .email-wrap {
-          display: flex; flex-direction: column; gap: 10px;
-          padding: 8px;
+          display: flex; flex-direction: column; gap: 8px;
+          padding: 6px;
           background: rgba(255,255,255,0.1);
           border: 1px solid rgba(255,255,255,0.2);
-          border-radius: 999px;
+          border-radius: 24px;
           backdrop-filter: blur(8px);
         }
         @media (min-width: 640px) {
-          .email-wrap { flex-direction: row; }
+          .email-wrap { flex-direction: row; border-radius: 999px; gap: 10px; }
         }
         .email-inner {
           position: relative; flex: 1;
         }
         .email-icon {
-          position: absolute; left: 18px; top: 50%; transform: translateY(-50%);
+          position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
           color: rgba(100,100,120,0.5); pointer-events: none;
         }
         .email-input {
-          width: 100%; padding: 14px 20px 14px 48px;
+          width: 100%; padding: 12px 16px 12px 42px;
           border-radius: 999px;
           background: #fff; color: #191a2e;
           border: none; outline: none;
-          font-size: 15px; font-weight: 500;
-          transition: box-shadow 0.2s;
+          font-size: 14px; font-weight: 500;
         }
-        .email-input:focus { box-shadow: 0 0 0 3px rgba(252,211,68,0.35); }
-        .email-input::placeholder { color: rgba(100,100,120,0.45); }
+        @media (min-width: 768px) {
+          .email-input { font-size: 15px; padding: 14px 20px 14px 48px; }
+        }
         .cta-submit {
-          display: flex; align-items: center; justify-content: center; gap-8px;
-          gap: 8px;
-          padding: 14px 28px; border-radius: 999px;
+          display: flex; align-items: center; justify-content: center; gap: 6px;
+          padding: 12px 24px; border-radius: 999px;
           background: #fcd344; color: #3d2400;
-          font-size: 14px; font-weight: 800;
+          font-size: 13px; font-weight: 800;
           border: none; cursor: pointer; white-space: nowrap;
-          transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
-          box-shadow: 0 4px 20px rgba(252,211,68,0.4);
+          transition: transform 0.2s, box-shadow 0.2s;
         }
-        .cta-submit:hover {
-          background: #ffe066;
-          transform: translateY(-2px);
-          box-shadow: 0 8px 28px rgba(252,211,68,0.5);
+        @media (min-width: 768px) {
+          .cta-submit { font-size: 14px; padding: 14px 28px; gap: 8px; }
         }
-        .cta-submit:active { transform: scale(0.97); }
-        .cta-submit svg { transition: transform 0.2s; }
-        .cta-submit:hover svg { transform: translateX(3px); }
         .success-box {
           background: rgba(255,255,255,0.1);
           border: 1px solid rgba(255,255,255,0.2);
-          border-radius: 28px; padding: 32px;
+          border-radius: 24px; padding: 24px;
           backdrop-filter: blur(12px);
         }
-        .success-icon {
-          width: 64px; height: 64px; border-radius: 50%;
-          background: #fcd344;
-          display: flex; align-items: center; justify-content: center;
-          margin: 0 auto 16px;
-        }
         .avatar-ring {
-          width: 36px; height: 36px; border-radius: 50%;
+          width: 32px; height: 32px; border-radius: 50%;
           border: 2px solid rgba(84,65,219,0.6);
           overflow: hidden; background: #e4dfff;
-          margin-left: -10px;
+          margin-left: -8px;
         }
         .avatar-ring:first-child { margin-left: 0; }
+        @media (min-width: 768px) {
+          .avatar-ring { width: 36px; height: 36px; margin-left: -10px; }
+        }
       `}</style>
 
-      <section className="py-24 px-6">
+      <section className="px-6 mx-auto w-full h-svh flex flex-col items-center justify-center py-6 md:py-0">
         <div
-          className="max-w-[1100px] mx-auto cta-wrap"
+          className="max-w-275 mx-auto w-full cta-wrap"
           style={{ boxShadow: '0 40px 80px -20px rgba(62,37,195,0.35)' }}
         >
           {/* 배경 레이어 */}
@@ -138,10 +140,10 @@ export default function CTASection() {
           <div className="cta-orb-tr" />
           <div className="cta-orb-bl" />
 
-          <div className="relative z-10 px-8 py-16 md:px-20 md:py-20 text-center">
+          <div className="relative z-10 px-6 py-12 md:px-20 md:py-20 text-center">
             {/* 출시 뱃지 */}
             <div
-              className="inline-flex items-center gap-2 px-5 py-2 rounded-full mb-8"
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-4 md:mb-8"
               style={{
                 background: 'rgba(255,255,255,0.1)',
                 border: '1px solid rgba(255,255,255,0.22)',
@@ -152,7 +154,7 @@ export default function CTASection() {
                 style={{ background: '#fcd344' }}
               />
               <span
-                className="text-xs font-bold tracking-wide"
+                className="text-[10px] md:text-xs font-bold tracking-wide"
                 style={{ color: 'rgba(255,255,255,0.85)' }}
               >
                 정식 출시 준비 중
@@ -160,25 +162,24 @@ export default function CTASection() {
             </div>
 
             {/* 헤드라인 */}
-            <h2 className="text-3xl md:text-5xl font-black text-white leading-[1.15] tracking-tight mb-6">
+            <h2 className="text-2xl md:text-5xl font-black text-white leading-[1.2] tracking-tight mb-4 md:mb-6">
               우리 아이 평생 불릴 이름,
               <br />
               <span style={{ color: '#fcd344' }}>한 번 더</span> 확인해보세요.
             </h2>
 
             <p
-              className="text-base md:text-lg mb-8 leading-relaxed max-w-xl mx-auto"
+              className="text-sm md:text-lg mb-6 md:mb-8 leading-relaxed max-w-xl mx-auto"
               style={{ color: 'rgba(255,255,255,0.65)' }}
             >
-              지금 사전 대기 명단에 등록하고
-              <br className="hidden md:block" />
+              지금 사전 등록하고{' '}
               <strong className="text-white">우선 체험권</strong>과{' '}
-              <strong style={{ color: '#fcd344' }}>50% 할인 바우처</strong>를
-              받아보세요.
+              <strong style={{ color: '#fcd344' }}>50% 할인권</strong>을
+              받으세요.
             </p>
 
             {/* 혜택 칩 */}
-            <div className="flex flex-wrap justify-center gap-2.5 mb-10">
+            <div className="flex flex-wrap justify-center gap-2 mb-8 md:mb-10">
               {perks.map((p) => (
                 <span key={p.text} className="perk-chip">
                   {p.icon} {p.text}
@@ -187,13 +188,13 @@ export default function CTASection() {
             </div>
 
             {/* 폼 / 완료 상태 */}
-            <div className="max-w-lg mx-auto">
+            <div className="max-w-md mx-auto">
               {isSubmitted ? (
-                <div className="success-box">
-                  <div className="success-icon">
+                <div className="success-box animate-in fade-in zoom-in duration-300">
+                  <div className="w-12 h-12 md:w-16 md:h-16 bg-[#fcd344] rounded-full flex items-center justify-center mx-auto mb-4">
                     <svg
-                      width="26"
-                      height="26"
+                      width="24"
+                      height="24"
                       viewBox="0 0 24 24"
                       fill="none"
                       stroke="#3d2400"
@@ -204,27 +205,12 @@ export default function CTASection() {
                       <polyline points="20 6 9 17 4 12" />
                     </svg>
                   </div>
-                  <h3 className="text-xl font-black text-white mb-2">
+                  <h3 className="text-lg md:text-xl font-black text-white mb-2">
                     신청 완료! 🎉
                   </h3>
-                  <p
-                    style={{
-                      color: 'rgba(255,255,255,0.65)',
-                      fontSize: '15px',
-                    }}
-                  >
-                    입력하신 이메일로 출시 알림과 혜택을 보내드릴게요.
+                  <p className="text-xs md:text-sm text-white/60">
+                    혜택 안내 메일을 곧 보내드릴게요.
                   </p>
-                  <div
-                    className="mt-4 inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-bold"
-                    style={{
-                      background: 'rgba(252,211,68,0.15)',
-                      color: '#fcd344',
-                      border: '1px solid rgba(252,211,68,0.25)',
-                    }}
-                  >
-                    ✅ 대기 명단 등록 완료
-                  </div>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit}>
@@ -255,7 +241,10 @@ export default function CTASection() {
                         required
                       />
                     </div>
-                    <button type="submit" className="cta-submit">
+                    <button
+                      type="submit"
+                      className="cta-submit hover:bg-[#ffe066] active:scale-95 transition-all"
+                    >
                       무료 사전 예약
                       <svg
                         width="16"
@@ -277,7 +266,7 @@ export default function CTASection() {
             </div>
 
             {/* 소셜 프루프 */}
-            <div className="mt-10 flex flex-col items-center gap-3">
+            <div className="mt-8 md:mt-10 flex flex-col items-center gap-2 md:gap-3">
               <div className="flex">
                 {[16, 17, 18, 19, 20].map((i) => (
                   <div key={i} className="avatar-ring">
@@ -289,10 +278,7 @@ export default function CTASection() {
                   </div>
                 ))}
               </div>
-              <p
-                className="text-sm font-medium"
-                style={{ color: 'rgba(255,255,255,0.55)' }}
-              >
+              <p className="text-[11px] md:text-sm font-medium text-white/50">
                 이미{' '}
                 <strong style={{ color: '#fcd344', fontWeight: 800 }}>
                   1,248명

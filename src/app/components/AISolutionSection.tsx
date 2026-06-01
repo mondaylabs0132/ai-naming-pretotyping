@@ -52,7 +52,7 @@ export default function AISolutionSection() {
           setIsInView(true);
         }
       },
-      { threshold: 0.2 }
+      { threshold: 0.2 },
     );
 
     if (sectionRef.current) {
@@ -113,11 +113,13 @@ export default function AISolutionSection() {
         }
       `}</style>
 
-      <section 
+      <section
         ref={sectionRef}
         className="ai-section-bg relative overflow-hidden px-6 mx-auto w-full h-svh flex flex-col items-center justify-center py-6 md:py-0"
       >
-        <div className={`max-w-[1240px] mx-auto w-full ${isInView ? 'animate-chart' : ''}`}>
+        <div
+          className={`max-w-310 mx-auto w-full ${isInView ? 'animate-chart' : ''}`}
+        >
           {/* 헤드라인 섹션 */}
           <div className="flex flex-col md:flex-row justify-between items-center md:items-end mb-6 md:mb-16 gap-3 md:gap-8 text-center md:text-left">
             <div className="space-y-1 md:space-y-4">
@@ -127,13 +129,13 @@ export default function AISolutionSection() {
               >
                 AI ANALYSIS ENGINE
               </p>
-              <h2
-                className="text-xl md:text-[48px] font-black leading-[1.1] tracking-tight text-on-background"
-              >
-                AI가 미리<br className="md:hidden" />{' '}
+              <h2 className="text-xl md:text-[48px] font-black leading-[1.1] tracking-tight text-on-background">
+                AI가 미리
+                <br className="md:hidden" />{' '}
                 <span
                   style={{
-                    background: 'linear-gradient(135deg, #5441d8 0%, #8b7cf8 100%)',
+                    background:
+                      'linear-gradient(135deg, #5441d8 0%, #8b7cf8 100%)',
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
                     backgroundClip: 'text',
@@ -148,7 +150,8 @@ export default function AISolutionSection() {
                 className="text-[15px] leading-relaxed font-medium"
                 style={{ color: '#474555' }}
               >
-                수만 건의 또래 대화 데이터와 발음 심리학을 기반으로<br />
+                수만 건의 또래 대화 데이터와 발음 심리학을 기반으로
+                <br />
                 부모님조차 생각지 못한 리스크를 정교하게 분석합니다.
               </p>
             </div>
@@ -165,15 +168,17 @@ export default function AISolutionSection() {
                 <div
                   key={f.title}
                   className="ai-card group"
-                  style={{ 
-                    borderColor: `${f.accent}15`,
-                    '--circumference': `${circumference}px`,
-                    '--offset': `${offset}px`
-                  } as any}
+                  style={
+                    {
+                      borderColor: `${f.accent}15`,
+                      '--circumference': `${circumference}px`,
+                      '--offset': `${offset}px`,
+                    } as any
+                  }
                 >
                   {/* 배경 장식 */}
                   <div
-                    className="absolute top-0 right-0 w-16 h-16 md:w-28 md:h-28 rounded-bl-full -z-0 opacity-30 transition-transform duration-700 group-hover:scale-110"
+                    className="absolute top-0 right-0 w-16 h-16 md:w-28 md:h-28 rounded-bl-full z-0 opacity-30 transition-transform duration-700 group-hover:scale-110"
                     style={{
                       background: `radial-gradient(circle at top right, ${f.accentLight}, transparent 70%)`,
                     }}
@@ -186,7 +191,7 @@ export default function AISolutionSection() {
                         className="w-8 h-8 md:w-12 md:h-12 rounded-xl md:rounded-[18px] flex items-center justify-center transition-all duration-300 group-hover:rotate-6"
                         style={{ background: f.accentLight }}
                       >
-                        <span 
+                        <span
                           className="material-symbols-outlined text-lg md:text-2xl"
                           style={{ color: f.accent }}
                         >
@@ -224,7 +229,12 @@ export default function AISolutionSection() {
                     >
                       <div className="relative flex items-center justify-center">
                         {/* SVG 링 */}
-                        <svg width="56" height="56" viewBox="0 0 60 60" className="md:w-[92px] md:h-[92px]">
+                        <svg
+                          width="56"
+                          height="56"
+                          viewBox="0 0 60 60"
+                          className="md:w-23 md:h-23"
+                        >
                           <circle
                             className="score-track"
                             cx="30"
@@ -242,10 +252,16 @@ export default function AISolutionSection() {
                           />
                         </svg>
                         <div className="absolute inset-0 flex flex-col items-center justify-center pt-0.5">
-                          <span className="text-base md:text-2xl font-black leading-none" style={{ color: f.accent }}>
+                          <span
+                            className="text-base md:text-2xl font-black leading-none"
+                            style={{ color: f.accent }}
+                          >
                             {f.score}
                           </span>
-                          <span className="text-[7px] md:text-[9px] font-bold opacity-40 uppercase tracking-tighter" style={{ color: f.accent }}>
+                          <span
+                            className="text-[7px] md:text-[9px] font-bold opacity-40 uppercase tracking-tighter"
+                            style={{ color: f.accent }}
+                          >
                             Score
                           </span>
                         </div>
@@ -258,7 +274,10 @@ export default function AISolutionSection() {
           </div>
 
           {/* 하단 면책 메모 */}
-          <p className="text-center text-[9px] md:text-xs mt-6 md:mt-12 opacity-40 font-medium" style={{ color: '#787586' }}>
+          <p
+            className="text-center text-[9px] md:text-xs mt-6 md:mt-12 opacity-40 font-medium"
+            style={{ color: '#787586' }}
+          >
             * 데이터 기반 참고 지표이며, 최종 결정은 부모님의 판단을 존중합니다.
           </p>
         </div>

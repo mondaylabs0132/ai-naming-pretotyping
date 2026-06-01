@@ -39,7 +39,7 @@ export default function ScrollReveal({
     <div
       ref={ref}
       className={`
-        transition-all duration-1000 opacity-0 
+        transition-all duration-1000 opacity-0 pt-8.5
         ${move ? 'translate-y-10' : ''} 
         ${snap ? 'snap-start snap-always min-h-svh flex flex-col justify-center' : ''} 
         ${className}
