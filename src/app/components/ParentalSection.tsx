@@ -63,9 +63,8 @@ export default function ParentalSection() {
                 src="/image02.png"
                 alt="Emotional shot of a young child"
                 fill
-                sizes="100vw"
-                style={{ objectFit: 'cover' }}
-                className="object-cover w-full h-full"
+                sizes="(min-width: 1024px) 50vw, (min-width: 640px) 80vw, 100vw"
+                className="object-cover"
               />
               {/* 부드러운 보라 오버레이 */}
               <div
