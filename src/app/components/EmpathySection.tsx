@@ -76,7 +76,7 @@ export default function EmpathySection() {
       `}</style>
 
       <section
-        className="py-20 px-6"
+        className="overflow-hidden px-6 mx-auto w-full h-screen flex flex-col items-center justify-center"
         style={{
           background: 'linear-gradient(180deg, #f5f2ff 0%, #fbf8ff 100%)',
         }}
@@ -98,14 +98,6 @@ export default function EmpathySection() {
                 왜 <span style={{ color: '#5441d8' }}>아이리음</span>이
                 <br className="md:hidden" /> 필요할까요?
               </h2>
-              <p
-                className="text-sm max-w-xs"
-                style={{ color: '#787586', lineHeight: '1.7' }}
-              >
-                이름 짓기의 숨겨진 리스크,
-                <br />
-                부모님들이 미처 몰랐던 3가지
-              </p>
             </div>
             <div
               className="mt-6 h-px"

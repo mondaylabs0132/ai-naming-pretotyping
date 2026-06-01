@@ -66,7 +66,7 @@ export default function AISolutionSection() {
         }
       `}</style>
 
-      <section className="ai-section-bg py-24 px-6">
+      <section className="ai-section-bg relative overflow-hidden px-6 mx-auto w-full h-screen flex flex-col items-center justify-center">
         <div className="max-w-[1200px] mx-auto">
           {/* 헤더 */}
           <div className="flex flex-col md:flex-row justify-between items-end mb-14 gap-6">

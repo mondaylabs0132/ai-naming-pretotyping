@@ -1,16 +1,18 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
 export default function Header() {
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const scrollToEmail = () => {
+    const input = document.getElementById('email-input');
+    const section = input?.closest('section');
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setTimeout(() => {
+        (input as HTMLInputElement)?.focus();
+      }, 800); // 스크롤 및 스냅 완료 후 포커스
+    }
+  };
 
   return (
     <>
@@ -50,21 +52,17 @@ export default function Header() {
       <header
         className={`
           fixed top-0 left-0 right-0 z-50
-          transition-all duration-500 ease-out
-          ${scrolled ? 'nav-border-scrolled py-3' : 'nav-border py-4'}
+          transition-all duration-500 ease-out nav-border py-4
         `}
         style={{
           backdropFilter: 'blur(20px) saturate(180%)',
           WebkitBackdropFilter: 'blur(20px) saturate(180%)',
-          background: scrolled
-            ? 'rgba(251, 248, 255, 0.88)'
-            : 'rgba(251, 248, 255, 0.6)',
-          boxShadow: scrolled
-            ? '0 4px 32px -8px rgba(84, 65, 219, 0.1), 0 1px 0 rgba(84,65,219,0.06)'
-            : 'none',
+          background: 'rgba(251, 248, 255, 0.6)',
+          boxShadow:
+            '0 4px 32px -8px rgba(84, 65, 219, 0.1), 0 1px 0 rgba(84,65,219,0.06)',
         }}
       >
-        <div className="max-w-[1200px] mx-auto px-6 flex items-center justify-between">
+        <div className="max-w-300 mx-auto px-6 flex items-center justify-between">
           {/* 로고 */}
           <div className="flex items-center gap-3 group cursor-pointer">
             <div className="relative">
@@ -104,6 +102,7 @@ export default function Header() {
               boxShadow:
                 '0 2px 16px rgba(84, 65, 219, 0.35), inset 0 1px 0 rgba(255,255,255,0.15)',
             }}
+            onClick={scrollToEmail}
           >
             <span className="relative z-10 flex items-center gap-1.5">
               <span

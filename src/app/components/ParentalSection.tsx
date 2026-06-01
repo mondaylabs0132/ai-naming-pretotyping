@@ -35,7 +35,7 @@ export default function ParentalSection() {
         }
       `}</style>
 
-      <section className="relative overflow-hidden py-24 px-6">
+      <section className="relative overflow-hidden px-6 mx-auto w-full h-screen flex flex-col items-center justify-center">
         {/* 배경 */}
         <div
           className="absolute inset-0 -z-10"
