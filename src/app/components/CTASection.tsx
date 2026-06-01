@@ -1,11 +1,22 @@
 'use client';
 
-import { useState, useRef, type FormEvent } from 'react';
+import { useState, useRef, useActionState, useEffect } from 'react';
+import { signupEmail } from '../actions';
+import { Ticket, BadgePercent, BarChart3, Sparkles } from 'lucide-react';
 
 const perks = [
-  { icon: '🎟️', text: '우선 체험권' },
-  { icon: '💸', text: '50% 할인' },
-  { icon: '📊', text: '분석 리포트' },
+  {
+    icon: Ticket,
+    text: '우선 체험권',
+  },
+  {
+    icon: BadgePercent,
+    text: '50% 할인',
+  },
+  {
+    icon: BarChart3,
+    text: '분석 리포트',
+  },
 ];
 
 const EMAIL_DOMAINS = [
@@ -25,6 +36,20 @@ export default function CTASection() {
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [activeIndex, setActiveIndex] = useState(-1);
   const inputRef = useRef<HTMLInputElement>(null);
+  const [state, formAction, isPending] = useActionState(signupEmail, {});
+
+  useEffect(() => {
+    if (state.success) {
+      setIsSubmitted(true);
+      setEmail('');
+
+      const timer = setTimeout(() => {
+        setIsSubmitted(false);
+      }, 5000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [state.success]);
 
   const handleEmailChange = (value: string) => {
     setEmail(value);
@@ -72,19 +97,10 @@ export default function CTASection() {
     }
   };
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    setSuggestions([]);
-    console.log('Submitted email:', email);
-    setIsSubmitted(true);
-    setEmail('');
-    setTimeout(() => setIsSubmitted(false), 5000);
-  };
-
   return (
     <>
       <style>{`
-        .cta-wrap {
+              .cta-wrap {
           background: linear-gradient(145deg, #3d2fc4 0%, #5441d8 45%, #7c5fe6 100%);
           border-radius: 32px;
           position: relative;
@@ -236,7 +252,6 @@ export default function CTASection() {
           .avatar-ring { width: 36px; height: 36px; margin-left: -10px; }
         }
       `}</style>
-
       <section className="px-6 mx-auto w-full h-svh flex flex-col items-center justify-center py-6 md:py-0 relative">
         <div
           className="max-w-[1100px] mx-auto w-full cta-wrap"
@@ -272,7 +287,8 @@ export default function CTASection() {
 
             {/* 헤드라인 */}
             <h2 className="text-2xl md:text-5xl font-black text-white leading-[1.2] tracking-tight mb-4 md:mb-6">
-              우리 아이 평생 불릴 이름,<br />
+              우리 아이 평생 불릴 이름,
+              <br />
               <span style={{ color: '#fcd344' }}>한 번 더</span> 확인해보세요.
             </h2>
 
@@ -280,17 +296,24 @@ export default function CTASection() {
               className="text-sm md:text-lg mb-6 md:mb-8 leading-relaxed max-w-xl mx-auto"
               style={{ color: 'rgba(255,255,255,0.65)' }}
             >
-              지금 사전 등록하고 <strong className="text-white">우선 체험권</strong>과{' '}
-              <strong style={{ color: '#fcd344' }}>50% 할인권</strong>을 받으세요.
+              지금 사전 등록하고{' '}
+              <strong className="text-white">우선 체험권</strong>과{' '}
+              <strong style={{ color: '#fcd344' }}>50% 할인권</strong>을
+              받으세요.
             </p>
 
             {/* 혜택 칩 */}
             <div className="flex flex-wrap justify-center gap-2 mb-8 md:mb-10">
-              {perks.map((p) => (
-                <span key={p.text} className="perk-chip">
-                  {p.icon} {p.text}
-                </span>
-              ))}
+              {perks.map((p) => {
+                const Icon = p.icon;
+
+                return (
+                  <span key={p.text} className="perk-chip">
+                    <Icon size={14} strokeWidth={2.5} />
+                    {p.text}
+                  </span>
+                );
+              })}
             </div>
 
             {/* 폼 / 완료 상태 */}
@@ -311,28 +334,44 @@ export default function CTASection() {
                       <polyline points="20 6 9 17 4 12" />
                     </svg>
                   </div>
-                  <h3 className="text-lg md:text-xl font-black text-white mb-2">
-                    신청 완료! 🎉
+                  <h3 className="flex items-center justify-center gap-2 text-lg md:text-xl font-black text-white mb-2">
+                    <Sparkles size={22} />
+                    신청 완료!
                   </h3>
                   <p className="text-xs md:text-sm text-white/60">
                     혜택 안내 메일을 곧 보내드릴게요.
                   </p>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit}>
+                <form
+                  action={formAction}
+                  onSubmit={() => {
+                    setSuggestions([]);
+                  }}
+                >
                   <div className="email-form-wrapper">
                     <div className="email-wrap">
                       <div className="email-inner">
                         <div className="email-icon">
-                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <svg
+                            width="18"
+                            height="18"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          >
                             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
                             <polyline points="22,6 12,13 2,6" />
                           </svg>
                         </div>
                         <input
+                          name="email"
                           ref={inputRef}
                           id="email-input"
-                          type="text"
+                          type="email"
                           inputMode="email"
                           value={email}
                           onChange={(e) => handleEmailChange(e.target.value)}
@@ -352,7 +391,9 @@ export default function CTASection() {
                             {suggestions.map((domain, idx) => {
                               const atIndex = email.indexOf('@');
                               const localPart =
-                                atIndex !== -1 ? email.slice(0, atIndex) : email;
+                                atIndex !== -1
+                                  ? email.slice(0, atIndex)
+                                  : email;
                               const typedDomain =
                                 atIndex !== -1 ? email.slice(atIndex + 1) : '';
 
@@ -366,7 +407,10 @@ export default function CTASection() {
                                   onMouseDown={() => selectDomain(domain)}
                                 >
                                   <span
-                                    style={{ color: '#191a2e', fontWeight: 500 }}
+                                    style={{
+                                      color: '#191a2e',
+                                      fontWeight: 500,
+                                    }}
                                   >
                                     {localPart}
                                   </span>
@@ -388,25 +432,17 @@ export default function CTASection() {
 
                       <button
                         type="submit"
-                        className="cta-submit hover:bg-[#ffe066] active:scale-95 transition-all"
+                        disabled={isPending}
+                        className="cta-submit hover:bg-[#ffe066] active:scale-95 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                       >
-                        무료 사전 예약
-                        <svg
-                          width="16"
-                          height="16"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2.5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <line x1="5" y1="12" x2="19" y2="12" />
-                          <polyline points="12 5 19 12 12 19" />
-                        </svg>
+                        {isPending ? '신청 중...' : '무료 사전 예약'}
                       </button>
                     </div>
                   </div>
+
+                  {state.error && (
+                    <p className="mt-3 text-sm text-red-200">{state.error}</p>
+                  )}
                 </form>
               )}
             </div>
@@ -416,12 +452,20 @@ export default function CTASection() {
               <div className="flex">
                 {[16, 17, 18, 19, 20].map((i) => (
                   <div key={i} className="avatar-ring">
-                    <img src={`https://i.pravatar.cc/100?img=${i}`} alt="user" className="w-full h-full object-cover" />
+                    <img
+                      src={`https://i.pravatar.cc/100?img=${i}`}
+                      alt="user"
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                 ))}
               </div>
               <p className="text-[11px] md:text-sm font-medium text-white/50">
-                이미 <strong style={{ color: '#fcd344', fontWeight: 800 }}>1,248명</strong>의 부모님이 대기 중
+                이미{' '}
+                <strong style={{ color: '#fcd344', fontWeight: 800 }}>
+                  1,248명
+                </strong>
+                의 부모님이 대기 중
               </p>
             </div>
           </div>
