@@ -198,7 +198,7 @@ export default function HeroSection() {
                 }}
               />
               <Image
-                src="/hero-1.png"
+                src="/image01.png"
                 alt="Emotional Illustration of baby naming"
                 width={600}
                 height={500}
