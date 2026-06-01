@@ -11,9 +11,9 @@ import ScrollReveal from './components/ScrollReveal';
 
 export default function Home() {
   return (
-    <>
+    <div className="h-svh overflow-y-auto snap-y snap-mandatory scroll-smooth hide-scrollbar">
       <Header />
-      <main className="mt-20">
+      <main>
         <ScrollReveal>
           <HeroSection />
         </ScrollReveal>
@@ -34,9 +34,9 @@ export default function Home() {
         </ScrollReveal>
         <ScrollReveal>
           <CTASection />
+          <Footer />
         </ScrollReveal>
       </main>
-      <Footer />
-    </>
+    </div>
   );
 }

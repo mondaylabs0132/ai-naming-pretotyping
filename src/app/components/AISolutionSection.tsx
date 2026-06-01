@@ -1,244 +1,235 @@
+'use client';
+
+import { useEffect, useRef, useState } from 'react';
+
 const features = [
   {
-    emoji: '🧠',
-    title: '놀림 가능성 분석',
-    desc: '유사 발음 및 비속어 연상 가능성을 사전 차단합니다.',
+    icon: 'psychology',
+    title: '놀림 가능성',
+    desc: '유사 발음 및 비속어 차단.',
     score: 98,
     accent: '#5441d8',
     accentLight: 'rgba(84,65,219,0.08)',
-    tag: 'TEASING RISK',
+    tag: 'TEASING',
   },
   {
-    emoji: '🎙️',
-    title: '발음 안정성 분석',
-    desc: '혀의 위치와 성대 피로도를 고려한 편안한 발음 설계.',
+    icon: 'record_voice_over',
+    title: '발음 안정성',
+    desc: '편안한 발음 구조 설계.',
     score: 94,
     accent: '#2da87a',
     accentLight: 'rgba(45,168,122,0.08)',
-    tag: 'PHONETICS',
+    tag: 'PHONETIC',
   },
   {
-    emoji: '📈',
+    icon: 'trending_up',
     title: '유행도 분석',
-    desc: '너무 흔하거나 너무 튀지 않는 적절한 트렌드 점수 산출.',
+    desc: '적절한 트렌드 점수 산출.',
     score: 87,
     accent: '#f59e0b',
     accentLight: 'rgba(245,158,11,0.08)',
     tag: 'TREND',
   },
   {
-    emoji: '👥',
-    title: '사회적 인식 분석',
-    desc: '특정 세대나 성별에서 느껴지는 성격적 이미지를 데이터화.',
+    icon: 'groups',
+    title: '사회적 인식',
+    desc: '성격적 이미지 데이터화.',
     score: 91,
     accent: '#e0468a',
     accentLight: 'rgba(224,70,138,0.08)',
-    tag: 'PERCEPTION',
+    tag: 'PERCEPT',
   },
 ];
 
 export default function AISolutionSection() {
+  const [isInView, setIsInView] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+        }
+      },
+      { threshold: 0.2 },
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <>
-      <style>{`
-        .ai-card {
-          position: relative;
-          background: #fff;
-          border: 1px solid rgba(84,65,219,0.08);
-          border-radius: 24px;
-          padding: 28px;
-          overflow: hidden;
-          transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-        }
-        .ai-card:hover {
-          transform: translateY(-5px);
-          box-shadow: 0 20px 48px -8px rgba(84,65,219,0.13);
-        }
-        .score-ring {
-          transform: rotate(-90deg);
-          transform-origin: center;
-        }
-        .score-track { fill: none; stroke: rgba(0,0,0,0.06); stroke-width: 3; }
-        .score-fill  { fill: none; stroke-width: 3; stroke-linecap: round; transition: stroke-dashoffset 1s ease; }
-
-        .ai-section-bg {
-          background: #fbf8ff;
-        }
-      `}</style>
-
-      <section className="ai-section-bg py-24 px-6">
-        <div className="max-w-[1200px] mx-auto">
-          {/* 헤더 */}
-          <div className="flex flex-col md:flex-row justify-between items-end mb-14 gap-6">
-            <div>
-              <p
-                className="text-xs font-bold tracking-[0.18em] uppercase mb-3"
-                style={{ color: '#5441d8' }}
-              >
-                AI ANALYSIS ENGINE
-              </p>
-              <h2
-                className="text-3xl md:text-[40px] font-bold leading-tight"
-                style={{ color: '#191a2e' }}
-              >
-                AI가 미리
-                <br />
-                <span
-                  style={{
-                    background: 'linear-gradient(135deg, #5441d8, #8b7cf8)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    backgroundClip: 'text',
-                  }}
-                >
-                  걸러드립니다
-                </span>
-              </h2>
-            </div>
-            <div className="md:text-right max-w-xs">
-              <p
-                className="text-sm leading-relaxed"
-                style={{ color: '#787586' }}
-              >
-                수만 건의 또래 대화 데이터와
-                <br />
-                발음 심리학을 기반으로 정교하게 분석합니다.
-              </p>
-              {/* 신뢰 배지 */}
-              <div
-                className="inline-flex items-center gap-2 mt-4 px-4 py-2 rounded-full"
+    <section
+      ref={sectionRef}
+      className="ai-section-bg relative overflow-hidden px-6 mx-auto w-full h-svh flex flex-col items-center justify-center py-6 md:py-0"
+    >
+      <div
+        className={`max-w-310 mx-auto w-full ${isInView ? 'animate-chart' : ''}`}
+      >
+        {/* 헤드라인 섹션 */}
+        <div className="flex flex-col md:flex-row justify-between items-center md:items-end mb-6 md:mb-16 gap-3 md:gap-8 text-center md:text-left">
+          <div className="space-y-1 md:space-y-4">
+            <p
+              className="text-xs font-bold tracking-[0.25em] uppercase"
+              style={{ color: '#5441d8' }}
+            >
+              AI ANALYSIS ENGINE
+            </p>
+            <h2 className="text-3xl font-black leading-[1.1] tracking-tight text-on-background">
+              AI가 미리{' '}
+              <span
                 style={{
-                  background: 'rgba(84,65,219,0.06)',
-                  border: '1px solid rgba(84,65,219,0.12)',
+                  background:
+                    'linear-gradient(135deg, #5441d8 0%, #8b7cf8 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
                 }}
               >
-                <span className="text-sm">⚡</span>
-                <span
-                  className="text-xs font-semibold"
-                  style={{ color: '#5441d8' }}
-                >
-                  4가지 항목 동시 분석
-                </span>
-              </div>
-            </div>
+                걸러드립니다
+              </span>
+            </h2>
           </div>
+          <div className="md:text-right max-w-sm hidden sm:block">
+            <p
+              className="text-[15px] leading-relaxed font-medium"
+              style={{ color: '#474555' }}
+            >
+              수만 건의 또래 대화 데이터와 발음 심리학을 기반으로
+              <br />
+              부모님조차 생각지 못한 리스크를 정교하게 분석합니다.
+            </p>
+          </div>
+        </div>
 
-          {/* 카드 그리드 */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {features.map((f) => {
-              const circumference = 2 * Math.PI * 20; // r=20
-              const offset = circumference * (1 - f.score / 100);
+        {/* 카드 컨테이너 (모바일 2x2 그리드) */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6 w-full">
+          {features.map((f) => {
+            const radius = 24;
+            const circumference = 2 * Math.PI * radius;
+            const offset = circumference * (1 - f.score / 100);
 
-              return (
+            return (
+              <div
+                key={f.title}
+                className="ai-card group"
+                style={
+                  {
+                    borderColor: `${f.accent}15`,
+                    '--circumference': `${circumference}px`,
+                    '--offset': `${offset}px`,
+                  } as any
+                }
+              >
+                {/* 배경 장식 */}
                 <div
-                  key={f.title}
-                  className="ai-card"
-                  style={{ borderColor: `${f.accent}18` }}
-                >
-                  {/* 배경 장식 */}
-                  <div
-                    className="absolute top-0 right-0 w-24 h-24 rounded-bl-full -z-0 opacity-40"
-                    style={{
-                      background: `radial-gradient(circle at top right, ${f.accentLight}, transparent 70%)`,
-                    }}
-                  />
+                  className="absolute top-0 right-0 w-16 h-16 md:w-28 md:h-28 rounded-bl-full z-0 opacity-30 transition-transform duration-700 group-hover:scale-110"
+                  style={{
+                    background: `radial-gradient(circle at top right, ${f.accentLight}, transparent 70%)`,
+                  }}
+                />
 
-                  <div className="relative z-10">
-                    {/* 상단: 이모지 + 태그 */}
-                    <div className="flex items-start justify-between mb-5">
-                      <div
-                        className="w-11 h-11 rounded-2xl flex items-center justify-center text-xl"
-                        style={{ background: f.accentLight }}
-                      >
-                        {f.emoji}
-                      </div>
+                <div className="relative z-10 flex flex-col h-full">
+                  {/* 상단: 아이콘 + 태그 */}
+                  <div className="flex items-start justify-between mb-3 md:mb-6">
+                    <div
+                      className="w-8 h-8 md:w-12 md:h-12 rounded-xl md:rounded-[18px] flex items-center justify-center transition-all duration-300 group-hover:rotate-6"
+                      style={{ background: f.accentLight }}
+                    >
                       <span
-                        className="text-[10px] font-black tracking-widest px-2 py-1 rounded-md"
-                        style={{ background: f.accentLight, color: f.accent }}
+                        className="material-symbols-outlined text-lg md:text-2xl"
+                        style={{ color: f.accent }}
                       >
-                        {f.tag}
+                        {f.icon}
                       </span>
                     </div>
+                    <span
+                      className="text-[8px] md:text-[9px] font-black tracking-tighter md:tracking-widest px-1.5 py-0.5 rounded-md md:rounded-lg"
+                      style={{ background: f.accentLight, color: f.accent }}
+                    >
+                      {f.tag}
+                    </span>
+                  </div>
 
-                    {/* 제목 + 설명 */}
+                  {/* 제목 + 설명 */}
+                  <div className="mb-4 md:mb-8">
                     <h4
-                      className="text-[15px] font-bold mb-1.5"
+                      className="font-bold mb-1 tracking-tight"
                       style={{ color: '#191a2e' }}
                     >
                       {f.title}
                     </h4>
                     <p
-                      className="text-xs leading-relaxed mb-5"
-                      style={{ color: '#787586' }}
+                      className="text-sm leading-tight md:leading-relaxed opacity-70 line-clamp-2 md:line-clamp-none"
+                      style={{ color: '#474555' }}
                     >
                       {f.desc}
                     </p>
+                  </div>
 
-                    {/* 점수 영역 */}
-                    <div
-                      className="flex items-center justify-between pt-4"
-                      style={{ borderTop: `1px solid ${f.accent}18` }}
-                    >
-                      <div>
-                        <p
-                          className="text-[11px] font-semibold mb-0.5"
-                          style={{ color: '#787586' }}
-                        >
-                          정확도
-                        </p>
-                        <p
-                          className="text-xl font-black"
-                          style={{ color: f.accent }}
-                        >
-                          {f.score}
-                          <span className="text-sm font-bold opacity-60">
-                            점
-                          </span>
-                        </p>
-                      </div>
-
+                  {/* 점수 영역 */}
+                  <div
+                    className="mt-auto flex flex-col items-center pt-3 md:pt-6 space-y-2 md:space-y-4"
+                    style={{ borderTop: `1px solid ${f.accent}12` }}
+                  >
+                    <div className="relative flex items-center justify-center">
                       {/* SVG 링 */}
-                      <svg width="48" height="48" viewBox="0 0 48 48">
+                      <svg
+                        width="56"
+                        height="56"
+                        viewBox="0 0 60 60"
+                        className="md:w-23 md:h-23"
+                      >
                         <circle
                           className="score-track"
-                          cx="24"
-                          cy="24"
-                          r="20"
+                          cx="30"
+                          cy="30"
+                          r={radius}
                         />
                         <circle
                           className="score-ring score-fill"
-                          cx="24"
-                          cy="24"
-                          r="20"
+                          cx="30"
+                          cy="30"
+                          r={radius}
                           stroke={f.accent}
                           strokeDasharray={circumference}
-                          strokeDashoffset={offset}
+                          style={{ strokeDashoffset: circumference }}
                         />
-                        <text
-                          x="24"
-                          y="28"
-                          textAnchor="middle"
-                          fontSize="10"
-                          fontWeight="800"
-                          fill={f.accent}
+                      </svg>
+                      <div className="absolute inset-0 flex flex-col items-center justify-center pt-0.5">
+                        <span
+                          className="text-base md:text-2xl font-black leading-none"
+                          style={{ color: f.accent }}
                         >
                           {f.score}
-                        </text>
-                      </svg>
+                        </span>
+                        <span
+                          className="text-[7px] md:text-[9px] font-bold opacity-40 uppercase tracking-tighter"
+                          style={{ color: f.accent }}
+                        >
+                          Score
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </div>
-              );
-            })}
-          </div>
-
-          {/* 하단 면책 메모 */}
-          <p className="text-center text-xs mt-8" style={{ color: '#b0aec0' }}>
-            * 점수는 수집된 데이터 기반의 참고 지표이며, 최종 결정은 부모님의
-            판단을 존중합니다.
-          </p>
+              </div>
+            );
+          })}
         </div>
-      </section>
-    </>
+
+        {/* 하단 면책 메모 */}
+        <p
+          className="text-center text-[9px] md:text-xs mt-6 md:mt-12 opacity-40 font-medium"
+          style={{ color: '#787586' }}
+        >
+          * 데이터 기반 참고 지표이며, 최종 결정은 부모님의 판단을 존중합니다.
+        </p>
+      </div>
+    </section>
   );
 }
