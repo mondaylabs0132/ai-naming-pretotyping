@@ -80,8 +80,7 @@ export default function AISolutionSection() {
               AI ANALYSIS ENGINE
             </p>
             <h2 className="text-3xl font-black leading-[1.1] tracking-tight text-on-background">
-              AI가 미리
-              <br className="md:hidden" />{' '}
+              AI가 미리{' '}
               <span
                 style={{
                   background:

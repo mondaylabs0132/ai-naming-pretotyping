@@ -83,7 +83,7 @@ export default function ResultPreviewSection() {
           >
             SAMPLE REPORT
           </p>
-          <h2 className="text-3xl font-bold mb-2 md:mb-4 tracking-tight text-on-background">
+          <h2 className="text-3xl font-bold tracking-tight text-on-background">
             당신이 받게 될{' '}
             <span
               style={{
@@ -96,6 +96,13 @@ export default function ResultPreviewSection() {
               분석 리포트
             </span>
           </h2>
+
+          <p
+            className="text-center text-xs md:text-xs mt-2 md:mt-6 opacity-30 font-medium"
+            style={{ color: '#787586' }}
+          >
+            * 실제 서비스 시 더 상세한 심층 분석 리포트가 제공됩니다.
+          </p>
         </div>
 
         {/* 카드 컨테이너 (모바일 중앙 정렬 스와이프) */}
@@ -252,14 +259,6 @@ export default function ResultPreviewSection() {
             </div>
           ))}
         </div>
-
-        {/* 하단 안내 */}
-        <p
-          className="text-center text-[9px] md:text-xs mt-6 md:mt-10 opacity-30 font-medium"
-          style={{ color: '#787586' }}
-        >
-          * 실제 서비스 시 더 상세한 심층 분석 리포트가 제공됩니다.
-        </p>
       </div>
     </section>
   );

@@ -13,7 +13,7 @@ export default function ScrollReveal({
   children,
   className = '',
   snap = true,
-  move = false,
+  move = true,
 }: ScrollRevealProps) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -24,14 +24,15 @@ export default function ScrollReveal({
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          el.classList.add('opacity-100');
-          el.classList.remove('opacity-0', 'translate-y-10');
+          el.classList.remove('opacity-0', 'translate-y-8');
+          el.classList.add('opacity-100', 'translate-y-0');
         }
       },
-      { threshold: 0.1 },
+      { threshold: 0.15 },
     );
 
     observer.observe(el);
+
     return () => observer.disconnect();
   }, []);
 
@@ -39,9 +40,13 @@ export default function ScrollReveal({
     <div
       ref={ref}
       className={`
-        transition-all duration-1000 opacity-0 pt-8.5
-        ${move ? 'translate-y-10' : ''} 
-        ${snap ? 'snap-start snap-always min-h-svh flex flex-col justify-center' : ''} 
+        pt-16
+        opacity-0
+        transition-all
+        duration-1000
+        ease-out
+        ${move ? 'translate-y-8' : ''}
+        ${snap ? 'snap-start snap-always min-h-svh flex flex-col justify-center' : ''}
         ${className}
       `}
     >
