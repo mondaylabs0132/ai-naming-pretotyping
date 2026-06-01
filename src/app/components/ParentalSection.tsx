@@ -32,7 +32,7 @@ export default function ParentalSection() {
         {/* 상단 레이블 */}
         <div className="text-center mb-6 md:mb-16">
           <span
-            className="inline-flex items-center gap-2 text-[10px] md:text-xs font-bold tracking-[0.18em] uppercase px-3 py-1 rounded-full"
+            className="items-center gap-2 text-xs font-bold tracking-[0.18em] uppercase px-3 py-1 rounded-full"
             style={{
               color: '#5441d8',
               background: 'rgba(84,65,219,0.07)',
@@ -85,7 +85,7 @@ export default function ParentalSection() {
               >
                 <span className="text-lg md:text-2xl">💛</span>
                 <p
-                  className="text-[9px] md:text-xs font-medium leading-tight"
+                  className="text-xs md:text-xs font-medium leading-tight"
                   style={{ color: '#474555' }}
                 >
                   <strong className="text-on-background block mb-0.5">
@@ -102,7 +102,7 @@ export default function ParentalSection() {
             {/* 풀쿼트 */}
             <div className="pullquote-line relative pl-4 md:pl-6 mb-4 md:mb-10 inline-block lg:block text-left">
               <p
-                className="text-2xl md:text-5xl font-bold leading-[1.2] tracking-tight"
+                className="text-2xl md:text-3xl font-bold leading-[1.2] tracking-tight"
                 style={{ color: '#191a2e' }}
               >
                 &quot;이름 하나 잘못 지어서...&quot;
@@ -119,7 +119,8 @@ export default function ParentalSection() {
                 className="not-italic text-[13px] md:text-base font-normal block mt-1.5"
                 style={{ color: '#787586' }}
               >
-                아이 입에서 이 말을 듣는 순간, 부모의 마음은 얼마나 무너질까요.
+                아이 입에서 이 말을 듣는 순간, <br className="md:hidden" />{' '}
+                부모의 마음은 얼마나 무너질까요.
               </span>
             </p>
 
@@ -137,7 +138,7 @@ export default function ParentalSection() {
                   color: '#ff6b6b',
                 },
               ].map((s) => (
-                <div key={s.label} className="text-left">
+                <div key={s.label} className="text-center lg:text-left">
                   <p
                     className="text-xl md:text-3xl font-black mb-0.5 md:mb-1"
                     style={{ color: s.color }}
@@ -145,8 +146,8 @@ export default function ParentalSection() {
                     {s.num}
                   </p>
                   <p
-                    className="text-[9px] md:text-xs leading-tight font-medium"
-                    style={{ color: '#787586', maxWidth: '80px' }}
+                    className="text-xs leading-tight font-medium"
+                    style={{ color: '#787586', maxWidth: '120px' }}
                   >
                     {s.label}
                   </p>

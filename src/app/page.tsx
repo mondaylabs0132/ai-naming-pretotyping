@@ -34,8 +34,6 @@ export default function Home() {
         </ScrollReveal>
         <ScrollReveal>
           <CTASection />
-        </ScrollReveal>
-        <ScrollReveal snap={true} className="min-h-100">
           <Footer />
         </ScrollReveal>
       </main>

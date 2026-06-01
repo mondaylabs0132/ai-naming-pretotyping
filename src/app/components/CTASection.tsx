@@ -254,7 +254,7 @@ export default function CTASection() {
       `}</style>
       <section className="px-6 mx-auto w-full h-svh flex flex-col items-center justify-center py-6 md:py-0 relative">
         <div
-          className="max-w-[1100px] mx-auto w-full cta-wrap"
+          className="max-w-275 mx-auto w-full cta-wrap"
           style={{ boxShadow: '0 40px 80px -20px rgba(62,37,195,0.35)' }}
         >
           {/* 배경 레이어 (별도 컨테이너로 분리하여 overflow: hidden 적용) */}
@@ -278,7 +278,7 @@ export default function CTASection() {
                 style={{ background: '#fcd344' }}
               />
               <span
-                className="text-[10px] md:text-xs font-bold tracking-wide"
+                className="text-xs font-bold tracking-wide"
                 style={{ color: 'rgba(255,255,255,0.85)' }}
               >
                 정식 출시 준비 중
@@ -286,7 +286,7 @@ export default function CTASection() {
             </div>
 
             {/* 헤드라인 */}
-            <h2 className="text-2xl md:text-5xl font-black text-white leading-[1.2] tracking-tight mb-4 md:mb-6">
+            <h2 className="text-2xl md:text-4xl font-black text-white leading-[1.2] tracking-tight mb-4 md:mb-6">
               우리 아이 평생 불릴 이름,
               <br />
               <span style={{ color: '#fcd344' }}>한 번 더</span> 확인해보세요.
@@ -298,6 +298,7 @@ export default function CTASection() {
             >
               지금 사전 등록하고{' '}
               <strong className="text-white">우선 체험권</strong>과{' '}
+              <br className="md:hidden" />{' '}
               <strong style={{ color: '#fcd344' }}>50% 할인권</strong>을
               받으세요.
             </p>

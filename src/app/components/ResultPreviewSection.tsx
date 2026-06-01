@@ -71,14 +71,14 @@ export default function ResultPreviewSection() {
 
   return (
     <section
-      className="py-10 md:py-24 px-6 mx-auto w-full h-svh flex flex-col items-center justify-center"
+      className="py-16 md:py-24 px-6 mx-auto w-full min-h-svh flex flex-col items-center justify-center"
       style={{ background: '#fbf8ff' }}
     >
-      <div className="max-w-275 mx-auto w-full">
+      <div className="max-w-6xl mx-auto w-full">
         {/* 헤드라인 섹션 */}
-        <div className="text-center mb-6 md:mb-14">
+        <div className="text-center">
           <p
-            className="text-sm md:text-xs font-bold tracking-[0.2em] uppercase mb-1.5 md:mb-3"
+            className="text-sm font-bold tracking-[0.2em] uppercase mb-1.5 md:mb-3"
             style={{ color: '#5441d8' }}
           >
             SAMPLE REPORT
@@ -96,18 +96,12 @@ export default function ResultPreviewSection() {
               분석 리포트
             </span>
           </h2>
-          <p
-            className="text-sm md:text-sm opacity-60"
-            style={{ color: '#474555' }}
-          >
-            항목별 정밀 분석 샘플을 미리 확인해보세요
-          </p>
         </div>
 
         {/* 카드 컨테이너 (모바일 중앙 정렬 스와이프) */}
         <div
           ref={scrollRef}
-          className="scroll-container flex lg:grid lg:grid-cols-3 gap-4 lg:gap-6 overflow-x-auto lg:overflow-x-visible snap-x snap-mandatory -mx-6 px-12 lg:mx-0 lg:px-0 pb-4 lg:pb-0 items-stretch"
+          className="scroll-container flex lg:grid lg:grid-cols-3 gap-4 lg:gap-6 overflow-x-auto lg:overflow-x-visible snap-x snap-mandatory -mx-6 px-12 lg:mx-0 lg:px-0 pt-6 items-stretch"
         >
           {nameCards.map((card) => (
             <div
@@ -122,7 +116,7 @@ export default function ResultPreviewSection() {
               {card.featured && (
                 <div className="absolute -top-px left-1/2 -translate-x-1/2">
                   <div
-                    className="px-3 py-1 md:px-5 md:py-1.5 text-[8px] md:text-[11px] font-black tracking-wider rounded-b-xl md:rounded-b-2xl text-white"
+                    className="px-3 py-1 md:px-5 md:py-1.5 text-xs font-black tracking-wider rounded-b-xl md:rounded-b-2xl text-white whitespace-nowrap"
                     style={{
                       background: 'linear-gradient(135deg, #5441d8, #7c6ef0)',
                     }}
@@ -137,7 +131,7 @@ export default function ResultPreviewSection() {
                 className={`flex flex-col items-center text-center mb-4 md:mb-7 ${card.featured ? 'mt-3 md:mt-5' : 'mt-1'}`}
               >
                 <span
-                  className="text-[9px] md:text-[11px] font-bold px-2 py-0.5 md:px-3 md:py-1 rounded-full mb-2.5 md:mb-4"
+                  className="text-xs font-bold px-2 py-0.5 md:px-3 md:py-1 rounded-full mb-2.5 md:mb-4"
                   style={{
                     background: `${card.accent}14`,
                     color: card.accent,
@@ -147,12 +141,10 @@ export default function ResultPreviewSection() {
                   {card.badge}
                 </span>
 
-                <h3 className="text-2xl md:text-5xl font-black tracking-tight text-on-background">
+                <h3 className="text-2xl md:text-4xl font-black tracking-tight text-on-background">
                   {card.name}
                 </h3>
-                <p className="text-sm font-medium opacity-30 mt-0.5">
-                  {card.hanja}
-                </p>
+                <p className="font-medium opacity-30 mt-0.5">{card.hanja}</p>
 
                 {/* 종합 점수 원형 */}
                 <div className="mt-3 md:mt-5 relative w-12 h-12 md:w-16 md:h-16">

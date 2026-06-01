@@ -88,7 +88,7 @@ export default function HeroSection() {
               style={{ color: '#474555' }}
             >
               의미만 좋은 이름으로 충분할까요?
-              <br className="hidden md:block" />
+              <br className="block" />
               예상치 못한 별명, 이름을 짓기 전에 확인해보세요.
             </p>
 

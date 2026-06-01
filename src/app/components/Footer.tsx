@@ -152,7 +152,7 @@ export default function Footer() {
           }}
         />
 
-        <div className="relative z-10 max-w-300 mx-auto px-6 pt-16 pb-10">
+        <div className="relative max-w-300 mx-auto px-6 pt-16 pb-10">
           {/* 메인 그리드 */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-14">
             {/* 브랜드 */}
