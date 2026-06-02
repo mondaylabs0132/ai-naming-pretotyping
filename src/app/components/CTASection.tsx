@@ -2,20 +2,12 @@
 
 import { useState, useRef, useActionState, useEffect } from 'react';
 import { signupEmail } from '../actions';
-import { Ticket, BadgePercent, BarChart3, Sparkles } from 'lucide-react';
+import { BadgePercent, Sparkles } from 'lucide-react';
 
 const perks = [
   {
-    icon: Ticket,
-    text: '우선 체험권',
-  },
-  {
     icon: BadgePercent,
-    text: '50% 할인',
-  },
-  {
-    icon: BarChart3,
-    text: '분석 리포트',
+    text: '50% 할인권',
   },
 ];
 
@@ -252,7 +244,7 @@ export default function CTASection() {
           .avatar-ring { width: 36px; height: 36px; margin-left: -10px; }
         }
       `}</style>
-      <section className="px-6 mx-auto w-full h-svh flex flex-col items-center justify-center py-6 md:py-0 relative">
+      <section className="px-6 mx-auto w-full h-svh flex flex-col items-center justify-center section-pt pb-6 md:py-0 relative">
         <div
           className="max-w-275 mx-auto w-full cta-wrap"
           style={{ boxShadow: '0 40px 80px -20px rgba(62,37,195,0.35)' }}
@@ -297,8 +289,6 @@ export default function CTASection() {
               style={{ color: 'rgba(255,255,255,0.65)' }}
             >
               지금 사전 등록하고{' '}
-              <strong className="text-white">우선 체험권</strong>과{' '}
-              <br className="md:hidden" />{' '}
               <strong style={{ color: '#fcd344' }}>50% 할인권</strong>을
               받으세요.
             </p>
@@ -464,7 +454,7 @@ export default function CTASection() {
               <p className="text-[11px] md:text-sm font-medium text-white/50">
                 이미{' '}
                 <strong style={{ color: '#fcd344', fontWeight: 800 }}>
-                  1,248명
+                  100+명
                 </strong>
                 의 부모님이 대기 중
               </p>

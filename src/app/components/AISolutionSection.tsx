@@ -65,7 +65,7 @@ export default function AISolutionSection() {
   return (
     <section
       ref={sectionRef}
-      className="ai-section-bg relative overflow-hidden px-6 mx-auto w-full h-svh flex flex-col items-center justify-center py-6 md:py-0"
+      className="ai-section-bg relative overflow-hidden px-6 mx-auto w-full h-svh flex flex-col items-center justify-center section-pt pb-6 md:py-0"
     >
       <div
         className={`max-w-310 mx-auto w-full ${isInView ? 'animate-chart' : ''}`}

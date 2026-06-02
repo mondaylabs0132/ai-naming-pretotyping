@@ -15,7 +15,7 @@ export default function HeroSection() {
   };
 
   return (
-    <section className="relative overflow-hidden px-6 mx-auto w-full h-screen flex flex-col items-center justify-center">
+    <section className="relative overflow-hidden px-6 mx-auto w-full h-screen flex flex-col items-center justify-center section-pt">
       {/* 배경 장식 */}
       <div className="pointer-events-none select-none">
         {/* 큰 그라디언트 orb */}
@@ -153,8 +153,7 @@ export default function HeroSection() {
                   ))}
                 </div>
                 <span>
-                  이미 <strong className="text-primary">1,200+</strong> 부모님이
-                  신청
+                  이미 <strong className="text-primary">0</strong> 부모님이 신청
                 </span>
               </div>
             </div>

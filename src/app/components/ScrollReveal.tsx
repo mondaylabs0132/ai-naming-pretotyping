@@ -13,7 +13,7 @@ export default function ScrollReveal({
   children,
   className = '',
   snap = true,
-  move = true,
+  move = false,
 }: ScrollRevealProps) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -40,13 +40,12 @@ export default function ScrollReveal({
     <div
       ref={ref}
       className={`
-        pt-14
         opacity-0
         transition-all
         duration-1000
         ease-out
         ${move ? 'translate-y-8' : ''}
-        ${snap ? 'snap-start snap-always min-h-svh flex flex-col justify-center' : ''}
+        ${snap ? 'snap-start snap-always min-h-[calc(100vh-80px)] flex flex-col justify-center' : ''}
         ${className}
       `}
     >

@@ -1,7 +1,5 @@
 import AISolutionSection from './components/AISolutionSection';
 import CTASection from './components/CTASection';
-import DifferentiationSection from './components/DifferentiationSection';
-import EmpathySection from './components/EmpathySection';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import HeroSection from './components/HeroSection';
@@ -11,23 +9,17 @@ import ScrollReveal from './components/ScrollReveal';
 
 export default function Home() {
   return (
-    <div className="h-svh overflow-y-auto snap-y snap-mandatory scroll-smooth hide-scrollbar">
+    <div className="h-screen overflow-y-auto snap-y snap-mandatory scroll-smooth hide-scrollbar">
       <Header />
       <main>
         <ScrollReveal>
           <HeroSection />
         </ScrollReveal>
         <ScrollReveal>
-          <EmpathySection />
-        </ScrollReveal>
-        <ScrollReveal>
           <ParentalSection />
         </ScrollReveal>
         <ScrollReveal>
           <AISolutionSection />
-        </ScrollReveal>
-        <ScrollReveal>
-          <DifferentiationSection />
         </ScrollReveal>
         <ScrollReveal>
           <ResultPreviewSection />

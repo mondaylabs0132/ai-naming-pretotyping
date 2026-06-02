@@ -2,25 +2,10 @@ import Link from 'next/link';
 
 const footerSections = [
   {
-    title: 'Service',
-    links: [
-      { label: 'AI 분석 엔진', href: '#' },
-      { label: '추천 시스템', href: '#' },
-      { label: '안전성 검사', href: '#' },
-    ],
-  },
-  {
     title: 'Legal',
     links: [
       { label: '개인정보처리방침', href: '#' },
       { label: '이용약관', href: '#' },
-    ],
-  },
-  {
-    title: 'Support',
-    links: [
-      { label: '자주 묻는 질문', href: '#' },
-      { label: '1:1 문의', href: '#' },
     ],
   },
 ];

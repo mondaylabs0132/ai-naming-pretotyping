@@ -71,10 +71,10 @@ export default function ResultPreviewSection() {
 
   return (
     <section
-      className="py-16 md:py-24 px-6 mx-auto w-full min-h-svh flex flex-col items-center justify-center"
+      className="section-pt pb-16 md:pb-24 px-6 mx-auto w-full h-svh flex flex-col items-center justify-center"
       style={{ background: '#fbf8ff' }}
     >
-      <div className="max-w-6xl mx-auto w-full">
+      <div className="mx-auto w-full pt-6">
         {/* 헤드라인 섹션 */}
         <div className="text-center">
           <p

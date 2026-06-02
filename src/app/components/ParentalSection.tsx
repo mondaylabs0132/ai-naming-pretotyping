@@ -11,7 +11,7 @@ const quotes = [
 
 export default function ParentalSection() {
   return (
-    <section className="relative overflow-hidden w-full h-svh flex flex-col justify-end">
+    <section className="relative overflow-hidden w-full h-svh flex flex-col justify-end section-pt">
       {/* 풀블리드 이미지 */}
       <Image
         src="/image02.png"
@@ -64,7 +64,7 @@ export default function ParentalSection() {
           className="text-sm md:text-lg font-medium italic leading-relaxed mb-6 md:mb-8 self-start"
           style={{ color: 'rgba(255,255,255,0.75)' }}
         >
-          &quot;부모님, 제 이름 왜 이렇게 지어주셨어요?&quot;
+          &quot;엄마, 애들이 이름으로 놀려요..&quot;
           <span
             className="not-italic text-xs md:text-base font-normal block mt-1.5"
             style={{ color: 'rgba(255,255,255,0.5)' }}
@@ -73,38 +73,21 @@ export default function ParentalSection() {
           </span>
         </p>
 
-        {/* 스탯 */}
-        <div className="flex items-center gap-8 md:gap-14 mb-7 md:mb-10 self-start">
-          {[
-            { num: '73%', label: '놀림받은 경험 있음', color: '#a89cf7' },
-            { num: '2명 중 1명', label: '이름 바꾸고 싶었음', color: '#ff8f8f' },
-          ].map((s) => (
-            <div key={s.label}>
-              <p
-                className="text-2xl md:text-4xl font-black mb-0.5"
-                style={{ color: s.color }}
-              >
-                {s.num}
-              </p>
-              <p
-                className="text-xs font-medium leading-tight"
-                style={{ color: 'rgba(255,255,255,0.5)' }}
-              >
-                {s.label}
-              </p>
-            </div>
-          ))}
-        </div>
-
         {/* 스크롤 인용구 */}
         <div className="relative overflow-hidden w-full">
           <div
             className="absolute left-0 top-0 bottom-0 w-8 md:w-16 z-10"
-            style={{ background: 'linear-gradient(90deg, rgba(12,11,30,0.9), transparent)' }}
+            style={{
+              background:
+                'linear-gradient(90deg, rgba(12,11,30,0.9), transparent)',
+            }}
           />
           <div
             className="absolute right-0 top-0 bottom-0 w-8 md:w-16 z-10"
-            style={{ background: 'linear-gradient(-90deg, rgba(12,11,30,0.9), transparent)' }}
+            style={{
+              background:
+                'linear-gradient(-90deg, rgba(12,11,30,0.9), transparent)',
+            }}
           />
 
           <div className="quote-scroll py-1">
