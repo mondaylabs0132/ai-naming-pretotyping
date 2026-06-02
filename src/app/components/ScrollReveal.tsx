@@ -40,7 +40,7 @@ export default function ScrollReveal({
     <div
       ref={ref}
       className={`
-        pt-16
+        pt-14
         opacity-0
         transition-all
         duration-1000

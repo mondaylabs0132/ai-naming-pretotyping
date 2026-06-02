@@ -49,7 +49,7 @@ export default function EmpathySection() {
           </p>
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-2 md:gap-4 text-center md:text-left">
             <h2 className="text-3xl font-bold leading-tight text-on-background">
-              왜 <span style={{ color: '#5441d8' }}>아이리음</span>이
+              왜 <span style={{ color: '#5441d8' }}>이름담다</span>가
               <br className="md:hidden" /> 필요할까요?
             </h2>
           </div>

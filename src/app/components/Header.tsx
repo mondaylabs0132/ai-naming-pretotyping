@@ -56,7 +56,7 @@ export default function Header() {
               backgroundClip: 'text',
             }}
           >
-            Astra Naming
+            이름담다
           </span>
         </div>
 
