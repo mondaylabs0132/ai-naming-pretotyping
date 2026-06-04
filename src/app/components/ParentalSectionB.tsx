@@ -1,28 +1,28 @@
 import Image from 'next/image';
 
 const quotes = [
-  { text: '이름 때문에 학교에서 놀림받았어요', age: '초등 3학년' },
-  { text: '친구들이 제 이름으로 별명 만들었어요', age: '중학교 1학년' },
   {
-    text: '이름 바꾸고 싶다고 했을 때 너무 마음이 아팠어요',
-    age: '30대 부모님',
+    text: '이름 하나에 이렇게 많은 사랑을 담을 수 있을지 몰랐어요',
+    tag: '예비 엄마',
   },
+  { text: '태어나기 전부터 이름을 불러줬어요', tag: '0세 아빠' },
+  { text: '평생 자랑스러운 이름을 주고 싶었어요', tag: '두 아이 엄마' },
 ];
 
-export default function ParentalSection() {
+export default function ParentalSectionB() {
   return (
     <section className="relative overflow-hidden w-full h-svh flex flex-col justify-end section-pt">
       {/* 풀블리드 이미지 */}
       <Image
-        src="/imageA02.png"
-        alt="Emotional shot of a young child"
+        src="/imageB01.jpeg"
+        alt="Warm moment of a parent holding a newborn"
         fill
         sizes="100vw"
         className="object-cover object-top"
         priority
       />
 
-      {/* 그라디언트 오버레이: 상단 투명 → 하단 진하게 */}
+      {/* 그라디언트 오버레이 */}
       <div
         className="absolute inset-0"
         style={{
@@ -43,7 +43,7 @@ export default function ParentalSection() {
             backdropFilter: 'blur(8px)',
           }}
         >
-          실제 부모님들의 이야기
+          부모님들의 마음
         </span>
 
         {/* 헤드라인 */}
@@ -55,7 +55,9 @@ export default function ParentalSection() {
             className="text-2xl md:text-4xl font-bold leading-snug tracking-tight"
             style={{ color: '#fff' }}
           >
-            &quot;이름 하나 잘못 지어서...&quot;
+            &quot;이름을 짓는 순간,
+            <br />
+            부모가 되었습니다.&quot;
           </p>
         </div>
 
@@ -64,12 +66,12 @@ export default function ParentalSection() {
           className="text-sm md:text-lg font-medium italic leading-relaxed mb-6 md:mb-8 self-start"
           style={{ color: 'rgba(255,255,255,0.75)' }}
         >
-          &quot;엄마, 애들이 이름으로 놀려요..&quot;
+          &quot;이 이름으로 오래오래 불러줄게.&quot;
           <span
             className="not-italic text-xs md:text-base font-normal block mt-1.5"
             style={{ color: 'rgba(255,255,255,0.5)' }}
           >
-            아이 입에서 이 말을 듣는 순간, 부모의 마음은 얼마나 무너질까요.
+            처음 이름을 부르는 그 순간의 떨림을, 오래 간직할 수 있도록.
           </span>
         </p>
 
@@ -114,7 +116,7 @@ export default function ParentalSection() {
                     color: '#c6c0ff',
                   }}
                 >
-                  {q.age}
+                  {q.tag}
                 </span>
               </div>
             ))}

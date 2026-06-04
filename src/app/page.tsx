@@ -1,9 +1,8 @@
+import ABHeroParental from './components/ABHeroParental';
 import AISolutionSection from './components/AISolutionSection';
 import CTASection from './components/CTASection';
 import Footer from './components/Footer';
 import Header from './components/Header';
-import HeroSection from './components/HeroSection';
-import ParentalSection from './components/ParentalSection';
 import ResultPreviewSection from './components/ResultPreviewSection';
 import ScrollReveal from './components/ScrollReveal';
 
@@ -12,12 +11,7 @@ export default function Home() {
     <div className="h-screen overflow-y-auto snap-y snap-mandatory scroll-smooth hide-scrollbar">
       <Header />
       <main>
-        <ScrollReveal>
-          <HeroSection />
-        </ScrollReveal>
-        <ScrollReveal>
-          <ParentalSection />
-        </ScrollReveal>
+        <ABHeroParental />
         <ScrollReveal>
           <AISolutionSection />
         </ScrollReveal>

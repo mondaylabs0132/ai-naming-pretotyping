@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 
-export default function HeroSection() {
+export default function HeroSectionB() {
   const scrollToEmail = () => {
     const input = document.getElementById('email-input');
     const section = input?.closest('section');
@@ -10,7 +10,7 @@ export default function HeroSection() {
       section.scrollIntoView({ behavior: 'smooth', block: 'start' });
       setTimeout(() => {
         (input as HTMLInputElement)?.focus();
-      }, 800); // 스크롤 및 스냅 완료 후 포커스
+      }, 800);
     }
   };
 
@@ -18,7 +18,6 @@ export default function HeroSection() {
     <section className="relative overflow-hidden px-6 mx-auto w-full h-screen flex flex-col items-center justify-center section-pt">
       {/* 배경 장식 */}
       <div className="pointer-events-none select-none">
-        {/* 큰 그라디언트 orb */}
         <div
           className="absolute -top-32 -right-32 w-75 md:w-130 h-75 md:h-130 rounded-full opacity-30"
           style={{
@@ -31,7 +30,6 @@ export default function HeroSection() {
             background: 'radial-gradient(circle, #fcd344 0%, transparent 70%)',
           }}
         />
-        {/* 격자 패턴 */}
         <div
           className="absolute inset-0 opacity-[0.025]"
           style={{
@@ -41,6 +39,7 @@ export default function HeroSection() {
           }}
         />
       </div>
+
       <div className="w-full max-w-300 mx-auto">
         <div className="relative grid grid-cols-1 md:grid-cols-2 items-center gap-12 md:gap-16">
           {/* 좌측 텍스트 */}
@@ -57,14 +56,14 @@ export default function HeroSection() {
               >
                 <span className="w-1.5 h-1.5 rounded-full bg-[#5441d8] animate-pulse shrink-0" />
                 <span className="translate-y-[0.5px]">
-                  AI 기반 이름 안전 분석 서비스
+                  세상에 하나뿐인 이름 선물
                 </span>
               </span>
             </div>
 
             {/* 헤드라인 */}
             <h1 className="hero-fade-2 text-4xl md:text-6xl font-bold leading-[1.15] mb-6 tracking-tight">
-              <span className="text-on-background">아이 이름,</span>
+              <span className="text-on-background">아이에게 주는</span>
               <br />
               <span
                 style={{
@@ -75,11 +74,10 @@ export default function HeroSection() {
                   backgroundClip: 'text',
                 }}
               >
-                평생 놀림거리
+                첫 번째 선물,
               </span>
-              <span className="text-on-background">가</span>
               <br />
-              <span className="text-on-background">될 수도 있습니다.</span>
+              <span className="text-on-background">이름</span>
             </h1>
 
             {/* 서브카피 */}
@@ -87,9 +85,9 @@ export default function HeroSection() {
               className="hero-fade-3 text-md md:text-lg leading-relaxed mb-8 max-w-105"
               style={{ color: '#474555' }}
             >
-              의미만 좋은 이름으로 충분할까요?
+              이름은 아이가 평생 간직할 첫 번째 선물입니다.
               <br className="block" />
-              예상치 못한 별명, 이름을 짓기 전에 확인해보세요.
+              아름답고 안전한 이름을 AI와 함께 찾아보세요.
             </p>
 
             {/* 인포 박스 */}
@@ -101,14 +99,14 @@ export default function HeroSection() {
                 border: '1px solid rgba(198,192,255,0.6)',
               }}
             >
-              <span className="text-lg mt-px">✨</span>
+              <span className="text-lg mt-px">🎁</span>
               <p
                 className="text-sm font-medium leading-relaxed"
                 style={{ color: '#3e25c3' }}
               >
-                AI가 또래 환경에서 놀림 요소를 미리 분석해
+                의미·발음·안전성을 모두 고려해
                 <br />
-                <strong>안전한 이름만</strong> 추천합니다.
+                <strong>평생 자랑스러운 이름</strong>을 선물하세요.
               </p>
             </div>
 
@@ -161,7 +159,6 @@ export default function HeroSection() {
 
           {/* 우측 이미지 */}
           <div className="relative items-center justify-center mt-8 md:mt-0 hidden md:block lg:flex">
-            {/* 배경 orb */}
             <div
               className="absolute w-70 md:w-105 h-70 md:h-105 rounded-full"
               style={{
@@ -170,20 +167,6 @@ export default function HeroSection() {
               }}
             />
 
-            {/* 공전 장식 점 */}
-            <div className="absolute w-65 md:w-95 h-65 md:h-95">
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                <div
-                  className="orbit-dot w-2 md:w-3 h-2 md:h-3 rounded-full"
-                  style={{
-                    background: '#fcd344',
-                    boxShadow: '0 0 8px rgba(252,211,68,0.6)',
-                  }}
-                />
-              </div>
-            </div>
-
-            {/* 메인 이미지 */}
             <div className="hero-float relative z-10 w-full max-w-[320px] md:max-w-115">
               <div
                 className="absolute inset-0 rounded-[28px] -z-10"
@@ -208,7 +191,7 @@ export default function HeroSection() {
                 }}
               />
 
-              {/* 플로팅 뱃지 - 분석 완료 */}
+              {/* 플로팅 뱃지 - 선물 */}
               <div
                 className="absolute -bottom-3 -left-3 md:-bottom-4 md:-left-6 z-20 flex items-center gap-2 md:gap-2.5 px-3 md:px-4 py-2 md:py-2.5 rounded-xl md:rounded-2xl"
                 style={{
@@ -222,25 +205,25 @@ export default function HeroSection() {
                   className="w-7 md:w-8 h-7 md:h-8 rounded-lg md:rounded-xl flex items-center justify-center text-sm md:text-base"
                   style={{ background: 'rgba(84,65,219,0.1)' }}
                 >
-                  🛡️
+                  💝
                 </div>
                 <div>
                   <p
                     className="text-[10px] md:text-[11px] font-bold"
                     style={{ color: '#5441d8' }}
                   >
-                    놀림 위험도
+                    이름 추천 완료
                   </p>
                   <p
                     className="text-[9px] md:text-[10px]"
                     style={{ color: '#787586' }}
                   >
-                    분석 완료 · 안전
+                    안전 · 아름다운 이름
                   </p>
                 </div>
               </div>
 
-              {/* 플로팅 뱃지 - 이름 점수 */}
+              {/* 플로팅 뱃지 - 점수 */}
               <div
                 className="absolute -top-3 -right-3 md:-top-4 md:-right-4 z-20 flex items-center gap-1.5 md:gap-2 px-3 md:px-3.5 py-1.5 md:py-2 rounded-xl md:rounded-2xl"
                 style={{
@@ -253,7 +236,7 @@ export default function HeroSection() {
                 <span className="text-sm md:text-base">⭐</span>
                 <div>
                   <p className="text-[10px] md:text-[11px] font-bold text-on-background">
-                    안전 점수
+                    행복 지수
                   </p>
                   <p className="text-[9px] md:text-[10px] font-bold text-primary">
                     98 / 100
