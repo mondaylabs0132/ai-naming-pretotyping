@@ -14,13 +14,15 @@ export default function ABHeroParental() {
 
   useLayoutEffect(() => {
     const stored = localStorage.getItem(STORAGE_KEY) as 'A' | 'B' | null;
-    if (stored === 'A' || stored === 'B') {
-      setVariant(stored);
-    } else {
-      const assigned = Math.random() < 0.5 ? 'A' : 'B';
-      localStorage.setItem(STORAGE_KEY, assigned);
-      setVariant(assigned);
-    }
+    const resolved = stored === 'A' || stored === 'B' ? stored : (Math.random() < 0.5 ? 'A' : 'B');
+    if (!stored) localStorage.setItem(STORAGE_KEY, resolved);
+    setVariant(resolved);
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (window as any).dataLayer?.push({
+      event: 'ab_variant_assigned',
+      ab_variant: resolved,
+    });
   }, []);
 
   if (variant === 'B') {

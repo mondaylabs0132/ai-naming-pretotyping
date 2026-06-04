@@ -35,6 +35,12 @@ export default function CTASection() {
       setIsSubmitted(true);
       setEmail('');
 
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (window as any).dataLayer?.push({
+        event: 'email_submitted',
+        ab_variant: localStorage.getItem('ab_hero_parental'),
+      });
+
       const timer = setTimeout(() => {
         setIsSubmitted(false);
       }, 5000);
