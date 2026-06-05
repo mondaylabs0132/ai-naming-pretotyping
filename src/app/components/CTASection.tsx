@@ -445,7 +445,7 @@ export default function CTASection() {
             </div>
 
             {/* 소셜 프루프 */}
-            <div className="mt-8 md:mt-10 flex flex-col items-center gap-2 md:gap-3">
+            {/* <div className="mt-8 md:mt-10 flex flex-col items-center gap-2 md:gap-3">
               <div className="flex">
                 {[16, 17, 18, 19, 20].map((i) => (
                   <div key={i} className="avatar-ring">
@@ -464,7 +464,7 @@ export default function CTASection() {
                 </strong>
                 의 부모님이 대기 중
               </p>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>

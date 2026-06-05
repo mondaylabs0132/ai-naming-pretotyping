@@ -1,5 +1,6 @@
 'use client';
 
+import { Gift, Heart, Star } from 'lucide-react';
 import Image from 'next/image';
 
 export default function HeroSectionB() {
@@ -99,7 +100,7 @@ export default function HeroSectionB() {
                 border: '1px solid rgba(198,192,255,0.6)',
               }}
             >
-              <span className="text-lg mt-px">🎁</span>
+              <Gift size={18} className="mt-px shrink-0" style={{ color: '#3e25c3' }} />
               <p
                 className="text-sm font-medium leading-relaxed"
                 style={{ color: '#3e25c3' }}
@@ -137,7 +138,7 @@ export default function HeroSectionB() {
                 </span>
               </button>
 
-              <div
+              {/* <div
                 className="flex items-center gap-2 text-xs"
                 style={{ color: '#787586' }}
               >
@@ -153,7 +154,7 @@ export default function HeroSectionB() {
                 <span>
                   이미 <strong className="text-primary">0</strong> 부모님이 신청
                 </span>
-              </div>
+              </div> */}
             </div>
           </div>
 
@@ -205,7 +206,7 @@ export default function HeroSectionB() {
                   className="w-7 md:w-8 h-7 md:h-8 rounded-lg md:rounded-xl flex items-center justify-center text-sm md:text-base"
                   style={{ background: 'rgba(84,65,219,0.1)' }}
                 >
-                  💝
+                  <Heart size={16} style={{ color: '#5441d8' }} />
                 </div>
                 <div>
                   <p
@@ -233,7 +234,7 @@ export default function HeroSectionB() {
                   border: '1px solid rgba(198,192,255,0.5)',
                 }}
               >
-                <span className="text-sm md:text-base">⭐</span>
+                <Star size={16} style={{ color: '#5441d8' }} />
                 <div>
                   <p className="text-[10px] md:text-[11px] font-bold text-on-background">
                     행복 지수

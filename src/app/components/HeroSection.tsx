@@ -139,7 +139,7 @@ export default function HeroSection() {
                 </span>
               </button>
 
-              <div
+              {/* <div
                 className="flex items-center gap-2 text-xs"
                 style={{ color: '#787586' }}
               >
@@ -155,7 +155,7 @@ export default function HeroSection() {
                 <span>
                   이미 <strong className="text-primary">0</strong> 부모님이 신청
                 </span>
-              </div>
+              </div> */}
             </div>
           </div>
 
