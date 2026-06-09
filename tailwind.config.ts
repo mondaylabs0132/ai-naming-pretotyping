@@ -78,6 +78,7 @@ const config: Config = {
         'label-md': ['Be Vietnam Pro', 'sans-serif'],
         'body-md': ['Be Vietnam Pro', 'sans-serif'],
         'body-lg': ['Be Vietnam Pro', 'sans-serif'],
+        'cafe24': ['Cafe24Surround', 'sans-serif'],
       },
       fontSize: {
         xs: ['var(--text-xs)', { lineHeight: '1.5' }],

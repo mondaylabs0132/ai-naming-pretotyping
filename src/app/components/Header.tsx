@@ -47,7 +47,7 @@ export default function Header() {
               className="logo-glow relative z-10 rounded-lg"
             />
           </div>
-          <span
+          <h1
             className="text-xl font-bold tracking-tight"
             style={{
               background: 'linear-gradient(135deg, #5441d8 0%, #8b7cf8 100%)',
@@ -56,8 +56,8 @@ export default function Header() {
               backgroundClip: 'text',
             }}
           >
-            이름담다
-          </span>
+            첫지음 - AI 아기 이름 작명소
+          </h1>
         </div>
 
         {/* CTA 버튼 */}
