@@ -3,9 +3,12 @@ import Script from 'next/script';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Astra Naming - AI 아이 이름 분석',
+  title: '첫지음 - AI 아기 이름 작명소',
   description:
     'AI가 또래 환경에서 놀림 요소를 미리 분석해 안전한 이름만 추천합니다.',
+  icons: {
+    icon: '/main-icon.png',
+  },
 };
 
 export default function RootLayout({

@@ -2,7 +2,9 @@ import ABHeroParental from './components/ABHeroParental';
 import AISolutionSection from './components/AISolutionSection';
 import CTASection from './components/CTASection';
 import Footer from './components/Footer';
+import FreeNameSection from './components/FreeNameSection';
 import Header from './components/Header';
+import PricingValueSection from './components/PricingValueSection';
 import ResultPreviewSection from './components/ResultPreviewSection';
 import ScrollReveal from './components/ScrollReveal';
 
@@ -14,6 +16,12 @@ export default function Home() {
         <ABHeroParental />
         <ScrollReveal>
           <AISolutionSection />
+        </ScrollReveal>
+        <ScrollReveal>
+          <FreeNameSection />
+        </ScrollReveal>
+        <ScrollReveal>
+          <PricingValueSection />
         </ScrollReveal>
         <ScrollReveal>
           <ResultPreviewSection />

@@ -31,24 +31,17 @@ export default function Header() {
       <div className="max-w-300 mx-auto px-6 flex items-center justify-between">
         {/* 로고 */}
         <div className="flex items-center gap-3 group cursor-pointer">
-          <div className="relative">
-            <div
-              className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-              style={{
-                background:
-                  'radial-gradient(circle, rgba(84,65,219,0.15) 0%, transparent 70%)',
-              }}
-            />
+          <div className="relative w-9 h-9 flex items-center justify-center">
             <Image
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFSXZBzLEmIn-EBknaMOueggLz419YJhrkGWOoL-TcLRxZMCol5kAW4HsTU7QFz45A8ISfszeaLJifxMAc0sAOGcLFLllaQCmgAh3S4dZ30Y6skk6bIVSK-rRb1jOrD5GbeK1dsHVcERj4zRdcDsTRETplvpKHtiCldxL-WkB5fWhGqLONdnTcZG80eQEro3YvVvOAdPV8YguXRsPGYWLFIrOogOQvNt5TASQzRU7op17z5r-lQZ1yo3TC6y2UiuSND2B9rGa-bxk"
-              alt="Astra Naming Logo"
+              src="/main-icon.png"
+              alt="Logo"
               width={36}
               height={36}
-              className="logo-glow relative z-10 rounded-lg"
+              className="object-contain mb-1"
             />
           </div>
           <h1
-            className="text-xl font-bold tracking-tight"
+            className="tracking-tight"
             style={{
               background: 'linear-gradient(135deg, #5441d8 0%, #8b7cf8 100%)',
               WebkitBackgroundClip: 'text',
@@ -56,7 +49,8 @@ export default function Header() {
               backgroundClip: 'text',
             }}
           >
-            첫지음 - AI 아기 이름 작명소
+            첫지음{' '}
+            <span className="hidden md:inline">- AI 아기 이름 작명소</span>
           </h1>
         </div>
 
