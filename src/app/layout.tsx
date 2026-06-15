@@ -1,59 +1,46 @@
 import type { Metadata } from 'next';
-import { Plus_Jakarta_Sans } from 'next/font/google';
+import Script from 'next/script';
 import './globals.css';
-import FocusEmailButton from './components/FocusEmailButton';
-
-const plusJakarta = Plus_Jakarta_Sans({
-  variable: '--font-plus-jakarta',
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-});
 
 export const metadata: Metadata = {
-  title: 'Starlit Names — AI 신생아 작명 서비스 준비 중',
+  title: '첫지음 - AI 아기 이름 작명소',
   description:
-    'AI와 성명학을 결합한 작명 서비스를 준비하고 있어요. 오픈 알림을 받아보세요.',
+    'AI가 또래 환경에서 놀림 요소를 미리 분석해 안전한 이름만 추천합니다.',
+  icons: {
+    icon: '/main-icon.png',
+  },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="ko" className={`${plusJakarta.variable} h-full antialiased`}>
-      <body className="flex min-h-full flex-col">
-        <header className="sticky top-0 z-50 border-b border-outline-variant/20 bg-background/80 backdrop-blur-md">
-          <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 md:px-20">
-            <div className="flex items-center gap-2">
-              <span className="text-xl text-primary">✦</span>
-              <span className="text-base font-bold tracking-tight text-on-surface">
-                Starlit Names
-              </span>
-            </div>
-            <FocusEmailButton />
-          </div>
-        </header>
-
+    <html lang="ko" className="scroll-smooth">
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        />
+      </head>
+      <body className="bg-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
+        <Script id="gtm" strategy="afterInteractive">{`
+          (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+          })(window,document,'script','dataLayer','GTM-WHG2LPB2');
+        `}</Script>
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-WHG2LPB2"
+            height="0"
+            width="0"
+            style={{ display: 'none', visibility: 'hidden' }}
+          />
+        </noscript>
         {children}
-
-        <footer className="border-t border-outline-variant/20 py-8">
-          <div className="mx-auto max-w-7xl px-6 md:px-20">
-            <div className="flex flex-col items-start justify-between gap-4 text-sm text-on-surface-variant sm:flex-row sm:items-center">
-              <div className="flex items-center gap-2">
-                <span className="text-primary">✦</span>
-                <span className="font-semibold text-on-surface">
-                  Starlit Names
-                </span>
-                <span className="text-on-surface-variant/60">— 사전 예약</span>
-              </div>
-              <p className="text-xs text-on-surface-variant/60">
-                © 2024 Starlit Names. 수집된 개인 정보는 오픈 알림 외에 사용되지
-                않습니다.
-              </p>
-            </div>
-          </div>
-        </footer>
       </body>
     </html>
   );
