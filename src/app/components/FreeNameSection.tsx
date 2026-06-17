@@ -129,7 +129,7 @@ export default function FreeNameSection() {
               >
                 close
               </span>
-              <p className="text-[11px] md:text-sm font-medium text-gray-400">
+              <p className="text-[11px] md:text-sm font-medium text-gray-400 whitespace-nowrap">
                 사실상 유료 결제 유도
               </p>
             </div>
@@ -153,7 +153,7 @@ export default function FreeNameSection() {
                   background: 'linear-gradient(135deg, #5441d8, #7c6ef0)',
                 }}
               >
-                Astra
+                첫지음
               </span>
             </div>
             <p
@@ -204,7 +204,7 @@ export default function FreeNameSection() {
                 check_circle
               </span>
               <p
-                className="text-[11px] md:text-sm font-bold"
+                className="text-[11px] md:text-sm font-bold whitespace-nowrap"
                 style={{ color: '#2da87a' }}
               >
                 완전 무료, 전부 공개

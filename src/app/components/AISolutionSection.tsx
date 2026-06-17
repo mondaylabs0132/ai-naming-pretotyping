@@ -1,13 +1,10 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
-
 const features = [
   {
     icon: 'psychology',
     title: '놀림 가능성',
     desc: '유사 발음 및 비속어 차단.',
-    score: 98,
     accent: '#5441d8',
     accentLight: 'rgba(84,65,219,0.08)',
     tag: 'TEASING',
@@ -16,7 +13,6 @@ const features = [
     icon: 'record_voice_over',
     title: '발음 안정성',
     desc: '편안한 발음 구조 설계.',
-    score: 94,
     accent: '#2da87a',
     accentLight: 'rgba(45,168,122,0.08)',
     tag: 'PHONETIC',
@@ -24,8 +20,7 @@ const features = [
   {
     icon: 'trending_up',
     title: '유행도 분석',
-    desc: '적절한 트렌드 점수 산출.',
-    score: 87,
+    desc: '최신 작명 트렌드를 반영.',
     accent: '#f59e0b',
     accentLight: 'rgba(245,158,11,0.08)',
     tag: 'TREND',
@@ -34,7 +29,6 @@ const features = [
     icon: 'groups',
     title: '사회적 인식',
     desc: '성격적 이미지 데이터화.',
-    score: 91,
     accent: '#e0468a',
     accentLight: 'rgba(224,70,138,0.08)',
     tag: 'PERCEPT',
@@ -42,34 +36,9 @@ const features = [
 ];
 
 export default function AISolutionSection() {
-  const [isInView, setIsInView] = useState(false);
-  const sectionRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsInView(true);
-        }
-      },
-      { threshold: 0.2 },
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
   return (
-    <section
-      ref={sectionRef}
-      className="ai-section-bg relative overflow-hidden px-6 mx-auto w-full h-svh flex flex-col items-center justify-center section-pt pb-6 md:py-0"
-    >
-      <div
-        className={`max-w-310 mx-auto w-full ${isInView ? 'animate-chart' : ''}`}
-      >
+    <section className="ai-section-bg relative overflow-hidden px-6 mx-auto w-full h-svh flex flex-col items-center justify-center section-pt pb-6 md:py-0">
+      <div className="max-w-310 mx-auto w-full">
         {/* 헤드라인 섹션 */}
         <div className="flex flex-col md:flex-row justify-between items-center md:items-end mb-6 md:mb-16 gap-3 md:gap-8 text-center md:text-left">
           <div className="space-y-1 md:space-y-4">
@@ -108,22 +77,11 @@ export default function AISolutionSection() {
 
         {/* 카드 컨테이너 (모바일 2x2 그리드) */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6 w-full">
-          {features.map((f) => {
-            const radius = 24;
-            const circumference = 2 * Math.PI * radius;
-            const offset = circumference * (1 - f.score / 100);
-
-            return (
+          {features.map((f) => (
               <div
                 key={f.title}
                 className="ai-card group"
-                style={
-                  {
-                    borderColor: `${f.accent}15`,
-                    '--circumference': `${circumference}px`,
-                    '--offset': `${offset}px`,
-                  } as any
-                }
+                style={{ borderColor: `${f.accent}15` }}
               >
                 {/* 배경 장식 */}
                 <div
@@ -171,55 +129,35 @@ export default function AISolutionSection() {
                     </p>
                   </div>
 
-                  {/* 점수 영역 */}
+                  {/* 검증 씰 배지 */}
                   <div
-                    className="mt-auto flex flex-col items-center pt-3 md:pt-6 space-y-2 md:space-y-4"
-                    style={{ borderTop: `1px solid ${f.accent}12` }}
+                    className="mt-auto flex items-center justify-center gap-2 pt-3 md:pt-6"
+                    style={{ borderTop: `1px dashed ${f.accent}30` }}
                   >
-                    <div className="relative flex items-center justify-center">
-                      {/* SVG 링 */}
-                      <svg
-                        width="56"
-                        height="56"
-                        viewBox="0 0 60 60"
-                        className="md:w-23 md:h-23"
+                    <div
+                      className="w-5 h-5 md:w-6 md:h-6 rounded-full flex items-center justify-center shrink-0"
+                      style={{
+                        background:
+                          'linear-gradient(135deg, #5441d8 0%, #7c6ef0 100%)',
+                      }}
+                    >
+                      <span
+                        className="material-symbols-outlined text-white"
+                        style={{ fontSize: '12px' }}
                       >
-                        <circle
-                          className="score-track"
-                          cx="30"
-                          cy="30"
-                          r={radius}
-                        />
-                        <circle
-                          className="score-ring score-fill"
-                          cx="30"
-                          cy="30"
-                          r={radius}
-                          stroke={f.accent}
-                          strokeDasharray={circumference}
-                          style={{ strokeDashoffset: circumference }}
-                        />
-                      </svg>
-                      <div className="absolute inset-0 flex flex-col items-center justify-center pt-0.5">
-                        <span
-                          className="text-base md:text-2xl font-black leading-none"
-                          style={{ color: f.accent }}
-                        >
-                          {f.score}
-                        </span>
-                        <span
-                          className="text-[7px] md:text-[9px] font-bold opacity-40 uppercase tracking-tighter"
-                          style={{ color: f.accent }}
-                        >
-                          Score
-                        </span>
-                      </div>
+                        check
+                      </span>
                     </div>
+                    <span
+                      className="text-[11px] md:text-sm font-bold tracking-tight"
+                      style={{ color: '#5441d8' }}
+                    >
+                      AI 검증 완료
+                    </span>
                   </div>
                 </div>
               </div>
-            );
-          })}
+          ))}
         </div>
 
         {/* 하단 면책 메모 */}
