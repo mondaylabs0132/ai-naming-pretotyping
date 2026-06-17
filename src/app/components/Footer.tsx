@@ -142,7 +142,7 @@ export default function Footer() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-14">
             {/* 브랜드 */}
             <div className="lg:col-span-2 flex flex-col items-center md:items-start text-center md:text-left gap-5">
-              <Link href="/" className="group inline-flex items-center gap-2.5">
+              {/* <Link href="/" className="group inline-flex items-center gap-2.5">
                 <div
                   className="w-8 h-8 rounded-xl flex items-center justify-center text-sm font-black text-white"
                   style={{
@@ -161,9 +161,9 @@ export default function Footer() {
                     backgroundClip: 'text',
                   }}
                 >
-                  Astra Naming
+                  첫지음
                 </span>
-              </Link>
+              </Link> */}
 
               <p
                 className="text-sm leading-relaxed max-w-65"
@@ -206,7 +206,7 @@ export default function Footer() {
                   className="text-xs font-semibold"
                   style={{ color: 'rgba(198,192,255,0.85)' }}
                 >
-                  출시 준비 중
+                  정식 출시 준비 중
                 </span>
               </div>
             </div>
@@ -242,7 +242,7 @@ export default function Footer() {
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="flex flex-wrap justify-center md:justify-start gap-x-5 gap-y-1">
               {[
-                '상호명: (주)아스트라 네이밍',
+                '상호명: 먼데이랩스',
                 '대표자: 홍길동',
                 '사업자번호: 000-00-00000',
               ].map((t) => (
@@ -259,7 +259,7 @@ export default function Footer() {
               className="text-[11px] font-bold tracking-tight"
               style={{ color: 'rgba(255,255,255,0.2)' }}
             >
-              © 2026 Astra Naming. All rights reserved.
+              © 2026 첫지음. All rights reserved.
             </p>
           </div>
         </div>

@@ -78,7 +78,7 @@ export default function PricingValueSection() {
       <div className="max-w-310 mx-auto w-full">
         {/* 헤드라인 */}
         <div
-          className="text-center mb-8 md:mb-14 transition-all duration-700 ease-out"
+          className="text-center mb-5 md:mb-14 transition-all duration-700 ease-out"
           style={{
             opacity: inView ? 1 : 0,
             transform: inView ? 'translateY(0)' : 'translateY(24px)',
@@ -111,16 +111,16 @@ export default function PricingValueSection() {
             className="mt-4 text-sm md:text-base leading-relaxed max-w-xl mx-auto"
             style={{ color: '#474555' }}
           >
-            첫지음은 <strong>20개의 이름 후보</strong>와 상세 풀이를 제공하여 더
-            신중한 선택을 도와드립니다.
+            첫지음은 <strong>20개의 이름 후보</strong>와 상세 풀이를 제공하여{' '}
+            <br />더 신중한 선택을 도와드립니다.
           </p>
         </div>
 
         {/* 비교 카드 */}
-        <div className="grid grid-cols-2 gap-3 md:gap-6 max-w-3xl mx-auto">
+        <div className="grid grid-cols-2 gap-2 md:gap-6 max-w-3xl mx-auto">
           {/* 경쟁사 — 좌측 슬라이드인 */}
           <div
-            className="relative bg-white rounded-2xl md:rounded-3xl p-5 md:p-8 border border-gray-100 overflow-hidden flex flex-col transition-all duration-700 ease-out"
+            className="relative bg-white rounded-2xl md:rounded-3xl p-4 md:p-8 border border-gray-100 overflow-hidden flex flex-col transition-all duration-700 ease-out"
             style={{
               opacity: inView ? 1 : 0,
               transform: inView ? 'translateX(0)' : 'translateX(-32px)',
@@ -128,50 +128,47 @@ export default function PricingValueSection() {
             }}
           >
             <p className="text-xs font-bold text-gray-400 mb-1">타 서비스</p>
-            <p className="text-xl md:text-3xl font-black text-gray-700 mb-5 md:mb-8">
+            <p className="text-xl md:text-3xl font-black text-gray-700 mb-3 md:mb-8">
               ₩20,000
             </p>
 
-            {/* 3개 이름 (순차 등장) */}
-            <div className="space-y-2 flex-1">
+            {/* 3개 이름 (칩 형태, 순차 등장) */}
+            <div className="flex flex-wrap gap-1.5 flex-1 content-start">
               {['김○○', '이○○', '박○○'].map((name, i) => (
-                <div
+                <span
                   key={i}
-                  className="flex items-center gap-2 bg-gray-50 rounded-lg md:rounded-xl px-3 py-2 md:py-3 transition-all duration-400 ease-out"
+                  className="flex items-center gap-1 bg-gray-50 rounded-md md:rounded-lg px-2 py-1 md:px-3 md:py-1.5 transition-all duration-400 ease-out"
                   style={{
                     opacity: inView ? 1 : 0,
                     transform: inView ? 'translateX(0)' : 'translateX(-12px)',
                     transitionDelay: `${350 + i * 100}ms`,
                   }}
                 >
-                  <span className="text-xs font-bold text-gray-300">
-                    0{i + 1}
-                  </span>
-                  <span className="font-bold text-gray-300 tracking-widest text-sm md:text-base">
+                  <span className="font-bold text-gray-300 tracking-widest text-xs md:text-sm">
                     {name}
                   </span>
                   <span
-                    className="ml-auto material-symbols-outlined text-sm"
+                    className="material-symbols-outlined text-[12px] md:text-sm"
                     style={{ color: '#c8c4d7' }}
                   >
                     lock
                   </span>
-                </div>
+                </span>
               ))}
             </div>
 
             {/* 카운트업 숫자 */}
             <div
-              className="flex items-end gap-1 mt-5 md:mt-8 pt-4 md:pt-5"
+              className="flex items-end gap-1 mt-3 md:mt-8 pt-3 md:pt-5"
               style={{ borderTop: '1px solid rgba(0,0,0,0.05)' }}
             >
               <span
-                className="text-4xl md:text-6xl font-black text-gray-200 leading-none transition-all duration-300"
+                className="text-3xl md:text-6xl font-black text-gray-200 leading-none transition-all duration-300"
                 style={{ fontVariantNumeric: 'tabular-nums' }}
               >
                 {leftCount}
               </span>
-              <span className="text-base md:text-xl font-bold text-gray-300 mb-1">
+              <span className="text-sm md:text-xl font-bold text-gray-300 mb-0.5 md:mb-1">
                 개
               </span>
             </div>
@@ -179,7 +176,7 @@ export default function PricingValueSection() {
 
           {/* 우리 서비스 — 우측 슬라이드인 */}
           <div
-            className="relative bg-white rounded-2xl md:rounded-3xl p-5 md:p-8 overflow-hidden flex flex-col transition-all duration-700 ease-out"
+            className="relative bg-white rounded-2xl md:rounded-3xl p-4 md:p-8 overflow-hidden flex flex-col transition-all duration-700 ease-out"
             style={{
               border: '2px solid rgba(84,65,219,0.25)',
               boxShadow: '0 16px 40px rgba(84,65,219,0.12)',
@@ -204,38 +201,41 @@ export default function PricingValueSection() {
                 </p>
               </div>
               <p
-                className="text-xl md:text-3xl font-black mb-5 md:mb-8"
+                className="text-xl md:text-3xl font-black mb-3 md:mb-8"
                 style={{ color: '#5441d8' }}
               >
                 ₩19,900
               </p>
 
-              {/* 20개 이름 태그 — 순차 pop-in */}
-              <div className="flex flex-wrap gap-1 flex-1 content-start">
-                {ourNames.map((name, i) => (
-                  <span
-                    key={i}
-                    className="text-[9px] md:text-[11px] font-bold px-1.5 py-0.5 md:px-2 md:py-1 rounded-md transition-all duration-300 ease-out"
-                    style={{
-                      background: 'rgba(84,65,219,0.07)',
-                      color: '#5441d8',
-                      opacity: inView ? 1 : 0,
-                      transform: inView ? 'scale(1)' : 'scale(0.6)',
-                      transitionDelay: `${450 + i * 50}ms`,
-                    }}
-                  >
-                    {name}
-                  </span>
-                ))}
+              {/* 20개 이름 태그 — 모바일에서는 일부만 노출 + 하단 페이드 */}
+              <div className="relative flex-1">
+                <div className="flex flex-wrap gap-1 content-start max-h-20 overflow-hidden md:max-h-none md:overflow-visible">
+                  {ourNames.map((name, i) => (
+                    <span
+                      key={i}
+                      className="text-[9px] md:text-[11px] font-bold px-1.5 py-0.5 md:px-2 md:py-1 rounded-md transition-all duration-300 ease-out"
+                      style={{
+                        background: 'rgba(84,65,219,0.07)',
+                        color: '#5441d8',
+                        opacity: inView ? 1 : 0,
+                        transform: inView ? 'scale(1)' : 'scale(0.6)',
+                        transitionDelay: `${450 + i * 50}ms`,
+                      }}
+                    >
+                      {name}
+                    </span>
+                  ))}
+                </div>
+                <div className="absolute inset-x-0 bottom-0 h-6 bg-linear-to-t from-white to-transparent md:hidden" />
               </div>
 
               {/* 카운트업 숫자 */}
               <div
-                className="flex items-end gap-1 mt-5 md:mt-8 pt-4 md:pt-5"
+                className="flex items-end gap-1 mt-3 md:mt-8 pt-3 md:pt-5"
                 style={{ borderTop: '1px solid rgba(84,65,219,0.1)' }}
               >
                 <span
-                  className="text-4xl md:text-6xl font-black leading-none transition-all duration-300"
+                  className="text-3xl md:text-6xl font-black leading-none transition-all duration-300"
                   style={{
                     color: '#5441d8',
                     fontVariantNumeric: 'tabular-nums',
@@ -244,7 +244,7 @@ export default function PricingValueSection() {
                   {rightCount}
                 </span>
                 <span
-                  className="text-base md:text-xl font-bold mb-1"
+                  className="text-sm md:text-xl font-bold mb-0.5 md:mb-1"
                   style={{ color: '#5441d8' }}
                 >
                   개
