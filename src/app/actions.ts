@@ -18,6 +18,10 @@ export async function signupEmail(prevState: State, formData: FormData): Promise
     if (error.code === '23505') {
       return { error: '이미 신청하셨어요!' };
     }
+    if (error.code === '42501') {
+      // RLS insert 정책이 없거나 anon 롤에 열려있지 않음 — docs/supabase-rls.sql 참고
+      console.error('[signupEmail] RLS 정책 확인 필요: docs/supabase-rls.sql');
+    }
     return { error: '잠시 후 다시 시도해 주세요.' };
   }
 
