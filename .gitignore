@@ -32,6 +32,9 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+# Cloudflare Workers 로컬 시크릿 (.env* 패턴에 안 걸림)
+.dev.vars
+.dev.vars.*
 
 # vercel
 .vercel
@@ -39,3 +42,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# cloudflare / opennext 빌드 산출물 및 로컬 상태
+.open-next/
+.wrangler/
