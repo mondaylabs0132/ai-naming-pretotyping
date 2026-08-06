@@ -188,6 +188,59 @@
   }
 }
 
+/* ── ModernNameSection ────────────────────── */
+
+.feel-chip {
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #5441d8;
+  background: rgba(84, 65, 219, 0.06);
+  border: 1px solid rgba(84, 65, 219, 0.14);
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease,
+    color 0.2s ease;
+}
+
+@media (min-width: 768px) {
+  .feel-chip {
+    padding: 9px 18px;
+    font-size: 13px;
+  }
+}
+
+.feel-chip:hover {
+  transform: translateY(-2px);
+  background: rgba(84, 65, 219, 0.12);
+}
+
+.feel-chip:active {
+  transform: scale(0.95);
+}
+
+.feel-chip.active {
+  color: #fff;
+  background: linear-gradient(135deg, #5441d8, #7c6ef0);
+  border-color: transparent;
+  box-shadow: 0 6px 18px rgba(84, 65, 219, 0.3);
+}
+
+@keyframes name-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.name-pop {
+  animation: name-pop 0.35s cubic-bezier(0.2, 1, 0.3, 1) backwards;
+}
+
 /* ── ParentalSection ──────────────────────── */
 
 .quote-scroll {

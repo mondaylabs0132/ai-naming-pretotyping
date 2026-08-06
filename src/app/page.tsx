@@ -4,6 +4,7 @@ import CTASection from './components/CTASection';
 import Footer from './components/Footer';
 import FreeNameSection from './components/FreeNameSection';
 import Header from './components/Header';
+import ModernNameSection from './components/ModernNameSection';
 import PricingValueSection from './components/PricingValueSection';
 import ResultPreviewSection from './components/ResultPreviewSection';
 import ScrollReveal from './components/ScrollReveal';
@@ -14,6 +15,10 @@ export default function Home() {
       <Header />
       <main>
         <ABHeroParental />
+        {/* TODO(톤 확인용): 리포지셔닝 확정 후 최종 순서로 재배치 */}
+        <ScrollReveal>
+          <ModernNameSection />
+        </ScrollReveal>
         <ScrollReveal>
           <AISolutionSection />
         </ScrollReveal>
