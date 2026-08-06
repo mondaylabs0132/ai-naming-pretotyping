@@ -2,54 +2,57 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 
-/** 감성 태그별 이름 후보 (출시 시 실제 사주 결과로 대체) */
+/**
+ * 감성 태그별 이름 후보 (출시 시 실제 사주 결과로 대체)
+ * chars: 한자 글자별 훈음 — "왜 이 이름인지" 설명할 근거
+ */
 const FEELS = [
   {
     tag: '부드러운',
     names: [
-      { name: '서온', hanja: '徐溫', meaning: '따뜻함이 오래 머무는' },
-      { name: '하린', hanja: '河潾', meaning: '맑게 흐르는 마음' },
-      { name: '온유', hanja: '溫柔', meaning: '부드럽게 품어주는' },
+      { name: '서온', hanja: '徐溫', chars: '徐 천천히 서 · 溫 따뜻할 온', meaning: '따뜻함이 오래 머무는', roman: 'Seo-on' },
+      { name: '하린', hanja: '河潾', chars: '河 물 하 · 潾 맑을 린', meaning: '맑게 흐르는 마음', roman: 'Ha-rin' },
+      { name: '온유', hanja: '溫柔', chars: '溫 따뜻할 온 · 柔 부드러울 유', meaning: '부드럽게 품어주는', roman: 'On-yu' },
     ],
   },
   {
     tag: '단아한',
     names: [
-      { name: '수아', hanja: '秀雅', meaning: '빼어나고 우아한' },
-      { name: '서윤', hanja: '舒潤', meaning: '넉넉하게 빛나는' },
-      { name: '지현', hanja: '智賢', meaning: '지혜롭고 어진' },
+      { name: '수아', hanja: '秀雅', chars: '秀 빼어날 수 · 雅 우아할 아', meaning: '빼어나고 우아한', roman: 'Su-a' },
+      { name: '서윤', hanja: '舒潤', chars: '舒 펼 서 · 潤 윤택할 윤', meaning: '넉넉하게 빛나는', roman: 'Seo-yun' },
+      { name: '지현', hanja: '智賢', chars: '智 지혜 지 · 賢 어질 현', meaning: '지혜롭고 어진', roman: 'Ji-hyeon' },
     ],
   },
   {
     tag: '모던한',
     names: [
-      { name: '시안', hanja: '詩安', meaning: '시처럼 편안한' },
-      { name: '하율', hanja: '河律', meaning: '자기 리듬을 아는' },
-      { name: '재이', hanja: '在怡', meaning: '늘 기쁨이 머무는' },
+      { name: '시안', hanja: '詩安', chars: '詩 시 시 · 安 편안할 안', meaning: '시처럼 편안한', roman: 'Si-an' },
+      { name: '하율', hanja: '河律', chars: '河 물 하 · 律 법칙 율', meaning: '자기 리듬을 아는', roman: 'Ha-yul' },
+      { name: '재이', hanja: '在怡', chars: '在 있을 재 · 怡 기쁠 이', meaning: '늘 기쁨이 머무는', roman: 'Jae-i' },
     ],
   },
   {
     tag: '씩씩한',
     names: [
-      { name: '건우', hanja: '健祐', meaning: '굳세게 도와주는' },
-      { name: '태오', hanja: '泰梧', meaning: '크게 자라나는' },
-      { name: '강준', hanja: '康俊', meaning: '건강하고 뛰어난' },
+      { name: '건우', hanja: '健祐', chars: '健 굳셀 건 · 祐 도울 우', meaning: '굳세게 도와주는', roman: 'Geon-u' },
+      { name: '태오', hanja: '泰梧', chars: '泰 클 태 · 梧 오동나무 오', meaning: '크게 자라나는', roman: 'Tae-o' },
+      { name: '강준', hanja: '康俊', chars: '康 편안할 강 · 俊 뛰어날 준', meaning: '건강하고 뛰어난', roman: 'Gang-jun' },
     ],
   },
   {
     tag: '세련된',
     names: [
-      { name: '예준', hanja: '睿俊', meaning: '슬기롭고 빼어난' },
-      { name: '아린', hanja: '雅潾', meaning: '우아하고 맑은' },
-      { name: '세아', hanja: '世雅', meaning: '세상을 곱게 보는' },
+      { name: '예준', hanja: '睿俊', chars: '睿 슬기로울 예 · 俊 뛰어날 준', meaning: '슬기롭고 빼어난', roman: 'Ye-jun' },
+      { name: '아린', hanja: '雅潾', chars: '雅 우아할 아 · 潾 맑을 린', meaning: '우아하고 맑은', roman: 'A-rin' },
+      { name: '세아', hanja: '世雅', chars: '世 세상 세 · 雅 우아할 아', meaning: '세상을 곱게 보는', roman: 'Se-a' },
     ],
   },
   {
     tag: '깊이있는',
     names: [
-      { name: '지호', hanja: '智昊', meaning: '하늘만큼 지혜로운' },
-      { name: '도현', hanja: '道賢', meaning: '바른 길을 아는' },
-      { name: '현서', hanja: '賢舒', meaning: '어질게 펼쳐가는' },
+      { name: '지호', hanja: '智昊', chars: '智 지혜 지 · 昊 하늘 호', meaning: '하늘만큼 지혜로운', roman: 'Ji-ho' },
+      { name: '도현', hanja: '道賢', chars: '道 길 도 · 賢 어질 현', meaning: '바른 길을 아는', roman: 'Do-hyeon' },
+      { name: '현서', hanja: '賢舒', chars: '賢 어질 현 · 舒 펼 서', meaning: '어질게 펼쳐가는', roman: 'Hyeon-seo' },
     ],
   },
 ] as const;
@@ -180,8 +183,11 @@ export default function ModernNameSection() {
                   <span className="font-black text-gray-300 tracking-widest text-sm md:text-lg">
                     {n}
                   </span>
+                  <span className="hidden md:inline ml-auto text-[11px] font-bold text-gray-300">
+                    뜻풀이 없음
+                  </span>
                   <span
-                    className="ml-auto material-symbols-outlined text-sm"
+                    className="material-symbols-outlined text-sm ml-auto md:ml-1.5"
                     style={{ color: '#c8c4d7' }}
                   >
                     sentiment_neutral
@@ -268,7 +274,21 @@ export default function ModernNameSection() {
                       >
                         {r.hanja}
                       </span>
+                      {/* 영어 표기 — 좁은 화면에서는 생략 */}
+                      <span
+                        className="hidden md:inline ml-auto text-[10px] font-medium"
+                        style={{ color: '#787586', opacity: 0.5 }}
+                      >
+                        {r.roman}
+                      </span>
                     </div>
+                    {/* 한자 훈음 — 좁은 화면에서는 한 줄 의미만 남김 */}
+                    <p
+                      className="hidden md:block text-[11px] font-bold leading-tight mt-1"
+                      style={{ color: '#474555', opacity: 0.7 }}
+                    >
+                      {r.chars}
+                    </p>
                     <p
                       className="text-[9px] md:text-[11px] font-medium leading-tight mt-0.5 truncate"
                       style={{ color: '#5441d8', opacity: 0.75 }}
