@@ -35,6 +35,8 @@ yarn-error.log*
 # Cloudflare Workers 로컬 시크릿 (.env* 패턴에 안 걸림)
 .dev.vars
 .dev.vars.*
+# 예시 파일은 커밋 대상 (부정 패턴은 위 패턴들보다 뒤에 와야 적용된다)
+!.dev.vars.example
 
 # vercel
 .vercel
