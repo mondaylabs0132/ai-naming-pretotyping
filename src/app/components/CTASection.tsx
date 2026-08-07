@@ -24,29 +24,36 @@ const EMAIL_DOMAINS = [
 
 export default function CTASection() {
   const [email, setEmail] = useState('');
-  // 완료 화면은 state.success에서 파생시키고, 5초 뒤 닫힘만 별도로 추적한다.
-  const [successDismissed, setSuccessDismissed] = useState(false);
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [activeIndex, setActiveIndex] = useState(-1);
   const inputRef = useRef<HTMLInputElement>(null);
   const [state, formAction, isPending] = useActionState(signupEmail, {});
 
-  const isSubmitted = !!state.success && !successDismissed;
+  /**
+   * state.success는 boolean이라 "첫 성공"과 "재제출 성공"을 구분할 수 없고,
+   * useActionState는 pending 동안 이전 state를 그대로 유지한다.
+   * 그래서 제출마다 번호를 붙여 어느 시도의 완료 화면인지 식별한다.
+   */
+  const [attempt, setAttempt] = useState(0);
+  const [dismissedAttempt, setDismissedAttempt] = useState(0);
+
+  // !isPending: 응답 전에는 이전 시도의 성공 화면을 재사용하지 않는다.
+  const isSubmitted = !!state.success && !isPending && dismissedAttempt !== attempt;
 
   useEffect(() => {
-    if (!state.success) return;
+    if (!state.success || isPending || dismissedAttempt === attempt) return;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (window as any).dataLayer?.push({ event: 'email_submitted' });
 
     // 완료 화면을 5초 보여준 뒤 입력 폼으로 되돌린다.
     const timer = setTimeout(() => {
-      setSuccessDismissed(true);
+      setDismissedAttempt(attempt);
       setEmail('');
     }, 5000);
 
     return () => clearTimeout(timer);
-  }, [state.success]);
+  }, [state.success, isPending, attempt, dismissedAttempt]);
 
   const handleEmailChange = (value: string) => {
     setEmail(value);
@@ -352,8 +359,9 @@ export default function CTASection() {
                   action={formAction}
                   onSubmit={() => {
                     setSuggestions([]);
-                    // 재신청 시 완료 화면이 다시 뜨도록 되돌린다.
-                    setSuccessDismissed(false);
+                    // 이 제출을 이전 시도와 구분한다. 완료 화면 표시 여부는
+                    // 응답이 온 뒤(isPending=false) 이 번호로 판단한다.
+                    setAttempt((n) => n + 1);
                   }}
                 >
                   {/* 허니팟 — 사람은 볼 수 없고, 채워져 오면 봇으로 본다 */}
