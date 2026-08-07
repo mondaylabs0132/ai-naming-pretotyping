@@ -3,70 +3,9 @@ import Link from 'next/link';
 const footerSections = [
   {
     title: 'Legal',
-    links: [
-      { label: '개인정보처리방침', href: '#' },
-      { label: '이용약관', href: '#' },
-    ],
-  },
-];
-
-const socials = [
-  {
-    label: 'Instagram',
-    href: '#',
-    icon: (
-      <svg
-        width="16"
-        height="16"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-        <circle cx="12" cy="12" r="4" />
-        <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" />
-      </svg>
-    ),
-  },
-  {
-    label: 'Blog',
-    href: '#',
-    icon: (
-      <svg
-        width="16"
-        height="16"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M12 20h9" />
-        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
-      </svg>
-    ),
-  },
-  {
-    label: 'KakaoTalk',
-    href: '#',
-    icon: (
-      <svg
-        width="16"
-        height="16"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-      </svg>
-    ),
+    // 이용약관은 법정 의무가 아니고, 현재 규율할 계약 관계(계정·결제·재화)가
+    // 없어 링크를 두지 않는다. 결제를 붙이는 시점에 환불 정책과 함께 추가한다.
+    links: [{ label: '개인정보처리방침', href: '/privacy' }],
   },
 ];
 
@@ -95,21 +34,6 @@ export default function Footer() {
           display: inline-block;
         }
         .footer-link:hover { color: rgba(255,255,255,0.9); }
-        .social-btn {
-          width: 36px; height: 36px; border-radius: 50%;
-          display: flex; align-items: center; justify-content: center;
-          background: rgba(255,255,255,0.06);
-          border: 1px solid rgba(255,255,255,0.1);
-          color: rgba(255,255,255,0.5);
-          transition: background 0.2s, color 0.2s, transform 0.2s;
-          cursor: pointer;
-        }
-        .social-btn:hover {
-          background: rgba(84,65,219,0.3);
-          border-color: rgba(84,65,219,0.5);
-          color: #fff;
-          transform: translateY(-2px);
-        }
       `}</style>
 
       {/* h-svh를 두지 않아 내용만큼만 차지한다. 짧은 마지막 스냅 지점은
@@ -171,26 +95,12 @@ export default function Footer() {
                 className="text-sm leading-relaxed max-w-65"
                 style={{ color: 'rgba(255,255,255,0.42)' }}
               >
-                아이의 평생을 함께할 소중한 이름,
+                사주와 한자 근거는 그대로 두고,
                 <br />
-                AI와 데이터 기반의 정교한 분석으로
+                결과는 요즘 감성으로.
                 <br />
-                놀림 걱정 없는 안전한 이름을 선물하세요.
+                이름마다 왜 이 이름인지 설명이 붙습니다.
               </p>
-
-              {/* 소셜 */}
-              <div className="flex gap-2.5">
-                {socials.map((s) => (
-                  <Link
-                    key={s.label}
-                    href={s.href}
-                    aria-label={s.label}
-                    className="social-btn"
-                  >
-                    {s.icon}
-                  </Link>
-                ))}
-              </div>
 
               {/* 상태 뱃지 */}
               <div

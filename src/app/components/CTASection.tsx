@@ -1,29 +1,29 @@
-'use client';
+"use client";
 
-import { useState, useRef, useActionState, useEffect } from 'react';
-import { signupEmail } from '../actions';
-import { BadgePercent, Sparkles } from 'lucide-react';
+import { useState, useRef, useActionState, useEffect } from "react";
+import { signupEmail } from "../actions";
+import { BadgePercent, Sparkles } from "lucide-react";
 
 const perks = [
   {
     icon: BadgePercent,
-    text: '50% 할인권',
+    text: "50% 할인권",
   },
 ];
 
 const EMAIL_DOMAINS = [
-  'gmail.com',
-  'naver.com',
-  'kakao.com',
-  'daum.net',
-  'hanmail.net',
-  'nate.com',
-  'icloud.com',
-  'outlook.com',
+  "gmail.com",
+  "naver.com",
+  "kakao.com",
+  "daum.net",
+  "hanmail.net",
+  "nate.com",
+  "icloud.com",
+  "outlook.com",
 ];
 
 export default function CTASection() {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [activeIndex, setActiveIndex] = useState(-1);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -38,18 +38,19 @@ export default function CTASection() {
   const [dismissedAttempt, setDismissedAttempt] = useState(0);
 
   // !isPending: 응답 전에는 이전 시도의 성공 화면을 재사용하지 않는다.
-  const isSubmitted = !!state.success && !isPending && dismissedAttempt !== attempt;
+  const isSubmitted =
+    !!state.success && !isPending && dismissedAttempt !== attempt;
 
   useEffect(() => {
     if (!state.success || isPending || dismissedAttempt === attempt) return;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (window as any).dataLayer?.push({ event: 'email_submitted' });
+    (window as any).dataLayer?.push({ event: "email_submitted" });
 
     // 완료 화면을 5초 보여준 뒤 입력 폼으로 되돌린다.
     const timer = setTimeout(() => {
       setDismissedAttempt(attempt);
-      setEmail('');
+      setEmail("");
     }, 5000);
 
     return () => clearTimeout(timer);
@@ -59,11 +60,11 @@ export default function CTASection() {
     setEmail(value);
     setActiveIndex(-1);
 
-    const atIndex = value.indexOf('@');
+    const atIndex = value.indexOf("@");
     if (atIndex !== -1) {
       const domainPart = value.slice(atIndex + 1).toLowerCase();
       const filtered =
-        domainPart === ''
+        domainPart === ""
           ? EMAIL_DOMAINS
           : EMAIL_DOMAINS.filter((d) => d.startsWith(domainPart));
       setSuggestions(filtered);
@@ -73,11 +74,11 @@ export default function CTASection() {
   };
 
   const selectDomain = (domain: string) => {
-    const atIndex = email.indexOf('@');
+    const atIndex = email.indexOf("@");
     const newEmail =
       atIndex !== -1
         ? email.slice(0, atIndex + 1) + domain
-        : email + '@' + domain;
+        : email + "@" + domain;
     setEmail(newEmail);
     setSuggestions([]);
     setActiveIndex(-1);
@@ -86,16 +87,16 @@ export default function CTASection() {
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (!suggestions.length) return;
-    if (e.key === 'ArrowDown') {
+    if (e.key === "ArrowDown") {
       e.preventDefault();
       setActiveIndex((prev) => (prev + 1) % suggestions.length);
-    } else if (e.key === 'ArrowUp') {
+    } else if (e.key === "ArrowUp") {
       e.preventDefault();
       setActiveIndex((prev) => (prev <= 0 ? suggestions.length - 1 : prev - 1));
-    } else if (e.key === 'Enter' && activeIndex >= 0) {
+    } else if (e.key === "Enter" && activeIndex >= 0) {
       e.preventDefault();
       selectDomain(suggestions[activeIndex]);
-    } else if (e.key === 'Escape') {
+    } else if (e.key === "Escape") {
       setSuggestions([]);
       setActiveIndex(-1);
     }
@@ -268,7 +269,7 @@ export default function CTASection() {
       <section className="px-6 mx-auto w-full h-svh flex flex-col items-center justify-center section-pt pb-6 md:py-0 relative">
         <div
           className="max-w-275 mx-auto w-full cta-wrap"
-          style={{ boxShadow: '0 40px 80px -20px rgba(62,37,195,0.35)' }}
+          style={{ boxShadow: "0 40px 80px -20px rgba(62,37,195,0.35)" }}
         >
           {/* 배경 레이어 (별도 컨테이너로 분리하여 overflow: hidden 적용) */}
           <div className="cta-bg-layer">
@@ -282,17 +283,17 @@ export default function CTASection() {
             <div
               className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-4 md:mb-8"
               style={{
-                background: 'rgba(255,255,255,0.1)',
-                border: '1px solid rgba(255,255,255,0.22)',
+                background: "rgba(255,255,255,0.1)",
+                border: "1px solid rgba(255,255,255,0.22)",
               }}
             >
               <span
                 className="w-1.5 h-1.5 rounded-full animate-pulse"
-                style={{ background: '#fcd344' }}
+                style={{ background: "#fcd344" }}
               />
               <span
                 className="text-xs font-bold tracking-wide"
-                style={{ color: 'rgba(255,255,255,0.85)' }}
+                style={{ color: "rgba(255,255,255,0.85)" }}
               >
                 정식 출시 준비 중
               </span>
@@ -302,15 +303,16 @@ export default function CTASection() {
             <h2 className="text-2xl md:text-4xl font-black text-white leading-[1.2] tracking-tight mb-4 md:mb-6">
               이름은 하나뿐인데,
               <br />
-              후보는 <span style={{ color: '#fcd344' }}>많을수록</span> 좋으니까.
+              후보는 <span style={{ color: "#fcd344" }}>많을수록</span>{" "}
+              좋으니까.
             </h2>
 
             <p
               className="text-sm md:text-lg mb-6 md:mb-8 leading-relaxed max-w-xl mx-auto"
-              style={{ color: 'rgba(255,255,255,0.65)' }}
+              style={{ color: "rgba(255,255,255,0.65)" }}
             >
-              지금 사전 등록하고{' '}
-              <strong style={{ color: '#fcd344' }}>50% 할인권</strong>을
+              지금 사전 등록하고{" "}
+              <strong style={{ color: "#fcd344" }}>50% 할인권</strong>을
               받으세요.
             </p>
 
@@ -350,9 +352,19 @@ export default function CTASection() {
                     <Sparkles size={22} />
                     신청 완료!
                   </h3>
+                  {/* 발송 로직이 아직 없으므로 시점을 '출시'로 둔다.
+                      입력한 주소를 되비춰 사용자가 오타를 직접 잡게 한다. */}
                   <p className="text-xs md:text-sm text-white/60">
-                    혜택 안내 메일을 곧 보내드릴게요.
+                    정식 출시되면 이 메일로 가장 먼저 알려드릴게요.
                   </p>
+                  {email && (
+                    <p
+                      className="mt-2 text-xs md:text-sm font-bold break-all"
+                      style={{ color: "#fcd344" }}
+                    >
+                      {email}
+                    </p>
+                  )}
                 </div>
               ) : (
                 <form
@@ -414,13 +426,13 @@ export default function CTASection() {
                         {suggestions.length > 0 && (
                           <div className="email-dropdown" role="listbox">
                             {suggestions.map((domain, idx) => {
-                              const atIndex = email.indexOf('@');
+                              const atIndex = email.indexOf("@");
                               const localPart =
                                 atIndex !== -1
                                   ? email.slice(0, atIndex)
                                   : email;
                               const typedDomain =
-                                atIndex !== -1 ? email.slice(atIndex + 1) : '';
+                                atIndex !== -1 ? email.slice(atIndex + 1) : "";
 
                               return (
                                 <button
@@ -428,12 +440,12 @@ export default function CTASection() {
                                   type="button"
                                   role="option"
                                   aria-selected={idx === activeIndex}
-                                  className={`email-dropdown-item${idx === activeIndex ? ' active' : ''}`}
+                                  className={`email-dropdown-item${idx === activeIndex ? " active" : ""}`}
                                   onMouseDown={() => selectDomain(domain)}
                                 >
                                   <span
                                     style={{
-                                      color: '#191a2e',
+                                      color: "#191a2e",
                                       fontWeight: 500,
                                     }}
                                   >
@@ -441,7 +453,7 @@ export default function CTASection() {
                                   </span>
                                   <span className="email-at-prefix">@</span>
                                   <span>
-                                    <span style={{ color: '#555' }}>
+                                    <span style={{ color: "#555" }}>
                                       {typedDomain}
                                     </span>
                                     <span className="domain-highlight">
@@ -460,7 +472,7 @@ export default function CTASection() {
                         disabled={isPending}
                         className="cta-submit hover:bg-[#ffe066] active:scale-95 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                       >
-                        {isPending ? '신청 중...' : '무료 사전 예약'}
+                        {isPending ? "신청 중..." : "무료 사전 예약"}
                       </button>
                     </div>
                   </div>
@@ -468,6 +480,25 @@ export default function CTASection() {
                   {state.error && (
                     <p className="mt-3 text-sm text-red-200">{state.error}</p>
                   )}
+
+                  {/* 이메일은 사전예약 목적에 필요한 최소 정보라 별도 체크박스
+                      없이 안내형으로 동의를 받는다. 할인 안내는 광고성 정보라
+                      수신 동의 대상임을 함께 명시한다 (정보통신망법 제50조). */}
+                  <p className="mt-4 text-[11px] leading-relaxed text-white/45">
+                    제출하면 개인정보 수집·이용 및 출시·혜택 안내 메일 수신에
+                    동의합니다.
+                    <span className="block mt-1">
+                      수집 항목: 이메일 · 보유 기간: 수집일로부터 1년 ·{" "}
+                      <a
+                        href="/privacy"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="underline font-semibold text-white/70 hover:text-white"
+                      >
+                        개인정보처리방침
+                      </a>
+                    </span>
+                  </p>
                 </form>
               )}
             </div>
