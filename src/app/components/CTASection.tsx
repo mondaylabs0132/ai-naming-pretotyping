@@ -97,6 +97,15 @@ export default function CTASection() {
   return (
     <>
       <style>{`
+        /* 허니팟: 화면 밖으로 밀어낸다. display:none은 봇이 쉽게 걸러낸다. */
+        .hp-field {
+          position: absolute;
+          left: -9999px;
+          width: 1px;
+          height: 1px;
+          opacity: 0;
+          pointer-events: none;
+        }
               .cta-wrap {
           background: linear-gradient(145deg, #3d2fc4 0%, #5441d8 45%, #7c5fe6 100%);
           border-radius: 32px;
@@ -347,6 +356,16 @@ export default function CTASection() {
                     setSuccessDismissed(false);
                   }}
                 >
+                  {/* 허니팟 — 사람은 볼 수 없고, 채워져 오면 봇으로 본다 */}
+                  <input
+                    type="text"
+                    name="company"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden="true"
+                    className="hp-field"
+                  />
+
                   <div className="email-form-wrapper">
                     <div className="email-wrap">
                       <div className="email-inner">

@@ -23,6 +23,22 @@ create policy "anon can insert email signups"
 create unique index if not exists email_signups_email_key
   on public.email_signups (lower(email));
 
+-- 4) 형식 제약. with check (true)는 "행 소유권"만 열어주는 것이고 값 검증은 하지 않는다.
+--    Server Action은 브라우저를 거치지 않고 직접 POST할 수 있으므로, 앱 검증이
+--    뚫리거나 코드가 바뀌어도 DB가 막도록 같은 규칙을 여기에도 둔다.
+--    (actions.ts의 EMAIL_RE / EMAIL_MAX와 동일한 규칙 — 한쪽만 바꾸지 말 것)
+alter table public.email_signups
+  drop constraint if exists email_signups_email_format;
+
+--    not valid: 앞으로 들어오는 행만 검사한다. 기존 행에 형식이 깨진 값이
+--    하나라도 있으면 valid 제약은 추가 자체가 실패하므로, 안전하게 이쪽을 쓴다.
+alter table public.email_signups
+  add constraint email_signups_email_format
+  check (
+    email ~* '^[^@[:space:]]+@[^@[:space:]]+\.[^@[:space:]]{2,}$'
+    and char_length(email) <= 254
+  ) not valid;
+
 -- 확인용 쿼리 --------------------------------------------------------------
 --
 -- RLS 켜졌는지:
@@ -30,5 +46,16 @@ create unique index if not exists email_signups_email_key
 --
 -- 정책 목록 (insert 1개만 나와야 정상):
 --   select policyname, cmd, roles from pg_policies where tablename = 'email_signups';
+--
+-- 형식 제약이 걸렸는지 (convalidated=false면 기존 행은 미검사 = 정상):
+--   select conname, convalidated from pg_constraint
+--   where conname = 'email_signups_email_format';
+--
+-- 형식이 깨진 기존 행 찾기 (0건이면 아래 validate로 전체 검사로 승격 가능):
+--   select id, email from public.email_signups
+--   where email !~* '^[^@[:space:]]+@[^@[:space:]]+\.[^@[:space:]]{2,}$' or char_length(email) > 254;
+--
+-- 위가 0건일 때만:
+--   alter table public.email_signups validate constraint email_signups_email_format;
 --
 -- 데이터 조회는 대시보드/secret 키로만 가능하다 (anon은 select 정책이 없어 거부됨).
