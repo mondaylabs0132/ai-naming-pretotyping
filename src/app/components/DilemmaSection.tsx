@@ -2,28 +2,22 @@
 
 import { useEffect, useRef, useState } from 'react';
 
-const options = [
+/**
+ * 서비스 간 비교가 아니라 '집안 안의 대립'이 주인공인 섹션.
+ * 앱의 개수·적중률 문제는 FreeNameSection이 이미 소유하므로 여기서 반복하지 않는다.
+ */
+const thoughts = [
   {
-    label: '작명소',
-    icon: 'storefront',
-    has: '근거는 있는데',
-    hasIcon: 'check_circle',
-    lacks: [
-      { icon: 'payments', text: '30만 원' },
-      { icon: 'schedule', text: '2~3일 대기' },
-      { icon: 'sentiment_neutral', text: '결과가 촌스러움' },
-    ],
+    quote: '사주 보고\n뜻 좋은 걸로 지어야지',
+    source: '할머니 · 할아버지',
+    icon: 'elderly',
+    align: 'left' as const,
   },
   {
-    label: '이름 추천 앱',
-    icon: 'smartphone',
-    has: '감성은 있는데',
-    hasIcon: 'check_circle',
-    lacks: [
-      { icon: 'help', text: '사주 근거 없음' },
-      { icon: 'shuffle', text: '그냥 예쁜 조합' },
-      { icon: 'chat_bubble', text: '뜻을 설명 못 함' },
-    ],
+    quote: '그래도 부르기 좋고\n촌스럽지 않았으면',
+    source: '엄마 · 아빠',
+    icon: 'favorite',
+    align: 'right' as const,
   },
 ];
 
@@ -58,10 +52,10 @@ export default function DilemmaSection() {
         />
       </div>
 
-      <div className="max-w-310 mx-auto w-full relative z-10">
+      <div className="max-w-2xl mx-auto w-full relative z-10">
         {/* 헤드라인 */}
         <div
-          className="text-center mb-6 md:mb-12 transition-all duration-700 ease-out"
+          className="text-center mb-8 md:mb-14 transition-all duration-700 ease-out"
           style={{
             opacity: inView ? 1 : 0,
             transform: inView ? 'translateY(0)' : 'translateY(24px)',
@@ -75,7 +69,7 @@ export default function DilemmaSection() {
           </p>
 
           <h2 className="text-3xl md:text-4xl font-black leading-tight tracking-tight text-on-background">
-            지금까지는 둘 중 하나를
+            할머니 말도 맞고,
             <br />
             <span
               style={{
@@ -85,106 +79,77 @@ export default function DilemmaSection() {
                 backgroundClip: 'text',
               }}
             >
-              포기해야 했습니다
+              내 마음도 있고
             </span>
           </h2>
-
-          <p
-            className="mt-3 text-sm md:text-base leading-relaxed"
-            style={{ color: '#474555' }}
-          >
-            뜻을 챙기면 촌스러워질까 걱정,
-            <br className="sm:hidden" />
-            <span className="hidden sm:inline"> </span>
-            세련되게 지으면 뜻이 없을까 걱정.
-          </p>
         </div>
 
-        {/* 두 갈래 */}
-        <div className="grid grid-cols-2 gap-3 md:gap-6 max-w-3xl mx-auto items-stretch">
-          {options.map((o, idx) => (
+        {/* 생각 말풍선 — 좌우 엇갈리게 */}
+        <div className="flex flex-col gap-5 md:gap-8">
+          {thoughts.map((t, idx) => (
             <div
-              key={o.label}
-              className="relative bg-white rounded-2xl md:rounded-3xl p-4 md:p-7 border border-gray-100 overflow-hidden flex flex-col transition-all duration-700 ease-out"
+              key={t.source}
+              className={`flex flex-col ${
+                t.align === 'right'
+                  ? 'items-end self-end'
+                  : 'items-start self-start'
+              } max-w-[85%] md:max-w-[75%] transition-all duration-700 ease-out`}
               style={{
                 opacity: inView ? 1 : 0,
                 transform: inView
-                  ? 'translateY(0)'
-                  : `translateY(${20 + idx * 8}px)`,
-                transitionDelay: `${150 + idx * 150}ms`,
+                  ? 'translateX(0)'
+                  : `translateX(${t.align === 'right' ? 28 : -28}px)`,
+                transitionDelay: `${250 + idx * 300}ms`,
               }}
             >
-              {/* 상단: 아이콘 + 이름 */}
-              <div className="flex items-center gap-2 md:gap-3 mb-3 md:mb-5">
-                <span
-                  className="w-8 h-8 md:w-11 md:h-11 rounded-xl md:rounded-2xl flex items-center justify-center shrink-0"
-                  style={{ background: 'rgba(84,65,219,0.06)' }}
-                >
-                  <span
-                    className="material-symbols-outlined text-lg md:text-2xl"
-                    style={{ color: '#787586' }}
-                  >
-                    {o.icon}
-                  </span>
-                </span>
-                <p
-                  className="text-sm md:text-lg font-black tracking-tight leading-tight"
-                  style={{ color: '#474555' }}
-                >
-                  {o.label}
-                </p>
-              </div>
-
-              {/* 있는 것 */}
+              {/* 말풍선 */}
               <div
-                className="flex items-center gap-1.5 px-2.5 py-1.5 md:px-3 md:py-2 rounded-lg md:rounded-xl mb-3 md:mb-5"
+                className="relative bg-white px-5 py-4 md:px-8 md:py-6"
                 style={{
-                  background: 'rgba(45,168,122,0.07)',
-                  border: '1px solid rgba(45,168,122,0.15)',
+                  borderRadius:
+                    t.align === 'right'
+                      ? '24px 24px 6px 24px'
+                      : '24px 24px 24px 6px',
+                  border: '1px solid rgba(84,65,219,0.1)',
+                  boxShadow: '0 12px 32px -8px rgba(84,65,219,0.1)',
                 }}
               >
                 <span
-                  className="material-symbols-outlined text-sm md:text-base"
-                  style={{ color: '#2da87a' }}
+                  className="absolute top-2 left-3 md:top-3 md:left-4 text-2xl md:text-3xl font-black leading-none select-none"
+                  style={{ color: '#5441d8', opacity: 0.1 }}
                 >
-                  {o.hasIcon}
+                  “
                 </span>
                 <p
-                  className="text-[10px] md:text-[13px] font-bold leading-tight"
-                  style={{ color: '#2da87a' }}
+                  className={`relative text-lg md:text-2xl font-bold leading-snug tracking-tight whitespace-pre-line ${
+                    t.align === 'right' ? 'text-right' : 'text-left'
+                  }`}
+                  style={{ color: '#191a2e' }}
                 >
-                  {o.has}
+                  {t.quote}
                 </p>
               </div>
 
-              {/* 없는 것 */}
-              <div className="space-y-1.5 md:space-y-2.5 flex-1">
-                {o.lacks.map((l, i) => (
-                  <div
-                    key={l.text}
-                    className="flex items-center gap-1.5 md:gap-2 transition-all duration-400 ease-out"
-                    style={{
-                      opacity: inView ? 1 : 0,
-                      transform: inView
-                        ? 'translateX(0)'
-                        : 'translateX(-10px)',
-                      transitionDelay: `${400 + idx * 150 + i * 90}ms`,
-                    }}
-                  >
-                    <span
-                      className="material-symbols-outlined text-sm md:text-base shrink-0"
-                      style={{ color: '#ba1a1a', opacity: 0.55 }}
-                    >
-                      {l.icon}
-                    </span>
-                    <p
-                      className="text-[10px] md:text-[13px] font-medium leading-tight"
-                      style={{ color: '#787586' }}
-                    >
-                      {l.text}
-                    </p>
-                  </div>
-                ))}
+              {/* 출처 캡션 */}
+              <div
+                className="flex items-center gap-1 mt-2 px-1 transition-all duration-500 ease-out"
+                style={{
+                  opacity: inView ? 0.65 : 0,
+                  transitionDelay: `${600 + idx * 300}ms`,
+                }}
+              >
+                <span
+                  className="material-symbols-outlined text-sm"
+                  style={{ color: '#787586' }}
+                >
+                  {t.icon}
+                </span>
+                <p
+                  className="text-[11px] md:text-sm font-medium"
+                  style={{ color: '#787586' }}
+                >
+                  {t.source}
+                </p>
               </div>
             </div>
           ))}
@@ -192,11 +157,11 @@ export default function DilemmaSection() {
 
         {/* 다음 섹션으로 연결 */}
         <div
-          className="flex flex-col items-center mt-6 md:mt-10 transition-all duration-700 ease-out"
+          className="flex flex-col items-center mt-8 md:mt-12 transition-all duration-700 ease-out"
           style={{
             opacity: inView ? 1 : 0,
             transform: inView ? 'translateY(0)' : 'translateY(12px)',
-            transitionDelay: '850ms',
+            transitionDelay: '1200ms',
           }}
         >
           <span
@@ -209,7 +174,7 @@ export default function DilemmaSection() {
             className="text-sm md:text-lg font-black tracking-tight mt-1"
             style={{ color: '#5441d8' }}
           >
-            그래서 첫지음을 만들었습니다
+            둘 다 되는지 직접 눌러보세요
           </p>
         </div>
       </div>

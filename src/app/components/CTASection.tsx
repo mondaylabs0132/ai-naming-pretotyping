@@ -285,9 +285,9 @@ export default function CTASection() {
 
             {/* 헤드라인 */}
             <h2 className="text-2xl md:text-4xl font-black text-white leading-[1.2] tracking-tight mb-4 md:mb-6">
-              우리 아이 평생 불릴 이름,
+              이름은 하나뿐인데,
               <br />
-              <span style={{ color: '#fcd344' }}>한 번 더</span> 확인해보세요.
+              후보는 <span style={{ color: '#fcd344' }}>많을수록</span> 좋으니까.
             </h2>
 
             <p

@@ -141,6 +141,70 @@
   animation: gradient-flow 6s linear infinite;
 }
 
+@keyframes hero-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-fade-1,
+.hero-fade-2,
+.hero-fade-3,
+.hero-fade-4 {
+  animation: hero-fade-up 0.7s cubic-bezier(0.2, 1, 0.3, 1) backwards;
+}
+
+.hero-fade-1 { animation-delay: 0.05s; }
+.hero-fade-2 { animation-delay: 0.15s; }
+.hero-fade-3 { animation-delay: 0.28s; }
+.hero-fade-4 { animation-delay: 0.42s; }
+
+@keyframes hero-float {
+  0%,
+  100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.hero-float {
+  animation: hero-fade-up 0.8s cubic-bezier(0.2, 1, 0.3, 1) 0.35s backwards,
+    hero-float 6s ease-in-out 1.15s infinite;
+}
+
+@keyframes badge-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(84, 65, 219, 0); }
+  50% { box-shadow: 0 0 0 5px rgba(84, 65, 219, 0.07); }
+}
+
+.badge-pulse {
+  animation: badge-pulse 3s ease-in-out infinite;
+}
+
+@keyframes orbit {
+  from { transform: rotate(0deg) translateX(130px); }
+  to { transform: rotate(360deg) translateX(130px); }
+}
+
+.orbit-dot {
+  animation: orbit 14s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-fade-1,
+  .hero-fade-2,
+  .hero-fade-3,
+  .hero-fade-4,
+  .hero-float,
+  .badge-pulse,
+  .orbit-dot {
+    animation: none;
+  }
+}
+
 /* ── EmpathySection ───────────────────────── */
 
 .empathy-card {
@@ -259,43 +323,7 @@
   animation: name-pop 0.35s cubic-bezier(0.2, 1, 0.3, 1) backwards;
 }
 
-/* ── ParentalSection ──────────────────────── */
-
-.quote-scroll {
-  display: flex;
-  gap: 10px;
-  animation: scroll-x 20s linear infinite;
-  width: max-content;
-}
-
-@media (min-width: 768px) {
-  .quote-scroll {
-    gap: 16px;
-    animation-duration: 18s;
-  }
-}
-
-@keyframes scroll-x {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-
-.quote-scroll:hover {
-  animation-play-state: paused;
-}
-
-.pullquote-line::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 3px;
-  background: linear-gradient(180deg, #5441d8, #c6c0ff);
-  border-radius: 99px;
-}
-
-/* ── AISolutionSection ────────────────────── */
+/* ── DetailSection ────────────────────────── */
 
 .ai-card {
   position: relative;

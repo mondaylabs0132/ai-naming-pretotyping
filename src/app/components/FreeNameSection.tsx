@@ -2,6 +2,10 @@
 
 import { useEffect, useRef, useState } from 'react';
 
+/**
+ * 무료 결과를 가리는지 여부만 다룬다.
+ * 비용·받는 이름 수는 PriceCompareSection이 소유한다.
+ */
 export default function FreeNameSection() {
   const [inView, setInView] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
@@ -30,7 +34,6 @@ export default function FreeNameSection() {
           style={{
             opacity: inView ? 1 : 0,
             transform: inView ? 'translateY(0)' : 'translateY(24px)',
-            transitionDelay: '0ms',
           }}
         >
           <p
@@ -59,31 +62,30 @@ export default function FreeNameSection() {
             className="mt-3 text-sm md:text-base leading-relaxed"
             style={{ color: '#474555' }}
           >
-            첫지음은 무료 결과도 숨기지 않습니다.
-            <br />
-            실제 이름과 한자 풀이를 그대로 확인할 수 있습니다.
+            첫지음은 무료 1개를 무조건 공개합니다.
+            <br className="sm:hidden" />
+            <span className="hidden sm:inline"> </span>
+            이름과 한자 풀이까지 그대로.
           </p>
         </div>
 
         {/* 비교 카드 */}
-        <div className="grid grid-cols-2 gap-3 md:gap-6 max-w-2xl mx-auto">
-          {/* 경쟁사 — 좌측 슬라이드인 */}
+        <div className="grid grid-cols-2 gap-3 md:gap-6 max-w-2xl mx-auto items-stretch">
+          {/* 이름 추천 앱 — 좌측 슬라이드인 */}
           <div
-            className="relative bg-white rounded-2xl md:rounded-3xl p-5 md:p-8 border border-gray-100 overflow-hidden transition-all duration-700 ease-out"
+            className="relative bg-white rounded-2xl md:rounded-3xl p-5 md:p-8 border border-gray-100 overflow-hidden flex flex-col transition-all duration-700 ease-out"
             style={{
               opacity: inView ? 1 : 0,
               transform: inView ? 'translateX(0)' : 'translateX(-32px)',
               transitionDelay: '150ms',
             }}
           >
-            <div className="absolute top-3 right-3 md:top-4 md:right-4">
-              <span className="text-[10px] md:text-xs font-bold px-2 py-0.5 rounded-full bg-gray-100 text-gray-400">
-                타 서비스
+            <div className="flex items-center justify-between gap-1 mb-4 md:mb-6">
+              <p className="text-xs font-bold text-gray-400">무료 결과 1개</p>
+              <span className="text-[10px] md:text-xs font-bold px-2 py-0.5 rounded-full bg-gray-100 text-gray-400 whitespace-nowrap">
+                이름 추천 앱
               </span>
             </div>
-            <p className="text-xs font-bold mb-4 md:mb-6 mt-6 md:mt-0 text-gray-400">
-              무료 결과 1개
-            </p>
 
             {/* 가려진 이름 카드 */}
             <div className="bg-gray-50 rounded-xl md:rounded-2xl p-4 md:p-6 border border-gray-100 mb-3 md:mb-5 relative overflow-hidden">
@@ -122,7 +124,7 @@ export default function FreeNameSection() {
               </div>
             </div>
 
-            <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-1.5 mt-auto">
               <span
                 className="material-symbols-outlined text-sm"
                 style={{ color: '#ba1a1a' }}
@@ -135,9 +137,9 @@ export default function FreeNameSection() {
             </div>
           </div>
 
-          {/* 우리 서비스 — 우측 슬라이드인 */}
+          {/* 첫지음 — 우측 슬라이드인 */}
           <div
-            className="relative bg-white rounded-2xl md:rounded-3xl p-5 md:p-8 overflow-hidden transition-all duration-700 ease-out"
+            className="relative bg-white rounded-2xl md:rounded-3xl p-5 md:p-8 overflow-hidden flex flex-col transition-all duration-700 ease-out"
             style={{
               border: '2px solid rgba(84,65,219,0.25)',
               boxShadow: '0 16px 40px rgba(84,65,219,0.12)',
@@ -146,9 +148,12 @@ export default function FreeNameSection() {
               transitionDelay: '300ms',
             }}
           >
-            <div className="absolute top-3 right-3 md:top-4 md:right-4">
+            <div className="flex items-center justify-between gap-1 mb-4 md:mb-6">
+              <p className="text-xs font-bold" style={{ color: '#5441d8' }}>
+                무료 결과 1개
+              </p>
               <span
-                className="text-[10px] md:text-xs font-bold px-2 py-0.5 rounded-full text-white"
+                className="text-[10px] md:text-xs font-bold px-2 py-0.5 rounded-full text-white whitespace-nowrap"
                 style={{
                   background: 'linear-gradient(135deg, #5441d8, #7c6ef0)',
                 }}
@@ -156,12 +161,6 @@ export default function FreeNameSection() {
                 첫지음
               </span>
             </div>
-            <p
-              className="text-xs font-bold mb-4 md:mb-6 mt-6 md:mt-0"
-              style={{ color: '#5441d8' }}
-            >
-              무료 결과 1개
-            </p>
 
             {/* 선명한 이름 카드 — pop in */}
             <div
@@ -196,7 +195,7 @@ export default function FreeNameSection() {
               </div>
             </div>
 
-            <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-1.5 mt-auto">
               <span
                 className="material-symbols-outlined text-sm"
                 style={{ color: '#2da87a' }}
@@ -207,18 +206,31 @@ export default function FreeNameSection() {
                 className="text-[11px] md:text-sm font-bold whitespace-nowrap"
                 style={{ color: '#2da87a' }}
               >
-                완전 무료, 전부 공개
+                가입 없이, 전부 공개
               </p>
             </div>
           </div>
         </div>
 
+        {/* 다음 섹션으로 연결 */}
         <p
-          className="text-center text-[10px] md:text-xs mt-6 md:mt-10 opacity-40 font-medium transition-all duration-700"
+          className="text-center text-sm md:text-lg font-black tracking-tight mt-6 md:mt-10 transition-all duration-700 ease-out"
+          style={{
+            color: '#5441d8',
+            opacity: inView ? 1 : 0,
+            transform: inView ? 'translateY(0)' : 'translateY(12px)',
+            transitionDelay: '750ms',
+          }}
+        >
+          그럼 유료는 몇 개를 줄까요?
+        </p>
+
+        <p
+          className="text-center text-[9px] md:text-xs mt-2 md:mt-3 font-medium transition-all duration-700"
           style={{
             color: '#787586',
             opacity: inView ? 0.4 : 0,
-            transitionDelay: '500ms',
+            transitionDelay: '850ms',
           }}
         >
           * 정식 서비스 출시 시 무료 1개 제공 예정입니다.
