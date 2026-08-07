@@ -75,9 +75,7 @@ const config: Config = {
       fontFamily: {
         'headline-lg': ['Plus Jakarta Sans', 'sans-serif'],
         'headline-md': ['Plus Jakarta Sans', 'sans-serif'],
-        'label-md': ['Be Vietnam Pro', 'sans-serif'],
-        'body-md': ['Be Vietnam Pro', 'sans-serif'],
-        'body-lg': ['Be Vietnam Pro', 'sans-serif'],
+        // 본문은 body에 지정된 Pretendard를 그대로 상속받는다.
         'cafe24': ['Cafe24Surround', 'sans-serif'],
       },
       fontSize: {

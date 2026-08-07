@@ -1,5 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Be+Vietnam+Pro:ital,wght@0,100..900;1,100..900&display=swap");
+/* Material Symbols는 layout.tsx의 <head> link로 로드한다 (여기서 중복 요청하지 않음) */
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200..800&display=swap");
 
 @import "tailwindcss";
 
@@ -141,6 +141,70 @@
   animation: gradient-flow 6s linear infinite;
 }
 
+@keyframes hero-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-fade-1,
+.hero-fade-2,
+.hero-fade-3,
+.hero-fade-4 {
+  animation: hero-fade-up 0.7s cubic-bezier(0.2, 1, 0.3, 1) backwards;
+}
+
+.hero-fade-1 { animation-delay: 0.05s; }
+.hero-fade-2 { animation-delay: 0.15s; }
+.hero-fade-3 { animation-delay: 0.28s; }
+.hero-fade-4 { animation-delay: 0.42s; }
+
+@keyframes hero-float {
+  0%,
+  100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.hero-float {
+  animation: hero-fade-up 0.8s cubic-bezier(0.2, 1, 0.3, 1) 0.35s backwards,
+    hero-float 6s ease-in-out 1.15s infinite;
+}
+
+@keyframes badge-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(84, 65, 219, 0); }
+  50% { box-shadow: 0 0 0 5px rgba(84, 65, 219, 0.07); }
+}
+
+.badge-pulse {
+  animation: badge-pulse 3s ease-in-out infinite;
+}
+
+@keyframes orbit {
+  from { transform: rotate(0deg) translateX(130px); }
+  to { transform: rotate(360deg) translateX(130px); }
+}
+
+.orbit-dot {
+  animation: orbit 14s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-fade-1,
+  .hero-fade-2,
+  .hero-fade-3,
+  .hero-fade-4,
+  .hero-float,
+  .badge-pulse,
+  .orbit-dot {
+    animation: none;
+  }
+}
+
 /* ── EmpathySection ───────────────────────── */
 
 .empathy-card {
@@ -188,43 +252,78 @@
   }
 }
 
-/* ── ParentalSection ──────────────────────── */
+/* ── DilemmaSection ───────────────────────── */
 
-.quote-scroll {
-  display: flex;
-  gap: 10px;
-  animation: scroll-x 20s linear infinite;
-  width: max-content;
-}
-
-@media (min-width: 768px) {
-  .quote-scroll {
-    gap: 16px;
-    animation-duration: 18s;
+@keyframes arrow-nudge {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateY(4px);
+    opacity: 0.75;
   }
 }
 
-@keyframes scroll-x {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+.dilemma-arrow {
+  animation: arrow-nudge 2s ease-in-out infinite;
 }
 
-.quote-scroll:hover {
-  animation-play-state: paused;
+/* ── ModernNameSection ────────────────────── */
+
+.feel-chip {
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #5441d8;
+  background: rgba(84, 65, 219, 0.06);
+  border: 1px solid rgba(84, 65, 219, 0.14);
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease,
+    color 0.2s ease;
 }
 
-.pullquote-line::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 3px;
-  background: linear-gradient(180deg, #5441d8, #c6c0ff);
-  border-radius: 99px;
+@media (min-width: 768px) {
+  .feel-chip {
+    padding: 9px 18px;
+    font-size: 13px;
+  }
 }
 
-/* ── AISolutionSection ────────────────────── */
+.feel-chip:hover {
+  transform: translateY(-2px);
+  background: rgba(84, 65, 219, 0.12);
+}
+
+.feel-chip:active {
+  transform: scale(0.95);
+}
+
+.feel-chip.active {
+  color: #fff;
+  background: linear-gradient(135deg, #5441d8, #7c6ef0);
+  border-color: transparent;
+  box-shadow: 0 6px 18px rgba(84, 65, 219, 0.3);
+}
+
+@keyframes name-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.name-pop {
+  animation: name-pop 0.35s cubic-bezier(0.2, 1, 0.3, 1) backwards;
+}
+
+/* ── DetailSection ────────────────────────── */
 
 .ai-card {
   position: relative;
@@ -341,99 +440,4 @@
     gap: 5px;
     font-size: 11px;
   }
-}
-
-/* ── ResultPreviewSection ─────────────────── */
-
-.result-card {
-  position: relative;
-  background: #fff;
-  border-radius: 24px;
-  padding: 16px 14px;
-  border: 1px solid rgba(84, 65, 219, 0.1);
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
-  overflow: hidden;
-  flex-shrink: 0;
-  width: 240px;
-}
-
-@media (min-width: 1024px) {
-  .result-card {
-    border-radius: 28px;
-    padding: 32px 28px;
-    width: auto;
-    flex-shrink: 1;
-  }
-}
-
-.result-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 28px 56px rgba(84, 65, 219, 0.14);
-}
-
-.result-card.featured {
-  border-color: rgba(84, 65, 219, 0.25);
-  box-shadow: 0 16px 32px rgba(84, 65, 219, 0.1);
-  z-index: 10;
-}
-
-@media (min-width: 1024px) {
-  .result-card.featured {
-    transform: scale(1.04);
-    box-shadow: 0 20px 48px rgba(84, 65, 219, 0.15);
-  }
-
-  .result-card.featured:hover {
-    transform: scale(1.04) translateY(-6px);
-  }
-}
-
-.metric-bar-track {
-  height: 3px;
-  background: rgba(84, 65, 219, 0.06);
-  border-radius: 99px;
-  overflow: hidden;
-}
-
-@media (min-width: 768px) {
-  .metric-bar-track {
-    height: 5px;
-  }
-}
-
-.metric-bar-fill {
-  height: 100%;
-  border-radius: 99px;
-  transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.name-glow {
-  position: absolute;
-  inset: 0;
-  opacity: 0.02;
-  font-size: 64px;
-  font-weight: 900;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
-  user-select: none;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  letter-spacing: -3px;
-}
-
-@media (min-width: 1024px) {
-  .name-glow {
-    font-size: 120px;
-    letter-spacing: -8px;
-  }
-}
-
-.scroll-container {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-.scroll-container::-webkit-scrollbar {
-  display: none;
 }

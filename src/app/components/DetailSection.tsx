@@ -2,40 +2,44 @@
 
 const features = [
   {
-    icon: 'psychology',
-    title: '놀림 가능성',
-    desc: '유사 발음 및 비속어 차단.',
+    icon: 'family_history',
+    title: '돌림자',
+    desc: '집안의 돌림자가 있다면 맞춰드립니다.',
+    ex: '이준○',
     accent: '#5441d8',
     accentLight: 'rgba(84,65,219,0.08)',
-    tag: 'TEASING',
+    tag: 'LINEAGE',
   },
   {
-    icon: 'record_voice_over',
-    title: '발음 안정성',
-    desc: '편안한 발음 구조 설계.',
-    accent: '#2da87a',
-    accentLight: 'rgba(45,168,122,0.08)',
-    tag: 'PHONETIC',
-  },
-  {
-    icon: 'trending_up',
-    title: '유행도 분석',
-    desc: '최신 작명 트렌드를 반영.',
-    accent: '#f59e0b',
-    accentLight: 'rgba(245,158,11,0.08)',
-    tag: 'TREND',
-  },
-  {
-    icon: 'groups',
-    title: '사회적 인식',
-    desc: '성격적 이미지 데이터화.',
+    icon: 'do_not_disturb_on',
+    title: '피하고 싶은 글자',
+    desc: '쓰고 싶지 않은 글자가 있다면 빼고 짓습니다.',
+    ex: '제외 슬 · 淑',
     accent: '#e0468a',
     accentLight: 'rgba(224,70,138,0.08)',
-    tag: 'PERCEPT',
+    tag: 'EXCLUDE',
+  },
+  {
+    icon: 'translate',
+    title: '영어 발음',
+    desc: '영어 표기와 발음을 함께 보여드립니다.',
+    ex: 'Do-yun',
+    accent: '#2da87a',
+    accentLight: 'rgba(45,168,122,0.08)',
+    tag: 'ENGLISH',
+  },
+  {
+    icon: 'calendar_month',
+    title: '태어나기 전에도',
+    desc: '아직 태어나지 않았다면 예정 월로 시작합니다.',
+    ex: '2026년 11월',
+    accent: '#f59e0b',
+    accentLight: 'rgba(245,158,11,0.08)',
+    tag: 'PRENATAL',
   },
 ];
 
-export default function AISolutionSection() {
+export default function DetailSection() {
   return (
     <section className="ai-section-bg relative overflow-hidden px-6 mx-auto w-full h-svh flex flex-col items-center justify-center section-pt pb-6 md:py-0">
       <div className="max-w-310 mx-auto w-full">
@@ -46,10 +50,10 @@ export default function AISolutionSection() {
               className="text-xs font-bold tracking-[0.25em] uppercase"
               style={{ color: '#5441d8' }}
             >
-              AI ANALYSIS ENGINE
+              THE DETAILS
             </p>
             <h2 className="text-3xl font-black leading-[1.1] tracking-tight text-on-background">
-              AI가 미리{' '}
+              디테일까지{' '}
               <span
                 style={{
                   background:
@@ -59,7 +63,7 @@ export default function AISolutionSection() {
                   backgroundClip: 'text',
                 }}
               >
-                걸러드립니다
+                챙깁니다
               </span>
             </h2>
           </div>
@@ -68,9 +72,9 @@ export default function AISolutionSection() {
               className="text-[15px] leading-relaxed font-medium"
               style={{ color: '#474555' }}
             >
-              수만 건의 또래 대화 데이터와 발음 심리학을 기반으로
+              작명소에서 상담하며 말했을 조건들,
               <br />
-              부모님조차 생각지 못한 리스크를 정교하게 분석합니다.
+              입력창에 그대로 있습니다.
             </p>
           </div>
         </div>
@@ -129,30 +133,16 @@ export default function AISolutionSection() {
                     </p>
                   </div>
 
-                  {/* 검증 씰 배지 */}
+                  {/* 입력 예시 */}
                   <div
-                    className="mt-auto flex items-center justify-center gap-2 pt-3 md:pt-6"
+                    className="mt-auto flex items-center justify-center pt-3 md:pt-6"
                     style={{ borderTop: `1px dashed ${f.accent}30` }}
                   >
-                    <div
-                      className="w-5 h-5 md:w-6 md:h-6 rounded-full flex items-center justify-center shrink-0"
-                      style={{
-                        background:
-                          'linear-gradient(135deg, #5441d8 0%, #7c6ef0 100%)',
-                      }}
-                    >
-                      <span
-                        className="material-symbols-outlined text-white"
-                        style={{ fontSize: '12px' }}
-                      >
-                        check
-                      </span>
-                    </div>
                     <span
-                      className="text-[11px] md:text-sm font-bold tracking-tight"
-                      style={{ color: '#5441d8' }}
+                      className="text-[10px] md:text-xs font-bold tracking-tight px-2 py-1 md:px-2.5 rounded-lg whitespace-nowrap"
+                      style={{ background: f.accentLight, color: f.accent }}
                     >
-                      AI 검증 완료
+                      {f.ex}
                     </span>
                   </div>
                 </div>
@@ -165,7 +155,7 @@ export default function AISolutionSection() {
           className="text-center text-[9px] md:text-xs mt-6 md:mt-12 opacity-40 font-medium"
           style={{ color: '#787586' }}
         >
-          * 데이터 기반 참고 지표이며, 최종 결정은 부모님의 판단을 존중합니다.
+          * 입력 항목 예시이며, 최종 결정은 부모님의 판단을 존중합니다.
         </p>
       </div>
     </section>

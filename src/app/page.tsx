@@ -1,11 +1,12 @@
-import ABHeroParental from './components/ABHeroParental';
-import AISolutionSection from './components/AISolutionSection';
 import CTASection from './components/CTASection';
+import DetailSection from './components/DetailSection';
+import DilemmaSection from './components/DilemmaSection';
 import Footer from './components/Footer';
 import FreeNameSection from './components/FreeNameSection';
 import Header from './components/Header';
-import PricingValueSection from './components/PricingValueSection';
-import ResultPreviewSection from './components/ResultPreviewSection';
+import HeroSection from './components/HeroSection';
+import ModernNameSection from './components/ModernNameSection';
+import PriceCompareSection from './components/PriceCompareSection';
 import ScrollReveal from './components/ScrollReveal';
 
 export default function Home() {
@@ -13,23 +14,28 @@ export default function Home() {
     <div className="h-screen overflow-y-auto snap-y snap-mandatory scroll-smooth hide-scrollbar">
       <Header />
       <main>
-        <ABHeroParental />
-        <ScrollReveal>
-          <AISolutionSection />
-        </ScrollReveal>
+        <HeroSection />
         <ScrollReveal>
           <FreeNameSection />
         </ScrollReveal>
         <ScrollReveal>
-          <PricingValueSection />
+          <PriceCompareSection />
         </ScrollReveal>
         <ScrollReveal>
-          <ResultPreviewSection />
+          <DilemmaSection />
+        </ScrollReveal>
+        <ScrollReveal>
+          <ModernNameSection />
+        </ScrollReveal>
+        <ScrollReveal>
+          <DetailSection />
         </ScrollReveal>
         <ScrollReveal>
           <CTASection />
-          <Footer />
         </ScrollReveal>
+        {/* Footer는 별도 스냅 지점. ScrollReveal로 감싸면 justify-center가
+            내용 위쪽을 래퍼 밖으로 밀어내 헤더에 가려진다. */}
+        <Footer />
       </main>
     </div>
   );

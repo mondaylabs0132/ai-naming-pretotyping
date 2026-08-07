@@ -24,30 +24,36 @@ const EMAIL_DOMAINS = [
 
 export default function CTASection() {
   const [email, setEmail] = useState('');
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [activeIndex, setActiveIndex] = useState(-1);
   const inputRef = useRef<HTMLInputElement>(null);
   const [state, formAction, isPending] = useActionState(signupEmail, {});
 
+  /**
+   * state.success는 boolean이라 "첫 성공"과 "재제출 성공"을 구분할 수 없고,
+   * useActionState는 pending 동안 이전 state를 그대로 유지한다.
+   * 그래서 제출마다 번호를 붙여 어느 시도의 완료 화면인지 식별한다.
+   */
+  const [attempt, setAttempt] = useState(0);
+  const [dismissedAttempt, setDismissedAttempt] = useState(0);
+
+  // !isPending: 응답 전에는 이전 시도의 성공 화면을 재사용하지 않는다.
+  const isSubmitted = !!state.success && !isPending && dismissedAttempt !== attempt;
+
   useEffect(() => {
-    if (state.success) {
-      setIsSubmitted(true);
+    if (!state.success || isPending || dismissedAttempt === attempt) return;
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (window as any).dataLayer?.push({ event: 'email_submitted' });
+
+    // 완료 화면을 5초 보여준 뒤 입력 폼으로 되돌린다.
+    const timer = setTimeout(() => {
+      setDismissedAttempt(attempt);
       setEmail('');
+    }, 5000);
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (window as any).dataLayer?.push({
-        event: 'email_submitted',
-        ab_variant: localStorage.getItem('ab_hero_parental'),
-      });
-
-      const timer = setTimeout(() => {
-        setIsSubmitted(false);
-      }, 5000);
-
-      return () => clearTimeout(timer);
-    }
-  }, [state.success]);
+    return () => clearTimeout(timer);
+  }, [state.success, isPending, attempt, dismissedAttempt]);
 
   const handleEmailChange = (value: string) => {
     setEmail(value);
@@ -98,6 +104,15 @@ export default function CTASection() {
   return (
     <>
       <style>{`
+        /* 허니팟: 화면 밖으로 밀어낸다. display:none은 봇이 쉽게 걸러낸다. */
+        .hp-field {
+          position: absolute;
+          left: -9999px;
+          width: 1px;
+          height: 1px;
+          opacity: 0;
+          pointer-events: none;
+        }
               .cta-wrap {
           background: linear-gradient(145deg, #3d2fc4 0%, #5441d8 45%, #7c5fe6 100%);
           border-radius: 32px;
@@ -285,9 +300,9 @@ export default function CTASection() {
 
             {/* 헤드라인 */}
             <h2 className="text-2xl md:text-4xl font-black text-white leading-[1.2] tracking-tight mb-4 md:mb-6">
-              우리 아이 평생 불릴 이름,
+              이름은 하나뿐인데,
               <br />
-              <span style={{ color: '#fcd344' }}>한 번 더</span> 확인해보세요.
+              후보는 <span style={{ color: '#fcd344' }}>많을수록</span> 좋으니까.
             </h2>
 
             <p
@@ -344,8 +359,21 @@ export default function CTASection() {
                   action={formAction}
                   onSubmit={() => {
                     setSuggestions([]);
+                    // 이 제출을 이전 시도와 구분한다. 완료 화면 표시 여부는
+                    // 응답이 온 뒤(isPending=false) 이 번호로 판단한다.
+                    setAttempt((n) => n + 1);
                   }}
                 >
+                  {/* 허니팟 — 사람은 볼 수 없고, 채워져 오면 봇으로 본다 */}
+                  <input
+                    type="text"
+                    name="company"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden="true"
+                    className="hp-field"
+                  />
+
                   <div className="email-form-wrapper">
                     <div className="email-wrap">
                       <div className="email-inner">
