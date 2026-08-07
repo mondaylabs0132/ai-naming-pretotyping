@@ -24,29 +24,28 @@ const EMAIL_DOMAINS = [
 
 export default function CTASection() {
   const [email, setEmail] = useState('');
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  // 완료 화면은 state.success에서 파생시키고, 5초 뒤 닫힘만 별도로 추적한다.
+  const [successDismissed, setSuccessDismissed] = useState(false);
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [activeIndex, setActiveIndex] = useState(-1);
   const inputRef = useRef<HTMLInputElement>(null);
   const [state, formAction, isPending] = useActionState(signupEmail, {});
 
+  const isSubmitted = !!state.success && !successDismissed;
+
   useEffect(() => {
-    if (state.success) {
-      setIsSubmitted(true);
+    if (!state.success) return;
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (window as any).dataLayer?.push({ event: 'email_submitted' });
+
+    // 완료 화면을 5초 보여준 뒤 입력 폼으로 되돌린다.
+    const timer = setTimeout(() => {
+      setSuccessDismissed(true);
       setEmail('');
+    }, 5000);
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (window as any).dataLayer?.push({
-        event: 'email_submitted',
-        ab_variant: localStorage.getItem('ab_hero_parental'),
-      });
-
-      const timer = setTimeout(() => {
-        setIsSubmitted(false);
-      }, 5000);
-
-      return () => clearTimeout(timer);
-    }
+    return () => clearTimeout(timer);
   }, [state.success]);
 
   const handleEmailChange = (value: string) => {
@@ -344,6 +343,8 @@ export default function CTASection() {
                   action={formAction}
                   onSubmit={() => {
                     setSuggestions([]);
+                    // 재신청 시 완료 화면이 다시 뜨도록 되돌린다.
+                    setSuccessDismissed(false);
                   }}
                 >
                   <div className="email-form-wrapper">

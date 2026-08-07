@@ -3,9 +3,9 @@ import Script from 'next/script';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: '첫지음 - AI 아기 이름 작명소',
+  title: '첫지음 - 사주로 짓는 세련된 아기 이름',
   description:
-    'AI가 또래 환경에서 놀림 요소를 미리 분석해 안전한 이름만 추천합니다.',
+    '작명소 30만 원 쓰기 전에, 1분 무료로. 사주와 한자 근거는 그대로 두고 결과는 요즘 감성으로. 이름마다 한 줄 뜻이 붙어 왜 이 이름인지 설명할 수 있습니다.',
   icons: {
     icon: '/main-icon.png',
   },
