@@ -45,8 +45,14 @@ export async function signupEmail(prevState: State, formData: FormData): Promise
       return { error: '이메일 형식을 확인해 주세요.' };
     }
     if (error.code === '42501') {
-      // RLS insert 정책이 없거나 anon 롤에 열려있지 않음 — docs/supabase-rls.sql 참고
-      console.error('[signupEmail] RLS 정책 확인 필요: docs/supabase-rls.sql');
+      // 42501은 두 가지 원인이 있고 메시지로 구분된다.
+      //   'permission denied for table ...'          → GRANT 누락 (테이블 권한)
+      //   'new row violates row-level security ...'  → RLS 정책 누락
+      // 둘 다 docs/supabase-rls.sql로 해결한다.
+      const cause = error.message.includes('permission denied')
+        ? 'anon 롤에 GRANT INSERT 누락'
+        : 'RLS insert 정책 누락';
+      console.error(`[signupEmail] ${cause} — docs/supabase-rls.sql 참고`);
     }
     return { error: '잠시 후 다시 시도해 주세요.' };
   }
