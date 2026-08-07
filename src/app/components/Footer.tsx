@@ -245,8 +245,8 @@ export default function Footer() {
             <div className="flex flex-wrap justify-center md:justify-start gap-x-5 gap-y-1">
               {[
                 '상호명: 먼데이랩스',
-                '대표자: 홍길동',
-                '사업자번호: 000-00-00000',
+                '대표자: 예병수',
+                '사업자번호: 203-35-93380',
               ].map((t) => (
                 <span
                   key={t}
