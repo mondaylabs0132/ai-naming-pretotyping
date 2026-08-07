@@ -112,7 +112,9 @@ export default function Footer() {
         }
       `}</style>
 
-      <footer className="footer-root h-svh">
+      {/* h-svh를 두지 않아 내용만큼만 차지한다. 짧은 마지막 스냅 지점은
+          브라우저가 스크롤 최대치로 클램프하므로 하단에 딱 붙는다. */}
+      <footer className="footer-root snap-start snap-always section-pt">
         {/* 배경 orb */}
         <div
           className="footer-orb"
@@ -137,7 +139,7 @@ export default function Footer() {
           }}
         />
 
-        <div className="relative max-w-300 mx-auto px-6 pt-16 pb-10">
+        <div className="relative max-w-300 mx-auto px-6 pt-10 md:pt-12 pb-10">
           {/* 메인 그리드 */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-14">
             {/* 브랜드 */}

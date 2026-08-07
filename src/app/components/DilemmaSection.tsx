@@ -174,7 +174,7 @@ export default function DilemmaSection() {
             className="text-sm md:text-lg font-black tracking-tight mt-1"
             style={{ color: '#5441d8' }}
           >
-            둘 다 되는지 직접 눌러보세요
+            첫지음에선 어떨까요?
           </p>
         </div>
       </div>

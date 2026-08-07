@@ -32,8 +32,10 @@ export default function Home() {
         </ScrollReveal>
         <ScrollReveal>
           <CTASection />
-          <Footer />
         </ScrollReveal>
+        {/* Footer는 별도 스냅 지점. ScrollReveal로 감싸면 justify-center가
+            내용 위쪽을 래퍼 밖으로 밀어내 헤더에 가려진다. */}
+        <Footer />
       </main>
     </div>
   );
