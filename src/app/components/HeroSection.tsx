@@ -29,7 +29,7 @@ export default function HeroSection() {
   };
 
   return (
-    <section className="snap-start snap-always relative overflow-hidden px-6 mx-auto w-full min-h-svh flex flex-col items-center section-pt">
+    <section className="snap-start snap-always relative overflow-hidden px-6 mx-auto w-full min-h-svh flex flex-col items-center section-pt pb-4">
       {/* 배경 장식 */}
       <div className="pointer-events-none select-none">
         {/* 큰 그라디언트 orb */}
@@ -272,8 +272,12 @@ export default function HeroSection() {
         </div>
       </div>
 
+      {/* 면책 문구는 일반 흐름에 둔다. absolute bottom-4로 두면 레이아웃
+          높이에 잡히지 않아, min-h-svh로 섹션이 늘어난 좁은 화면에서
+          결과 카드와 겹쳤다. 위 래퍼의 m-auto가 남는 공간을 흡수하므로
+          여유가 있으면 하단에 붙고, 넘치면 콘텐츠 바로 뒤로 밀린다. */}
       <p
-        className="absolute bottom-4 text-[9px] md:text-[10px] text-center px-6"
+        className="relative z-10 shrink-0 mt-4 text-[9px] md:text-[10px] text-center"
         style={{ color: '#787586', opacity: 0.45 }}
       >
         * 예시 이름이며, 실제 결과는 생년월일·사주에 따라 달라집니다.
