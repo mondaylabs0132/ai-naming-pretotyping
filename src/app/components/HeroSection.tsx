@@ -29,7 +29,7 @@ export default function HeroSection() {
   };
 
   return (
-    <section className="snap-start snap-always relative overflow-hidden px-6 mx-auto w-full h-screen flex flex-col items-center justify-center section-pt">
+    <section className="snap-start snap-always relative overflow-hidden px-6 mx-auto w-full min-h-svh flex flex-col items-center section-pt">
       {/* 배경 장식 */}
       <div className="pointer-events-none select-none">
         {/* 큰 그라디언트 orb */}
@@ -56,8 +56,8 @@ export default function HeroSection() {
         />
       </div>
 
-      <div className="w-full max-w-300 mx-auto">
-        <div className="relative grid grid-cols-1 md:grid-cols-2 items-center gap-7 md:gap-16">
+      <div className="w-full max-w-300 m-auto">
+        <div className="relative grid grid-cols-1 md:grid-cols-2 items-center gap-5 md:gap-16">
           {/* 좌측 텍스트 */}
           <div className="z-10 text-center md:text-left flex flex-col items-center md:items-start">
             {/* 상단 뱃지 — 제품 주장 대신 진입 장벽 제거 */}
@@ -160,7 +160,7 @@ export default function HeroSection() {
 
             <div className="hero-float relative z-10 w-full max-w-[300px] md:max-w-[380px]">
               <div
-                className="relative bg-white px-6 py-6 md:px-8 md:py-9 text-center"
+                className="relative bg-white px-6 py-5 md:px-8 md:py-9 text-center"
                 style={{
                   borderRadius: '28px',
                   border: '1px solid rgba(84,65,219,0.08)',
@@ -209,9 +209,11 @@ export default function HeroSection() {
                   “{SAMPLE.meaning}”
                 </p>
 
-                {/* 하단: 영어 표기 */}
+                {/* 하단: 영어 표기 — 모바일에서는 숨긴다.
+                    DetailSection이 영어 발음을 전담하므로 정보가 중복이고,
+                    작은 화면에서 카드가 한 화면을 넘기는 주 원인이었다. */}
                 <div
-                  className="mt-4 md:mt-6 pt-3 md:pt-4 flex items-center justify-center gap-1.5"
+                  className="mt-4 md:mt-6 pt-3 md:pt-4 hidden md:flex items-center justify-center gap-1.5"
                   style={{ borderTop: '1px dashed rgba(84,65,219,0.15)' }}
                 >
                   <span

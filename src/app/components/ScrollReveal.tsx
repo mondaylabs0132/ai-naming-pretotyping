@@ -45,7 +45,10 @@ export default function ScrollReveal({
         duration-1000
         ease-out
         ${move ? 'translate-y-8' : ''}
-        ${snap ? 'snap-start snap-always min-h-[calc(100vh-80px)] flex flex-col justify-center' : ''}
+        ${/* 자식 섹션이 h-svh로 스스로 한 화면을 차지하므로 래퍼는 높이를
+             지정하지 않는다. min-h-[calc(100vh-80px)] + justify-center를 두면
+             남는 공간이 -80px이 되어 자식이 상시 40px 위로 밀려 헤더에 가렸다. */ ''}
+        ${snap ? 'snap-start snap-always' : ''}
         ${className}
       `}
     >

@@ -266,9 +266,9 @@ export default function CTASection() {
           .avatar-ring { width: 36px; height: 36px; margin-left: -10px; }
         }
       `}</style>
-      <section className="px-6 mx-auto w-full h-svh flex flex-col items-center justify-center section-pt pb-6 md:py-0 relative">
+      <section className="px-6 mx-auto w-full min-h-svh flex flex-col items-center section-pt pb-6 md:py-0 relative">
         <div
-          className="max-w-275 mx-auto w-full cta-wrap"
+          className="max-w-275 m-auto w-full cta-wrap"
           style={{ boxShadow: "0 40px 80px -20px rgba(62,37,195,0.35)" }}
         >
           {/* 배경 레이어 (별도 컨테이너로 분리하여 overflow: hidden 적용) */}
