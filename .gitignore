@@ -48,3 +48,6 @@ next-env.d.ts
 # cloudflare / opennext 빌드 산출물 및 로컬 상태
 .open-next/
 .wrangler/
+
+# 로컬 MCP 연결 설정 (실서비스 Supabase project_ref 포함 — 각자 로컬에서 관리)
+.mcp.json
