@@ -49,8 +49,7 @@ export function UnsubscribeForm({ token }: { token: string }) {
       <button
         type="submit"
         disabled={isPending}
-        className="inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-bold text-white transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
-        style={{ backgroundColor: '#5441d8' }}
+        className="inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-bold text-white bg-[#5441d8] hover:bg-[#4534c4] hover:shadow-lg hover:shadow-[#5441d8]/25 cursor-pointer transition-all duration-200 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-[#5441d8] disabled:hover:shadow-none"
       >
         {isPending ? '처리 중...' : '수신거부 확인'}
       </button>
