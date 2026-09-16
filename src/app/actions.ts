@@ -1,6 +1,7 @@
 'use server';
 
 import { supabase } from '@/lib/supabase';
+import { CONSENT_VERSION } from '@/lib/consent';
 
 type State = { error?: string; success?: boolean };
 
@@ -32,7 +33,11 @@ export async function signupEmail(prevState: State, formData: FormData): Promise
   // unique index가 lower(email) 기준이므로 저장값도 소문자로 통일한다.
   const email = raw.toLowerCase();
 
-  const { error } = await supabase.from('email_signups').insert({ email });
+  // 어떤 문구에 언제 동의했는지 함께 남긴다 (정보통신망법 제50조 동의 근거).
+  // unsubscribe_token · consented_at은 DB 기본값으로 채워진다.
+  const { error } = await supabase
+    .from('pre_registrations')
+    .insert({ email, consent_version: CONSENT_VERSION });
 
   if (error) {
     console.error('[signupEmail]', error);

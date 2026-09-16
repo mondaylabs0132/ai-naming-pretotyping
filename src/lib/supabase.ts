@@ -3,8 +3,9 @@ import { createClient } from '@supabase/supabase-js';
 /**
  * publishable 키 + RLS 조합으로 동작합니다.
  * 세션이 없는 요청은 Postgres `anon` 롤로 매핑되며,
- * email_signups 테이블에는 insert 정책만 열려 있습니다.
- * (정책 정의: docs/supabase-rls.sql)
+ * pre_registrations 테이블에는 insert 정책만 열려 있고,
+ * 수신거부는 토큰만 받는 security definer 함수(rpc)로만 처리합니다.
+ * (정책 정의: docs/supabase-rls.sql, docs/supabase-migrations/)
  *
  * RLS를 우회하는 secret / service_role 키를 여기에 넣지 마세요.
  */
