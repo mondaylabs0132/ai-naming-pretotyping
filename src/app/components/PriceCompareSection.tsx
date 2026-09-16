@@ -74,10 +74,10 @@ export default function PriceCompareSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden px-6 mx-auto w-full h-svh flex flex-col items-center justify-center section-pt pb-6 md:py-0"
+      className="relative overflow-hidden px-6 mx-auto w-full min-h-svh flex flex-col items-center section-pt pb-6 md:py-0"
       style={{ background: '#fbf8ff' }}
     >
-      <div className="max-w-4xl mx-auto w-full">
+      <div className="max-w-4xl m-auto w-full">
         {/* 헤드라인 */}
         <div
           className="text-center mb-6 md:mb-12 transition-all duration-700 ease-out"

@@ -66,7 +66,9 @@
 /* ── CSS 변수 ─────────────────────────────── */
 
 :root {
-  --header-h: 68px; /* py-4 × 2 + 로고 36px */
+  /* 헤더 행 높이는 로고(36px)가 아니라 CTA 버튼이 결정한다.
+     py-2.5(20px) + text-sm 21px = 41px, 여기에 헤더 py-4(32px)를 더해 73px. */
+  --header-h: 73px;
 
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
@@ -78,6 +80,15 @@
   --text-4xl: 2.25rem;
   --text-5xl: 3rem;
   --text-6xl: 3.75rem;
+}
+
+/* 모바일에서는 헤더를 압축한다 (py-2.5 + 버튼 py-2).
+   작은 화면일수록 고정 헤더가 먹는 비율이 커져 내용 공간이 부족해진다.
+   Tailwind md(768px) 미만 = Header의 md: 이전 값과 반드시 일치해야 한다. */
+@media (max-width: 767px) {
+  :root {
+    --header-h: 57px; /* py-2.5(20px) + 버튼 py-2(16px) + text-sm 21px */
+  }
 }
 
 @media (max-width: 375px) {

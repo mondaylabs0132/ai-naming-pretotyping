@@ -24,7 +24,7 @@ export default function Header() {
     <header
       className={`
           fixed top-0 left-0 right-0 z-50
-          transition-all duration-500 ease-out nav-border py-4
+          transition-all duration-500 ease-out nav-border py-2.5 md:py-4
         `}
       style={{
         backdropFilter: 'blur(20px) saturate(180%)',
@@ -37,13 +37,15 @@ export default function Header() {
       <div className="max-w-300 mx-auto px-6 flex items-center justify-between">
         {/* 로고 */}
         <div className="flex items-center gap-3 group cursor-pointer">
-          <div className="relative w-9 h-9 flex items-center justify-center">
+          <div className="relative w-8 h-8 md:w-9 md:h-9 flex items-center justify-center">
             <Image
               src="/main-icon.png"
               alt="Logo"
               width={36}
               height={36}
-              className="object-contain mb-1"
+              // w/h-full: width·height 속성은 intrinsic 크기일 뿐이라
+              // CSS로 묶지 않으면 컨테이너를 넘어 36px로 렌더된다.
+              className="object-contain w-full h-full mb-1"
             />
           </div>
           <h1
@@ -62,7 +64,7 @@ export default function Header() {
 
         {/* CTA 버튼 */}
         <button
-          className="btn-shimmer relative overflow-hidden rounded-full text-sm font-semibold text-white px-5 py-2.5 transition-all duration-300 hover:scale-[1.03] hover:-translate-y-px active:scale-[0.97]"
+          className="btn-shimmer relative overflow-hidden rounded-full text-sm font-semibold text-white px-4 md:px-5 py-2 md:py-2.5 transition-all duration-300 hover:scale-[1.03] hover:-translate-y-px active:scale-[0.97]"
           style={{
             background: 'linear-gradient(135deg, #5441d8 0%, #7c6ef0 100%)',
             boxShadow:

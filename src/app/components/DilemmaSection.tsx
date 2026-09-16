@@ -39,7 +39,7 @@ export default function DilemmaSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden px-6 mx-auto w-full h-svh flex flex-col items-center justify-center section-pt pb-6 md:py-0"
+      className="relative overflow-hidden px-6 mx-auto w-full min-h-svh flex flex-col items-center section-pt pb-6 md:py-0"
       style={{ background: '#fbf8ff' }}
     >
       {/* 배경 장식 */}
@@ -52,7 +52,7 @@ export default function DilemmaSection() {
         />
       </div>
 
-      <div className="max-w-2xl mx-auto w-full relative z-10">
+      <div className="max-w-2xl m-auto w-full relative z-10">
         {/* 헤드라인 */}
         <div
           className="text-center mb-8 md:mb-14 transition-all duration-700 ease-out"

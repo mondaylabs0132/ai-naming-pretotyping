@@ -41,8 +41,8 @@ const features = [
 
 export default function DetailSection() {
   return (
-    <section className="ai-section-bg relative overflow-hidden px-6 mx-auto w-full h-svh flex flex-col items-center justify-center section-pt pb-6 md:py-0">
-      <div className="max-w-310 mx-auto w-full">
+    <section className="ai-section-bg relative overflow-hidden px-6 mx-auto w-full min-h-svh flex flex-col items-center section-pt pb-6 md:py-0">
+      <div className="max-w-310 m-auto w-full">
         {/* 헤드라인 섹션 */}
         <div className="flex flex-col md:flex-row justify-between items-center md:items-end mb-6 md:mb-16 gap-3 md:gap-8 text-center md:text-left">
           <div className="space-y-1 md:space-y-4">
