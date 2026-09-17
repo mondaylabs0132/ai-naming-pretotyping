@@ -1,13 +1,18 @@
-import type { Metadata } from 'next';
-import Script from 'next/script';
-import './globals.css';
+import type { Metadata } from "next";
+import Script from "next/script";
+import "./globals.css";
 
 export const metadata: Metadata = {
-  title: '첫지음 - 사주로 짓는 세련된 아기 이름',
+  title: "첫지음 - 사주로 짓는 세련된 아기 이름",
   description:
-    '작명소 30만 원 쓰기 전에, 1분 무료로. 사주와 한자 근거는 그대로 두고 결과는 요즘 감성으로. 이름마다 한 줄 뜻이 붙어 왜 이 이름인지 설명할 수 있습니다.',
+    "작명소 30만 원 쓰기 전에, 1분 무료로. 사주와 한자 근거는 그대로 두고 결과는 요즘 감성으로. 이름마다 한 줄 뜻이 붙어 왜 이 이름인지 설명할 수 있습니다.",
   icons: {
-    icon: '/main-icon.png',
+    icon: "/main-icon.png",
+  },
+  verification: {
+    other: {
+      "facebook-domain-verification": "753b2w3hnylhwhm896yp027mcnybm5",
+    },
   },
 };
 
@@ -34,12 +39,38 @@ export default function RootLayout({
           'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
           })(window,document,'script','dataLayer','GTM-WHG2LPB2');
         `}</Script>
+
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-WHG2LPB2"
             height="0"
             width="0"
-            style={{ display: 'none', visibility: 'hidden' }}
+            style={{ display: "none", visibility: "hidden" }}
+          />
+        </noscript>
+
+        {/* Meta Pixel */}
+        <Script id="meta-pixel" strategy="afterInteractive">{`
+          !function(f,b,e,v,n,t,s)
+          {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+          n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+          if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+          n.queue=[];t=b.createElement(e);t.async=!0;
+          t.src=v;s=b.getElementsByTagName(e)[0];
+          s.parentNode.insertBefore(t,s)}(window, document,'script',
+          'https://connect.facebook.net/en_US/fbevents.js');
+          fbq('init', '1102660275444225');
+          fbq('track', 'PageView');
+        `}</Script>
+        <noscript>
+          {/* 트래킹 픽셀이라 next/image 최적화 대상이 아님 */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            height="1"
+            width="1"
+            style={{ display: "none" }}
+            alt=""
+            src="https://www.facebook.com/tr?id=1102660275444225&ev=PageView&noscript=1"
           />
         </noscript>
         {children}
