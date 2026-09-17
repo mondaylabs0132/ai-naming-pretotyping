@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { track } from '@/lib/analytics';
 
 /**
  * 감성 태그별 이름 후보 (출시 시 실제 사주 결과로 대체)
@@ -86,8 +87,7 @@ export default function ModernNameSection() {
       return [...prev, tag].slice(-MAX_SELECT);
     });
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (window as any).dataLayer?.push({ event: 'tag_selected', feel_tag: tag });
+    track('tag_selected', { feel_tag: tag });
   };
 
   /** 선택한 태그 풀을 번갈아 뽑아 3개 구성 */

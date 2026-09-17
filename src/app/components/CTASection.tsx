@@ -2,6 +2,7 @@
 
 import { useState, useRef, useActionState, useEffect } from "react";
 import { signupEmail } from "../actions";
+import { track } from "@/lib/analytics";
 import { BadgePercent, Sparkles } from "lucide-react";
 
 const perks = [
@@ -44,8 +45,7 @@ export default function CTASection() {
   useEffect(() => {
     if (!state.success || isPending || dismissedAttempt === attempt) return;
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (window as any).dataLayer?.push({ event: "email_submitted" });
+    track("email_submitted");
 
     // 완료 화면을 5초 보여준 뒤 입력 폼으로 되돌린다.
     const timer = setTimeout(() => {

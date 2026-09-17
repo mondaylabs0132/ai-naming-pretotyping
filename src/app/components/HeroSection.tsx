@@ -1,5 +1,7 @@
 'use client';
 
+import { track } from '@/lib/analytics';
+
 /**
  * 첫 화면에서 "무엇을 받는지"를 3초 안에 보여준다.
  * 우측 결과 카드는 ModernNameSection의 '세련된' 태그 예시와 같은 데이터 계열.
@@ -15,8 +17,7 @@ const SAMPLE = {
 
 export default function HeroSection() {
   const scrollToEmail = () => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (window as any).dataLayer?.push({ event: 'cta_click', cta_location: 'hero' });
+    track('cta_click', { cta_location: 'hero' });
 
     const input = document.getElementById('email-input');
     const section = input?.closest('section');
