@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import { GA_MEASUREMENT_ID, META_PIXEL_ID } from "@/lib/analytics";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -32,22 +33,18 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
-        <Script id="gtm" strategy="afterInteractive">{`
-          (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-          })(window,document,'script','dataLayer','GTM-WHG2LPB2');
+        {/* Google Analytics 4 (gtag.js) */}
+        <Script
+          id="ga4-src"
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="ga4-init" strategy="afterInteractive">{`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${GA_MEASUREMENT_ID}');
         `}</Script>
-
-        <noscript>
-          <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-WHG2LPB2"
-            height="0"
-            width="0"
-            style={{ display: "none", visibility: "hidden" }}
-          />
-        </noscript>
 
         {/* Meta Pixel */}
         <Script id="meta-pixel" strategy="afterInteractive">{`
@@ -59,7 +56,7 @@ export default function RootLayout({
           t.src=v;s=b.getElementsByTagName(e)[0];
           s.parentNode.insertBefore(t,s)}(window, document,'script',
           'https://connect.facebook.net/en_US/fbevents.js');
-          fbq('init', '1102660275444225');
+          fbq('init', '${META_PIXEL_ID}');
           fbq('track', 'PageView');
         `}</Script>
         <noscript>
@@ -70,7 +67,7 @@ export default function RootLayout({
             width="1"
             style={{ display: "none" }}
             alt=""
-            src="https://www.facebook.com/tr?id=1102660275444225&ev=PageView&noscript=1"
+            src={`https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1`}
           />
         </noscript>
         {children}

@@ -1,14 +1,11 @@
 'use client';
 
 import Image from 'next/image';
+import { track } from '@/lib/analytics';
 
 export default function Header() {
   const scrollToEmail = () => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (window as any).dataLayer?.push({
-      event: 'cta_click',
-      cta_location: 'header',
-    });
+    track('cta_click', { cta_location: 'header' });
 
     const input = document.getElementById('email-input');
     const section = input?.closest('section');
